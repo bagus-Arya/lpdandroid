@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.go.sispentra" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Sispentra"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".PageNotFound"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataPeranActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataUserActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+<!--        Kolektor -->
+        <activity
+            android:name=".KolektorHomeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KolektorProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+<!--        Bendahara -->
+        <activity
+            android:name=".BendaharaHomeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataBendaharaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GrafikBendaharaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ValidasiSetoranBendaharaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ValidasiPenarikanBendaharaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LaporanSetoranBendaharaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LaporanPenarikanBendaharaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+<!--        Ketua -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
