@@ -37,6 +37,30 @@
         <entry key="..\:/Users/ASUS/Sispentra/app/src/main/res/layout/register_peran.xml" value="0.22" />
         <entry key="..\:/Users/ASUS/Sispentra/app/src/main/res/layout/register_user.xml" value="0.22" />
         <entry key="..\:/Users/ASUS/Sispentra/app/src/main/res/menu/menu.xml" value="0.29322916666666665" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/activity_main.xml" value="0.21687158469945356" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/bendahara_dashboard.xml" value="0.21" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/bendahara_laporan_penarikan.xml" value="0.21" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/bendahara_laporan_setoran.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/bendahara_profile.xml" value="0.21" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/bendahara_validasi_penarikan.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/bendahara_validasi_setoran.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/data_nasabah.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/data_peran.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/data_user.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/ketua_dashboard.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/kolektor_dashboard.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/kolektor_history_transaksi.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/kolektor_penarikan_tunai.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/kolektor_profile.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/kolektor_setoran_tunai.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/nasabah_dashboard.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/nasabah_data_ubah.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/nasabah_info_tabungan.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/nasabah_profile.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/nasabah_req_penarikan.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/register_nasabah.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/register_peran.xml" value="0.168359375" />
+        <entry key="..\:/Users/ASUS/lpdandroidgit/app/src/main/res/layout/register_user.xml" value="0.168359375" />
       </map>
     </option>
   </component>

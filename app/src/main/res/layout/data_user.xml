@@ -8,6 +8,19 @@
     android:background="@color/bgpage"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="29dp"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="29dp"/>
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
@@ -33,5 +46,20 @@
         app:layout_constraintHorizontal_bias="0.787"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_to_register_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/secondary"
+        android:text="Tambah User"
+        android:textAllCaps="false"
+        android:textSize="8pt"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineright"
+        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintStart_toStartOf="@+id/guidelineleft"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

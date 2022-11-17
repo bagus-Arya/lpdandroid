@@ -25,6 +25,10 @@
             android:name=".DataUserActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterUserActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
 <!--        Kolektor -->
         <activity
             android:name=".KolektorHomeActivity"
