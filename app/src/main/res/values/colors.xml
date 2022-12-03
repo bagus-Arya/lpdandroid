@@ -14,4 +14,8 @@
     <color name="edittext">#1affffff</color>
     <color name="bgpage">#F5F7FA</color>
     <color name="bgpage2">#B8C6DB</color>
+    <color name="muted">#6C757D</color>
+    <color name="colorPrimary">#8ec642</color>
+    <color name="colorPrimaryVariant">#5C9504</color>
+    <color name="colorOnPrimary">#FAFAFA</color>
 </resources>
