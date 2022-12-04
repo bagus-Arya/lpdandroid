@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.205" />
 
     <EditText
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/muted"
         android:id="@+id/usrname"
         android:layout_width="278dp"
@@ -44,7 +44,7 @@
         android:layout_marginTop="64dp"
         android:background="@drawable/bg_shape"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Username........."
         android:inputType="textPersonName"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/muted"
         android:id="@+id/pwsword"
         android:layout_width="278dp"
@@ -61,7 +61,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/bg_shape"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Password........."
         android:inputType="textPassword"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"

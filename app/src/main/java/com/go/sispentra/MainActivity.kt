@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.go.sispentra.controller.UserController
 import com.go.sispentra.model.LoginModelResponse
+import com.rw.keyboardlistener.KeyboardUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +30,31 @@ class MainActivity : AppCompatActivity() {
 
 //        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
         initAction()
+        //Check Keyboard
+        KeyboardUtils.addKeyboardToggleListener(this, object :
+            KeyboardUtils.SoftKeyboardToggleListener {
+            override fun onToggleSoftKeyboard(isVisible: Boolean) {
+                if (isVisible){
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        val window = window
+                        window.clearFlags(
+                            WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+
+                        )
+                        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                        //          window.statusBarColor = Color.TRANSPARENT
+//                        window.navigationBarColor = Color.TRANSPARENT
+                    }
+                }
+                else{
+                    transparentNavigation()
+                }
+                Log.d("keyboard", "keyboard visible: $isVisible")
+            }
+        })
     }
 
     fun initAction(){

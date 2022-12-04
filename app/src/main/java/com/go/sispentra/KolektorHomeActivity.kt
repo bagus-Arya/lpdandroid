@@ -22,7 +22,7 @@ class KolektorHomeActivity: AppCompatActivity(){
         shownama.setText(disprole+"."+unama);
 
         val btn_show_kolektor = findViewById<Button>(R.id.btn_dt_kolektor)
-        val btn_regist_nasabah = findViewById<Button>(R.id.btn_dt_bendahara)
+//        val btn_regist_nasabah = findViewById<Button>(R.id.btn_dt_bendahara)
         val btn_dt_nasabah = findViewById<Button>(R.id.btn_dt_grafik_kinerja)
         val btn_setoran = findViewById<Button>(R.id.btn_dt_validasi_setoran)
         val btn_penarikan = findViewById<Button>(R.id.btn_dt_validasi_penarikan)
@@ -37,10 +37,10 @@ class KolektorHomeActivity: AppCompatActivity(){
             startActivity(intent)
         }
 
-        btn_regist_nasabah.setOnClickListener{
-            val intent = Intent(this@KolektorHomeActivity, DataBendaharaActivity::class.java)
-            startActivity(intent)
-        }
+//        btn_regist_nasabah.setOnClickListener{
+//            val intent = Intent(this@KolektorHomeActivity, DataBendaharaActivity::class.java)
+//            startActivity(intent)
+//        }
 
         btn_dt_nasabah.setOnClickListener{
             val intent = Intent(this@KolektorHomeActivity, GrafikBendaharaActivity::class.java)

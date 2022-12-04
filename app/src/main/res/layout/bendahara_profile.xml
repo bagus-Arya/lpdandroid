@@ -5,34 +5,195 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgpage"
+    android:background="@drawable/bg_page"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".DataBendaharaActivity">
+    tools:context=".DataBendaharaActivity"
+    android:padding="15dp">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="640dp"
+        android:layout_marginTop="50dp"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="20dp"
+        app:contentPadding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.168"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@mipmap/logo_lpd_foreground" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="254dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="36dp"
-        android:text="Sistem Pencatatan Transaksi Setor Tarik Tabungan"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Data Diri"
+                android:textColor="@color/textColor"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_nama"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Nama Bendahara"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_jeniskelamin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_jeniskelamin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="Jenis Kelamin"
+                android:textColorHint="@color/muted"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:endIconTint="@color/secondary"
+
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_telepon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_nama">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/staff_autotextfield_editor_jeniskelamin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:inputType="none"
+                    android:popupBackground="@color/white"
+                    android:popupTheme="@color/white"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_telepon"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="No Telepon"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_role"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_jeniskelamin"
+                app:prefixText="+62"
+                app:prefixTextColor="@color/muted">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_telepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_role"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:enabled="false"
+                android:hint="Role"
+                android:textColorHint="@color/muted"
+                app:boxBackgroundColor="@color/disabled"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:endIconTint="@color/secondary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_telepon">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/staff_autotextfield_editor_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:inputType="none"
+                    android:popupBackground="@color/white"
+                    android:popupTheme="@color/white"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Password"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/textColor"
+                app:layout_constraintBottom_toTopOf="@+id/btn_ubah"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_role">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_ubah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/ubahColor"
+                android:text="Ubah"
+                app:layout_constraintEnd_toStartOf="@+id/btn_kembali"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_password" />
+
+            <Button
+                android:id="@+id/btn_kembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/muted"
+                android:text="Kembali"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_ubah"
+                app:layout_constraintTop_toTopOf="@+id/btn_ubah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
