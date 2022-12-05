@@ -14,4 +14,14 @@
     <color name="edittext">#1affffff</color>
     <color name="bgpage">#F5F7FA</color>
     <color name="bgpage2">#B8C6DB</color>
+    <color name="muted">#6C757D</color>
+    <color name="colorPrimary">#8ec642</color>
+    <color name="colorPrimaryVariant">#5C9504</color>
+    <color name="colorOnPrimary">#FAFAFA</color>
+    <color name="textColor">#605E5E</color>
+    <color name="inputBackgorundActive">#EDEDED</color>
+    <color name="cardBackgroundColor">#FFFFFFFF</color>
+    <color name="transparentColor">#00000000</color>
+    <color name="disabled">#A39D9D</color>
+    <color name="ubahColor">#3AA3DE</color>
 </resources>
