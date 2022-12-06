@@ -1,4 +1,11 @@
 package com.go.sispentra
 
-class KolektorHistoryTransaksi {
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class KolektorHistoryTransaksi : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.kolektor_history_transaksi)
+    }
 }

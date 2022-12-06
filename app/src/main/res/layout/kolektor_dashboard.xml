@@ -9,80 +9,118 @@
     android:background="@color/bgpage"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
-
-    <ImageView
-        android:id="@+id/imageView2"
+     <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="187dp"
         android:layout_height="185dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:srcCompat="@mipmap/logo_lpd_foreground" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="409dp"
-        android:layout_height="300dp"
+    <TextView
+        android:id="@+id/show_nama_kolektor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="336dp"
+        android:layout_height="442dp"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.112">
+        app:layout_constraintTop_toBottomOf="@+id/show_nama_kolektor">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/btn_dt_kolektor"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:text="Data Kolektor"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_regist_nasabah"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_regist_nasabah"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:backgroundTint="@color/secondary"
                 android:text="Pendaftaran Nasabah"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:backgroundTint="@color/secondary"
+                app:layout_constraintBottom_toTopOf="@+id/btn_dt_nasabah"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_dt_kolektor"/>
 
             <Button
                 android:id="@+id/btn_dt_nasabah"
+                android:text="Data Nasabah"
+                android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:text="Data Nasabah"
-                android:textAllCaps="false" />
+                app:layout_constraintBottom_toTopOf="@+id/btn_setoran"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_regist_nasabah"/>
 
             <Button
                 android:id="@+id/btn_setoran"
+                android:text="Setoran Tunai"
+                android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:text="Setoran Tunai"
-                android:textAllCaps="false" />
+                app:layout_constraintBottom_toTopOf="@+id/btn_penarikan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_dt_nasabah"/>
 
             <Button
                 android:id="@+id/btn_penarikan"
+                android:text="Penarikan Tunai"
+                android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:text="Penarikan Tunai"
-                android:textAllCaps="false" />
+                app:layout_constraintBottom_toTopOf="@+id/btn_history_transaksi"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_setoran"/>
 
             <Button
                 android:id="@+id/btn_history_transaksi"
+                android:text="History Transaksi"
+                android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:text="History Transaksi"
-                android:textAllCaps="false" />
+                app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_penarikan"/>
 
             <Button
                 android:id="@+id/btn_logout"
@@ -90,16 +128,28 @@
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Logout"
-                android:textAllCaps="false" />
-        </LinearLayout>
-    </ScrollView>
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_history_transaksi" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/show_nama"
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" "
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        android:text="Dashboard Kolektor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        android:textColor="@color/textColor"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

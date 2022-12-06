@@ -52,7 +52,9 @@
         <activity
             android:name=".DataUserActivity"
             android:exported="true"
-            android:screenOrientation="portrait" /> <!-- Kolektor -->
+            android:screenOrientation="portrait" />
+
+        <!-- Kolektor -->
         <activity
             android:name=".KolektorHomeActivity"
             android:exported="true"
@@ -60,7 +62,28 @@
         <activity
             android:name=".KolektorProfileActivity"
             android:exported="true"
-            android:screenOrientation="portrait" /> <!-- Bendahara -->
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KolektorRegistNasabahActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KolektorSetorTunaiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KolektorTarikTunaiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KolektorHistoryTransaksi"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KolektorDataNasabahActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <!-- Bendahara -->
         <activity
             android:name=".BendaharaHomeActivity"
             android:exported="true"
