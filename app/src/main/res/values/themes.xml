@@ -43,4 +43,11 @@
     <!--    </style>-->
     <!--    <style name="Theme.Sispentra.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
     <style name="Theme.Sispentra.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.Sispentra.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Sispentra.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

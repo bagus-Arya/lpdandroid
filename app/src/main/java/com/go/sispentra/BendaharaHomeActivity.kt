@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class BendaharaHomeActivity : AppCompatActivity(){
@@ -27,12 +26,12 @@ class BendaharaHomeActivity : AppCompatActivity(){
 
 
 //        val btn_show_dt_bendahara = findViewById<Button>(R.id.btn_dt_bendahara)
-        val btn_show_dt_grafik_kinerja = findViewById<Button>(R.id.btn_dt_grafik_kinerja)
+        val btn_show_dt_grafik_kinerja = findViewById<Button>(R.id.btn_req_penarikan)
         val btn_show_dt_validasi_setoran = findViewById<Button>(R.id.btn_dt_validasi_setoran)
         val btn_show_dt_validasi_penarikan = findViewById<Button>(R.id.btn_dt_validasi_penarikan)
         val btn_show_dt_laporan_setoran = findViewById<Button>(R.id.btn_dt_laporan_setoran)
         val btn_show_dt_laporan_penarikan = findViewById<Button>(R.id.btn_dt_laporan_penarikan)
-        val btn_show_dt_profile_bendahara = findViewById<Button>(R.id.btn_dt_profile_bendahara)
+        val btn_show_dt_profile_bendahara = findViewById<Button>(R.id.btn_dt_profile_nasabah)
 
 //        btn_show_dt_bendahara.setOnClickListener{
 //            val intent = Intent(this@BendaharaHomeActivity, DataBendaharaActivity::class.java)

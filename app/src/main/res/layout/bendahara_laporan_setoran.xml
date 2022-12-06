@@ -5,7 +5,7 @@
     android:id="@+id/webview_laporan_setoran"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?android:attr/actionBarSize"
+    android:paddingTop="?android:attr/actionBarSize"
     android:background="@drawable/bg_page">
 
     <WebView

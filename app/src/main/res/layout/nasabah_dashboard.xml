@@ -5,85 +5,121 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgpage"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:background="@drawable/bg_page"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".BendaharaHomeActivity">
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="187dp"
         android:layout_height="185dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:srcCompat="@mipmap/logo_lpd_foreground" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sistem Pencatatan Tabungan"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/show_nama_bendahara"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" "
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="409dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.112">
+        android:textColor="@color/textColor"/>
 
-        <LinearLayout
+    <!--    <TextView-->
+    <!--        android:id="@+id/show_nama_bendahara"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="XXXXX"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/imageView4"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="336dp"
+        android:layout_height="252dp"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp">
 
             <Button
-                android:id="@+id/btn_dt_profil_nasabah"
+                android:id="@+id/btn_dt_profile_nasabah"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Profil Saya"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_req_penarikan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_dt_req_penarikan"
+                android:id="@+id/btn_history_transaksi_nasabah"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:text="Req Penarikan"
-                android:textAllCaps="false" />
+                android:text="History Transaksi"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_logout_nasabah"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_req_penarikan" />
 
             <Button
-                android:id="@+id/btn_dt_info_tabungan"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                android:text="Informasi Tabungan"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_logout"
+                android:id="@+id/btn_logout_nasabah"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Logout"
-                android:textAllCaps="false" />
-        </LinearLayout>
-    </ScrollView>
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_history_transaksi_nasabah" />
+
+            <Button
+                android:id="@+id/btn_req_penarikan"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Request Penarikan"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_history_transaksi_nasabah"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_dt_profile_nasabah" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dashboard Ketua"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

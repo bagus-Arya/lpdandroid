@@ -54,7 +54,7 @@
             android:padding="10dp">
 
             <Button
-                android:id="@+id/btn_logout4"
+                android:id="@+id/btn_logout_bendahara"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
@@ -77,7 +77,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_grafik_kinerja" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_req_penarikan" />
 
             <Button
                 android:id="@+id/btn_dt_laporan_penarikan"
@@ -86,7 +86,7 @@
                 android:backgroundTint="@color/secondary"
                 android:text="Laporan Penarikan"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_logout4"
+                app:layout_constraintBottom_toTopOf="@+id/btn_logout_bendahara"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,13 +106,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_dt_validasi_setoran" />
 
             <Button
-                android:id="@+id/btn_dt_profile_bendahara"
+                android:id="@+id/btn_dt_profile_nasabah"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Profil Saya"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_dt_grafik_kinerja"
+                app:layout_constraintBottom_toTopOf="@+id/btn_req_penarikan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_dt_validasi_penarikan" />
 
             <Button
-                android:id="@+id/btn_dt_grafik_kinerja"
+                android:id="@+id/btn_req_penarikan"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
@@ -142,7 +142,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_profile_bendahara" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_dt_profile_nasabah" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

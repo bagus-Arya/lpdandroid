@@ -13,8 +13,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".nasabahRequestPenarikan"
+            android:exported="false" />
+        <activity
+            android:name=".nasabahHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".nasabahProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity"
+            />
 
-
+        <activity
+            android:name=".ketuaTambahDataStaffActivity"
+            android:exported="false"
+            android:label="@string/title_activity_ketua_tambah_data_staff"
+            android:parentActivityName=".ketuaDataStaffActivity" />
+        <activity
+            android:name=".ketuaDataStaffActivity"
+            android:exported="false"
+            android:parentActivityName=".ketuaHomeActivity" />
+        <activity
+            android:name=".ketuaProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".ketuaHomeActivity" />
+        <activity
+            android:name=".ketuaHomeActivity"
+            android:exported="false" />
         <activity
             android:name=".PageNotFound"
             android:exported="true"
@@ -22,9 +48,7 @@
         <activity
             android:name=".DataPeranActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DataUserActivity"
             android:exported="true"
@@ -53,23 +77,23 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ValidasiSetoranBendaharaActivity"
-            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ValidasiPenarikanBendaharaActivity"
-            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LaporanSetoranBendaharaActivity"
-            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LaporanPenarikanBendaharaActivity"
-            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" /> <!-- Ketua -->
         <activity
             android:name=".HomeActivity"

@@ -1,31 +1,22 @@
 package com.go.sispentra
 
-
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.*
 import com.google.android.material.textfield.TextInputLayout
 import com.rw.keyboardlistener.KeyboardUtils
-import com.rw.keyboardlistener.KeyboardUtils.SoftKeyboardToggleListener
 
-
-class DataBendaharaActivity: AppCompatActivity() {
-
-
+class ketuaProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        //Starter Pack
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.bendahara_profile)
+        setContentView(R.layout.ketua_profile)
+
         transparentNavigation()
         supportActionBar?.show()
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
@@ -59,11 +50,11 @@ class DataBendaharaActivity: AppCompatActivity() {
 
 
         //Listener
-        autoCompleteTxtJenisKelamin.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+        autoCompleteTxtJenisKelamin.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
             val item = parent.getItemAtPosition(position).toString()
 //            Toast.makeText(applicationContext, "Item: $position", Toast.LENGTH_SHORT).show()
         })
-        autoCompleteTxtjenisRole.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+        autoCompleteTxtjenisRole.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
             val item = parent.getItemAtPosition(position).toString()
 //            Toast.makeText(applicationContext, "Item: $position", Toast.LENGTH_SHORT).show()
         })
@@ -75,7 +66,8 @@ class DataBendaharaActivity: AppCompatActivity() {
         }
 
         //Check Keyboard
-        KeyboardUtils.addKeyboardToggleListener(this, object : SoftKeyboardToggleListener {
+        KeyboardUtils.addKeyboardToggleListener(this, object :
+            KeyboardUtils.SoftKeyboardToggleListener {
             override fun onToggleSoftKeyboard(isVisible: Boolean) {
                 if (isVisible){
                     if (Build.VERSION.SDK_INT >= 21) {
@@ -88,7 +80,7 @@ class DataBendaharaActivity: AppCompatActivity() {
                                 or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
                         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            //          window.statusBarColor = Color.TRANSPARENT
+                        //          window.statusBarColor = Color.TRANSPARENT
 //                        window.navigationBarColor = Color.TRANSPARENT
                     }
                 }
@@ -99,6 +91,7 @@ class DataBendaharaActivity: AppCompatActivity() {
             }
         })
     }
+
     fun transparentNavigation(){
         if (Build.VERSION.SDK_INT >= 21) {
             val window = window

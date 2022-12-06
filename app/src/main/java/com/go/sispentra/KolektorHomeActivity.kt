@@ -23,7 +23,7 @@ class KolektorHomeActivity: AppCompatActivity(){
 
         val btn_show_kolektor = findViewById<Button>(R.id.btn_dt_kolektor)
 //        val btn_regist_nasabah = findViewById<Button>(R.id.btn_dt_bendahara)
-        val btn_dt_nasabah = findViewById<Button>(R.id.btn_dt_grafik_kinerja)
+        val btn_dt_nasabah = findViewById<Button>(R.id.btn_req_penarikan)
         val btn_setoran = findViewById<Button>(R.id.btn_dt_validasi_setoran)
         val btn_penarikan = findViewById<Button>(R.id.btn_dt_validasi_penarikan)
         val btn_history_transaksi = findViewById<Button>(R.id.btn_dt_laporan_setoran)

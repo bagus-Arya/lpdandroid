@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgpage"
+    android:background="@drawable/bg_page"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".ValidasiPenarikanBendaharaActivity">
+    android:paddingTop="?attr/actionBarSize"
 
+    tools:context=".ValidasiPenarikanBendaharaActivity">
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/transparentColor">
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardBackgroundColor="@color/transparentColor">
 
-    </androidx.recyclerview.widget.RecyclerView>
+</androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
