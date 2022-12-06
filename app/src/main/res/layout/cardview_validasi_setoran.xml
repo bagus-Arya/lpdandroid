@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#EDEDED"
+        app:cardBackgroundColor="@color/cardBackgroundColor2"
         app:cardCornerRadius="20dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,17 +19,19 @@
             android:padding="10dp">
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:text="Nama Kolektor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,6 +42,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,9 +50,10 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_nama_koletor" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,9 +61,10 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_nama_nasabah" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,9 +72,21 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_jumlah_setoran" />
 
             <TextView
+                android:textColor="@color/textColor"
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text=":"
+                android:textSize="15dp"
+                app:layout_constraintStart_toEndOf="@+id/textView22"
+                app:layout_constraintTop_toBottomOf="@+id/dt_tgl_setoran" />
+
+            <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,9 +94,10 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,6 +107,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,6 +117,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,6 +127,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,83 +137,109 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status Transaksi"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView22"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+            <TextView
+                android:textColor="@color/textColor"
+                android:id="@+id/dt_nama_koletor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Kolektor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.036"
                 app:layout_constraintStart_toEndOf="@+id/textView24"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:textColor="@color/textColor"
+                android:id="@+id/dt_nama_nasabah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Nasabah"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.04"
-                app:layout_constraintStart_toEndOf="@+id/textView25"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/dt_nama_koletor"
+                app:layout_constraintTop_toBottomOf="@+id/dt_nama_koletor" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:textColor="@color/textColor"
+                android:id="@+id/dt_no_nasabah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No Tabungan"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.037"
-                app:layout_constraintStart_toEndOf="@+id/textView26"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/dt_nama_nasabah"
+                app:layout_constraintTop_toBottomOf="@+id/dt_nama_nasabah" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:textColor="@color/textColor"
+                android:id="@+id/dt_jumlah_setoran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jumlah Setoran"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.04"
-                app:layout_constraintStart_toEndOf="@+id/textView28"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/dt_no_nasabah"
+                app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:textColor="@color/textColor"
+                android:id="@+id/dt_tgl_setoran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Setoran"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.041"
-                app:layout_constraintStart_toEndOf="@+id/textView27"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/dt_jumlah_setoran"
+                app:layout_constraintTop_toBottomOf="@+id/dt_jumlah_setoran" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="86dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="#DE623A"
-                android:text="Batal"
+            <TextView
+                android:textColor="@color/textColor"
+                android:id="@+id/dt_status_transaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status Transaksi"
+                android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.264"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintHorizontal_bias="0.044"
+                app:layout_constraintStart_toEndOf="@+id/textView27"
+                app:layout_constraintTop_toBottomOf="@+id/dt_tgl_setoran" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btn_reject"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#DE623A"
+                android:text="REJECT"
+                app:layout_constraintEnd_toStartOf="@+id/btn_validasi"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dt_status_transaksi" />
+
+            <Button
+                android:id="@+id/btn_validasi"
                 android:layout_width="106dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="20dp"
                 android:backgroundTint="#095A0D"
                 android:text="Validasi"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.434"
-                app:layout_constraintStart_toEndOf="@+id/button3"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_reject"
+                app:layout_constraintTop_toTopOf="@+id/btn_reject" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

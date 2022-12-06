@@ -21,6 +21,7 @@
     <color name="textColor">#605E5E</color>
     <color name="inputBackgorundActive">#EDEDED</color>
     <color name="cardBackgroundColor">#FFFFFFFF</color>
+    <color name="cardBackgroundColor2">#EDEDED</color>
     <color name="transparentColor">#00000000</color>
     <color name="disabled">#A39D9D</color>
     <color name="ubahColor">#3AA3DE</color>

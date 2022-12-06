@@ -9,13 +9,16 @@
         <entry key="..\:/Github/lpdandroid/app/src/main/res/drawable/bg_shape.xml" value="0.265" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/activity_bendahara_profile.xml" value="0.2894399315946986" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_dashboard.xml" value="0.5" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_dashboard.xml" value="0.33" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_grafik_kinerja.xml" value="0.33" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_laporan_penarikan.xml" value="0.358695652173913" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_laporan_setoran.xml" value="0.21333903377511756" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_profile.xml" value="0.5" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_profile_saya.xml" value="0.3009833262077811" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_validasi_penarikan.xml" value="0.22" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_validasi_setoran.xml" value="0.358695652173913" />
-        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_penarikan.xml" value="0.358695652173913" />
-        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_setoran.xml" value="0.358695652173913" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_penarikan.xml" value="0.5" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_setoran.xml" value="0.5" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/kolektor_dashboard.xml" value="0.358695652173913" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/kolektor_history_transaksi.xml" value="0.358695652173913" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/kolektor_setoran_tunai.xml" value="0.358695652173913" />

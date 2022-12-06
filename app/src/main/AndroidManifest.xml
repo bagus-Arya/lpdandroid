@@ -49,21 +49,26 @@
         <activity
             android:name=".GrafikBendaharaActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ValidasiSetoranBendaharaActivity"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ValidasiPenarikanBendaharaActivity"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LaporanSetoranBendaharaActivity"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LaporanPenarikanBendaharaActivity"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:exported="true"
             android:screenOrientation="portrait" /> <!-- Ketua -->
         <activity
