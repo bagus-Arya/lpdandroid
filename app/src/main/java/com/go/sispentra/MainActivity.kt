@@ -60,10 +60,10 @@ class MainActivity : AppCompatActivity() {
     fun initAction(){
         val btnlogin = findViewById<Button>(R.id.btn_login)
         btnlogin.setOnClickListener{
-            Log.d("Logbutton", "login button pressed")
-            val intent = Intent(this@MainActivity, BendaharaHomeActivity::class.java)
-            startActivity(intent)
-        //            login()
+//            Log.d("Logbutton", "login button pressed")
+//            val intent = Intent(this@MainActivity, BendaharaHomeActivity::class.java)
+//            startActivity(intent)
+                    login()
         }
     }
 

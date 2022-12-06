@@ -3,6 +3,8 @@ package com.go.sispentra
 import com.go.sispentra.model.LoginModelResponse
 import com.go.sispentra.model.RoleModel
 import com.go.sispentra.model.UserModel
+import com.rw.keyboardlistener.com.go.sispentra.model.NasabahRequest
+import com.rw.keyboardlistener.com.go.sispentra.model.NasabahResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -17,6 +19,11 @@ interface ApiEndPoint {
         @Field("nama") nama:String,
         @Field("display_name") display_name:String
     ): Call<RoleModel>
+
+    @POST("dt-ns/post/3")
+    fun createNasabah(
+        @Body req:NasabahRequest
+    ): Call<NasabahResponse>
 
     @FormUrlEncoded
     @POST("api/v1/auth/login")
