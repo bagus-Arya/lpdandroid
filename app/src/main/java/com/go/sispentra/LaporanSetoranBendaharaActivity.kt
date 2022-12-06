@@ -23,7 +23,7 @@ class LaporanSetoranBendaharaActivity : AppCompatActivity() {
         setTitle("Laporan Setoran")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val webView=findViewById<WebView>(R.id.webview_laporan_penarikan)
+        val webView=findViewById<WebView>(R.id.webview_laporan_setoran)
         webView.webViewClient = WebViewClient()
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("https://www.google.com")
