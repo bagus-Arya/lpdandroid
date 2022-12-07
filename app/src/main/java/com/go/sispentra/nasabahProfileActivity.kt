@@ -1,19 +1,31 @@
 package com.go.sispentra
 
+import android.app.DatePickerDialog
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.rw.keyboardlistener.KeyboardUtils
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class nasabahProfileActivity : AppCompatActivity() {
+    val myFormat="dd-MM-yyyy"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nasabah_profile)
@@ -24,6 +36,26 @@ class nasabahProfileActivity : AppCompatActivity() {
         setTitle("Profile Saya")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        //input calender
+        val tgl_lahir_layout=findViewById<TextInputLayout>(R.id.nasabah_textfield_layout_tgl_lahir)
+        val tgl_lahir_editor=findViewById<TextInputEditText>(R.id.nasabah_textfield_editor_tgl_lahir)
+
+
+
+        //calender
+        val currentDate=Calendar.getInstance().getTime();
+        val sdf=SimpleDateFormat(myFormat,Locale.US)
+        tgl_lahir_editor.setText(sdf.format(currentDate.time))
+
+        val myCalender= Calendar.getInstance()
+        val datePicker=DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            myCalender.set(Calendar.YEAR,year)
+            myCalender.set(Calendar.MONTH,month)
+            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            updateCalendar(myCalender,tgl_lahir_editor)
+        }
+       datePicker
+
         //Input Select Gender
         var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")
         val autoCompleteTxtJenisKelamin = findViewById<AutoCompleteTextView>(R.id.nasabah_autotextfield_editor_jeniskelamin)
@@ -33,11 +65,76 @@ class nasabahProfileActivity : AppCompatActivity() {
         autoCompleteTxtJenisKelamin.setAdapter(adapterItemsJenisKelamin);
         autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(0).toString(), false);
 
+        //        hide softkeyboard
+        if (Build.VERSION.SDK_INT >= 21) {
+            tgl_lahir_editor!!.showSoftInputOnFocus = false
+            autoCompleteTxtJenisKelamin!!.showSoftInputOnFocus = false
+        } else if (Build.VERSION.SDK_INT >= 11) {
+            tgl_lahir_editor!!.setRawInputType(InputType.TYPE_CLASS_TEXT)
+            tgl_lahir_editor!!.setTextIsSelectable(true)
+
+            autoCompleteTxtJenisKelamin!!.setRawInputType(InputType.TYPE_CLASS_TEXT)
+            autoCompleteTxtJenisKelamin!!.setTextIsSelectable(true)
+        } else {
+            tgl_lahir_editor!!.setRawInputType(InputType.TYPE_NULL)
+            tgl_lahir_editor!!.isFocusable = true
+
+            autoCompleteTxtJenisKelamin!!.setRawInputType(InputType.TYPE_NULL)
+            autoCompleteTxtJenisKelamin!!.isFocusable = true
+        }
+
         //Listener
         autoCompleteTxtJenisKelamin.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
             val item = parent.getItemAtPosition(position).toString()
 //            Toast.makeText(applicationContext, "Item: $position", Toast.LENGTH_SHORT).show()
         })
+        tgl_lahir_editor.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+            val view = this.currentFocus
+            if (view != null) {
+
+                // now assign the system
+                // service to InputMethodManager
+                val manager = getSystemService(
+                    INPUT_METHOD_SERVICE
+                ) as InputMethodManager
+                manager
+                    .hideSoftInputFromWindow(
+                        view.windowToken, 0
+                    )
+            }
+            if (hasFocus) {
+                val data=DatePickerDialog(this,
+                    datePicker,
+                    myCalender.get(Calendar.YEAR),
+                    myCalender.get(Calendar.MONTH),
+                    myCalender.get(Calendar.DAY_OF_MONTH))
+                data.setOnDismissListener {
+                    tgl_lahir_editor.clearFocus()
+                }
+                data.show()
+
+            } else {
+                // Hide your calender here
+            }
+        })
+        autoCompleteTxtJenisKelamin.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+            val view = this.currentFocus
+            if (view != null) {
+
+                // now assign the system
+                // service to InputMethodManager
+                val manager = getSystemService(
+                    INPUT_METHOD_SERVICE
+                ) as InputMethodManager
+                manager
+                    .hideSoftInputFromWindow(
+                        view.windowToken, 0
+                    )
+            }
+        })
+
+
+
 
         //Check Keyboard
         KeyboardUtils.addKeyboardToggleListener(this, object :
@@ -83,4 +180,10 @@ class nasabahProfileActivity : AppCompatActivity() {
             window.navigationBarColor = Color.TRANSPARENT
         }
     }
+
+    private fun updateCalendar(myCalendar:Calendar, tgl_lahir_editor: TextInputEditText){
+        val sdf=SimpleDateFormat(myFormat,Locale.US)
+        tgl_lahir_editor.setText(sdf.format(myCalendar.time))
+    }
+
 }
