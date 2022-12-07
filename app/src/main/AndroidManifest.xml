@@ -14,17 +14,20 @@
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".nasabahTabunganActivity"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity" />
+        <activity
             android:name=".nasabahRequestPenarikan"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity" />
         <activity
             android:name=".nasabahHomeActivity"
             android:exported="false" />
         <activity
             android:name=".nasabahProfileActivity"
             android:exported="false"
-            android:parentActivityName=".nasabahHomeActivity"
-            />
-
+            android:parentActivityName=".nasabahHomeActivity" />
         <activity
             android:name=".ketuaTambahDataStaffActivity"
             android:exported="false"
@@ -52,9 +55,7 @@
         <activity
             android:name=".DataUserActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-
-        <!-- Kolektor -->
+            android:screenOrientation="portrait" /> <!-- Kolektor -->
         <activity
             android:name=".KolektorHomeActivity"
             android:exported="true"
@@ -82,8 +83,7 @@
         <activity
             android:name=".KolektorDataNasabahActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <!-- Bendahara -->
+            android:screenOrientation="portrait" /> <!-- Bendahara -->
         <activity
             android:name=".BendaharaHomeActivity"
             android:exported="true"

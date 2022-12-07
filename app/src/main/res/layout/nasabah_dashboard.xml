@@ -57,11 +57,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_history_transaksi_nasabah"
+                android:id="@+id/btn_tabungan_nasabah"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                android:text="History Transaksi"
+                android:text="Tabungan"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/btn_logout_nasabah"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_history_transaksi_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_tabungan_nasabah" />
 
             <Button
                 android:id="@+id/btn_req_penarikan"
@@ -89,7 +89,7 @@
                 android:backgroundTint="@color/secondary"
                 android:text="Request Penarikan"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_history_transaksi_nasabah"
+                app:layout_constraintBottom_toTopOf="@+id/btn_tabungan_nasabah"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

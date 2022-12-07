@@ -39,14 +39,9 @@ class nasabahProfileActivity : AppCompatActivity() {
         //input calender
         val tgl_lahir_layout=findViewById<TextInputLayout>(R.id.nasabah_textfield_layout_tgl_lahir)
         val tgl_lahir_editor=findViewById<TextInputEditText>(R.id.nasabah_textfield_editor_tgl_lahir)
-
-
-
-        //calender
         val currentDate=Calendar.getInstance().getTime();
         val sdf=SimpleDateFormat(myFormat,Locale.US)
         tgl_lahir_editor.setText(sdf.format(currentDate.time))
-
         val myCalender= Calendar.getInstance()
         val datePicker=DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             myCalender.set(Calendar.YEAR,year)
@@ -54,7 +49,6 @@ class nasabahProfileActivity : AppCompatActivity() {
             myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
             updateCalendar(myCalender,tgl_lahir_editor)
         }
-       datePicker
 
         //Input Select Gender
         var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")

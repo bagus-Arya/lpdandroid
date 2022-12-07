@@ -18,7 +18,7 @@ class nasabahHomeActivity : AppCompatActivity() {
 
         val btn_show_nasabah_profile = findViewById<Button>(R.id.btn_dt_profile_nasabah)
         val btn_show_req_penarikan = findViewById<Button>(R.id.btn_req_penarikan)
-        val btn_show_history_transaksi = findViewById<Button>(R.id.btn_history_transaksi_nasabah)
+        val btn_show_tabungan = findViewById<Button>(R.id.btn_tabungan_nasabah)
         val btn_show_logout = findViewById<Button>(R.id.btn_logout_nasabah)
 
         btn_show_nasabah_profile.setOnClickListener{
@@ -26,7 +26,11 @@ class nasabahHomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btn_show_req_penarikan.setOnClickListener{
-            val intent = Intent(this@nasabahHomeActivity, ketuaDataStaffActivity::class.java)
+            val intent = Intent(this@nasabahHomeActivity, nasabahRequestPenarikan::class.java)
+            startActivity(intent)
+        }
+        btn_show_tabungan.setOnClickListener{
+            val intent = Intent(this@nasabahHomeActivity, nasabahTabunganActivity::class.java)
             startActivity(intent)
         }
     }

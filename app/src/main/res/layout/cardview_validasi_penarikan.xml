@@ -97,54 +97,54 @@
                 app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Nasabah"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_nama_koletor" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No Tabungan"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_nama_nasabah" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jumlah Penarikan"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Penarikan"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_jumlah_setoran" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status Transaksi"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintTop_toBottomOf="@+id/dt_tgl_setoran" />
 
             <TextView
                 android:textColor="@color/textColor"
@@ -159,64 +159,64 @@
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/dt_nama_nasabah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Nasabah"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/dt_nama_koletor"
-                app:layout_constraintTop_toBottomOf="@+id/dt_nama_koletor" />
+                app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/dt_no_nasabah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No Tabungan"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/dt_nama_nasabah"
-                app:layout_constraintTop_toBottomOf="@+id/dt_nama_nasabah" />
+                app:layout_constraintTop_toTopOf="@+id/textView18" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/dt_jumlah_setoran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jumlah Penarikan"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/dt_no_nasabah"
-                app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
+                app:layout_constraintTop_toTopOf="@+id/textView20" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/dt_tgl_setoran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Penarikan"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/dt_jumlah_setoran"
-                app:layout_constraintTop_toBottomOf="@+id/dt_jumlah_setoran" />
+                app:layout_constraintTop_toTopOf="@+id/textView22" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/dt_status_transaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status Transaksi"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.044"
                 app:layout_constraintStart_toEndOf="@+id/textView27"
-                app:layout_constraintTop_toBottomOf="@+id/dt_tgl_setoran" />
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
 
             <Button
                 android:id="@+id/btn_reject"

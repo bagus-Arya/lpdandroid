@@ -20,8 +20,9 @@
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_profile_saya.xml" value="0.3009833262077811" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_validasi_penarikan.xml" value="0.22" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/bendahara_validasi_setoran.xml" value="0.358695652173913" />
-        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_penarikan.xml" value="0.5" />
-        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_setoran.xml" value="0.5" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_nasabah_tabungan_history.xml" value="0.61730319563523" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_penarikan.xml" value="1.1" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/cardview_validasi_setoran.xml" value="0.67" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/content_ketua_tambah_data_staff.xml" value="0.31765711842667804" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/ketua_dashboard.xml" value="0.3009833262077811" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/ketua_data_staff.xml" value="0.25" />
@@ -37,8 +38,9 @@
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_info_tabungan.xml" value="0.358695652173913" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_profile.xml" value="0.3137951450562463" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_req_penarikan.xml" value="0.358695652173913" />
-        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_request_penarikan.xml" value="0.31765711842667804" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_request_penarikan.xml" value="0.33" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_request_penearikan.xml" value="0.22659256092347158" />
+        <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/nasabah_tabungan.xml" value="0.67" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/page_not_found.xml" value="0.358695652173913" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/layout/register_nasabah.xml" value="0.358695652173913" />
         <entry key="..\:/Github/lpdandroid/app/src/main/res/menu/menu.xml" value="0.31765711842667804" />
