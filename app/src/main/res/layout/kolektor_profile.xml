@@ -5,159 +5,195 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgpage"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:background="@drawable/bg_page"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".DataBendaharaActivity"
+    android:padding="15dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineleft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="29dp"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineright"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="29dp"/>
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="640dp"
+        android:layout_marginTop="50dp"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="20dp"
+        app:contentPadding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.168"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@mipmap/logo_lpd_foreground" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="243dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="36dp"
-        android:text="Sistem Pencatatan Transaksi Tabungan"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="328dp"
-        android:layout_height="368dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineright"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="@+id/guidelineleft"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.141">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1mm"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textSize="9pt"
-                    android:text="Nama" />
-
-                <EditText
-                    android:id="@+id/btn_rgst_nama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_shape"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:padding="15dp" />
-
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textSize="9pt"
-                    android:text="Jenis Kelamin" />
-
-                <EditText
-                    android:id="@+id/btn_jenis_kelamin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_shape"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:padding="15dp" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textSize="9pt"
-                    android:text="No.Hp" />
-
-                <EditText
-                    android:id="@+id/btn_no_hp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_shape"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:padding="15dp" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textSize="9pt"
-                    android:text="Bagian" />
-
-                <EditText
-                    android:id="@+id/btn_bagian"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_shape"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:padding="15dp" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/dt_ubah_kolektor"
+            <TextView
+                android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="Ubah Data"
-                android:textSize="9pt"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/secondary"
-                android:textColor="@color/white" />
+                android:layout_marginTop="15dp"
+                android:text="Data Diri"
+                android:textColor="@color/textColor"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
-    </ScrollView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_nama"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Nama Bendahara"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_jeniskelamin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_jeniskelamin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="Jenis Kelamin"
+                android:textColorHint="@color/muted"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:endIconTint="@color/secondary"
+
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_telepon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_nama">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/staff_autotextfield_editor_jeniskelamin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:inputType="none"
+                    android:popupBackground="@color/white"
+                    android:popupTheme="@color/white"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_telepon"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="No Telepon"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_role"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_jeniskelamin"
+                app:prefixText="+62"
+                app:prefixTextColor="@color/muted">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_telepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_role"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:enabled="false"
+                android:hint="Role"
+                android:textColorHint="@color/muted"
+                app:boxBackgroundColor="@color/disabled"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:endIconTint="@color/secondary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_telepon">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/staff_autotextfield_editor_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:inputType="none"
+                    android:popupBackground="@color/white"
+                    android:popupTheme="@color/white"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Password"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/textColor"
+                app:layout_constraintBottom_toTopOf="@+id/btn_tambah_staff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_role">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_tambah_staff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/ubahColor"
+                android:text="Ubah"
+                app:layout_constraintEnd_toStartOf="@+id/btn_kembali"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_password" />
+
+            <Button
+                android:id="@+id/btn_kembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/muted"
+                android:text="Kembali"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_tambah_staff"
+                app:layout_constraintTop_toTopOf="@+id/btn_tambah_staff" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

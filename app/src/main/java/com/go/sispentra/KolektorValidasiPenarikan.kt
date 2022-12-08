@@ -3,21 +3,22 @@ package com.go.sispentra
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import com.rw.keyboardlistener.KeyboardUtils
 
-class KolektorHistoryTransaksi : AppCompatActivity() {
+class KolektorValidasiPenarikan : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.kolektor_history_transaksi)
+        setContentView(R.layout.kolektor_validasi_penarikan)
+
         transparentNavigation()
         supportActionBar?.show()
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
-        setTitle("History Transaksi")
+        setTitle("Validasi Penarikan")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //Check Keyboard

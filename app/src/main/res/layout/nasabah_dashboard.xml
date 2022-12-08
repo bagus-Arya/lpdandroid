@@ -9,6 +9,16 @@
     android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".BendaharaHomeActivity">
 
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sistem Pencatatan Tabungan"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="187dp"
@@ -35,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toBottomOf="@+id/textView23">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

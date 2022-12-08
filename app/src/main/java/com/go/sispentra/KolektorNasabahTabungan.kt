@@ -1,24 +1,46 @@
 package com.go.sispentra
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
 import com.rw.keyboardlistener.KeyboardUtils
 
-class KolektorHistoryTransaksi : AppCompatActivity() {
+class KolektorNasabahTabungan : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.kolektor_history_transaksi)
+        setContentView(R.layout.kolektor_nasabah_tabungan)
+
         transparentNavigation()
         supportActionBar?.show()
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
-        setTitle("History Transaksi")
+        setTitle("Nasabah Tabungan")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val btn_setoran_nasabah = findViewById<Button>(R.id.btn_tambah_setoran)
+        val btn_ubah_nasabah = findViewById<Button>(R.id.btn_ubah_nasabah)
+        val btn_hapus_nasabah = findViewById<Button>(R.id.btn_hapus_nasabah)
+
+
+        btn_setoran_nasabah.setOnClickListener{
+            val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahSetoran::class.java)
+            startActivity(intent)
+        }
+        btn_ubah_nasabah.setOnClickListener{
+            val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahUbah::class.java)
+            startActivity(intent)
+        }
+        btn_hapus_nasabah.setOnClickListener{
+//            val intent = Intent(this@KolektorNasabahTabungan, GrafikBendaharaActivity::class.java)
+//            startActivity(intent)
+        }
+
 
         //Check Keyboard
         KeyboardUtils.addKeyboardToggleListener(this, object :
@@ -46,7 +68,6 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
             }
         })
     }
-
     fun transparentNavigation(){
         if (Build.VERSION.SDK_INT >= 21) {
             val window = window

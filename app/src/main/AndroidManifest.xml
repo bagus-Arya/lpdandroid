@@ -14,6 +14,33 @@
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".KolektorValidasiPenarikan"
+            android:exported="false"
+            android:parentActivityName=".KolektorHomeActivity" />
+        <activity
+            android:name=".KolektorValidasiSetoran"
+            android:exported="false"
+            android:parentActivityName=".KolektorHomeActivity" />
+        <activity
+            android:name=".KolektorNasabahSetoran"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahTabungan" />
+        <activity
+            android:name=".KolektorNasabahUbah"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahTabungan" />
+        <activity
+            android:name=".KolektorNasabahTabungan"
+            android:exported="false" />
+        <activity
+            android:name=".KolektorNasabahActivity"
+            android:exported="false"
+            android:parentActivityName=".KolektorHomeActivity" />
+        <activity
+            android:name=".KolektorNasabahTambah"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahActivity" />
+        <activity
             android:name=".nasabahTabunganActivity"
             android:exported="false"
             android:parentActivityName=".nasabahHomeActivity" />
@@ -63,6 +90,7 @@
         <activity
             android:name=".KolektorProfileActivity"
             android:exported="true"
+            android:parentActivityName=".KolektorHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".KolektorRegistNasabahActivity"
@@ -79,7 +107,8 @@
         <activity
             android:name=".KolektorHistoryTransaksi"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".KolektorHomeActivity"/>
         <activity
             android:name=".KolektorDataNasabahActivity"
             android:exported="true"

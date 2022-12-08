@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".KolektorHomeActivity"
     android:orientation="vertical"
-    android:background="@color/bgpage"
+    android:background="@drawable/bg_page"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
-     <ImageView
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sistem Pencatatan Tabungan"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
         android:id="@+id/imageView4"
         android:layout_width="187dp"
         android:layout_height="185dp"
@@ -18,25 +28,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:srcCompat="@mipmap/logo_lpd_foreground" />
 
-    <TextView
-        android:id="@+id/show_nama_kolektor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" "
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
     <androidx.cardview.widget.CardView
         android:layout_width="336dp"
-        android:layout_height="442dp"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/show_nama_kolektor">
+        app:layout_constraintTop_toBottomOf="@+id/textView30">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,81 +46,68 @@
 
             <Button
                 android:id="@+id/btn_dt_kolektor"
-                android:text="Data Kolektor"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
+                android:text="Profile Saya"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_regist_nasabah"
+                app:layout_constraintBottom_toTopOf="@+id/btn_dt_kolektor_nasabah"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_regist_nasabah"
-                android:text="Pendaftaran Nasabah"
-                android:textAllCaps="false"
+                android:id="@+id/btn_kolektor_validasi_setoran"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                app:layout_constraintBottom_toTopOf="@+id/btn_dt_nasabah"
+                android:text="Validasi Setoran"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_validasi_penarikan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_kolektor"/>
+                app:layout_constraintTop_toBottomOf="@+id/btn_dt_kolektor_nasabah" />
 
             <Button
-                android:id="@+id/btn_dt_nasabah"
-                android:text="Data Nasabah"
-                android:textAllCaps="false"
+                android:id="@+id/btn_kolektor_validasi_penarikan"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                app:layout_constraintBottom_toTopOf="@+id/btn_setoran"
+                android:text="Validasi Penarikan"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_history"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_regist_nasabah"/>
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_setoran" />
 
             <Button
-                android:id="@+id/btn_setoran"
-                android:text="Setoran Tunai"
-                android:textAllCaps="false"
+                android:id="@+id/btn_kolektor_history"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
-                app:layout_constraintBottom_toTopOf="@+id/btn_penarikan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_nasabah"/>
-
-            <Button
-                android:id="@+id/btn_penarikan"
-                android:text="Penarikan Tunai"
-                android:textAllCaps="false"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                app:layout_constraintBottom_toTopOf="@+id/btn_history_transaksi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_setoran"/>
-
-            <Button
-                android:id="@+id/btn_history_transaksi"
                 android:text="History Transaksi"
                 android:textAllCaps="false"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
                 app:layout_constraintBottom_toTopOf="@+id/btn_logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_penarikan"/>
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_penarikan" />
+
+            <Button
+                android:id="@+id/btn_dt_kolektor_nasabah"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Nasabah"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_validasi_setoran"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_dt_kolektor" />
 
             <Button
                 android:id="@+id/btn_logout"
@@ -133,7 +120,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_history_transaksi" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_history" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
