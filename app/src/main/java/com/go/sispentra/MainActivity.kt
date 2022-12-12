@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val btnlogin = findViewById<Button>(R.id.btn_login)
         btnlogin.setOnClickListener{
             Log.d("Logbutton", "login button pressed")
-            val intent = Intent(this@MainActivity,nasabahHomeActivity::class.java)
+            val intent = Intent(this@MainActivity,KolektorNasabahTabungan::class.java)
             startActivity(intent)
         //            login()
         }
