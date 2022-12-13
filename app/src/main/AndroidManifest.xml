@@ -14,6 +14,17 @@
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".KolektorValidasiPenarikan"
             android:exported="false"
             android:parentActivityName=".KolektorHomeActivity" />
@@ -107,8 +118,8 @@
         <activity
             android:name=".KolektorHistoryTransaksi"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".KolektorHomeActivity"/>
+            android:parentActivityName=".KolektorHomeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".KolektorDataNasabahActivity"
             android:exported="true"
@@ -154,11 +165,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
