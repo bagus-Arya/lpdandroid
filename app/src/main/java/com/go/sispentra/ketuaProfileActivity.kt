@@ -18,10 +18,12 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import org.json.JSONException
+import org.json.JSONObject
 
 class ketuaProfileActivity : AppCompatActivity() {
     private var loginData= LoginData(null,null,-1)
@@ -134,6 +136,7 @@ class ketuaProfileActivity : AppCompatActivity() {
 //            var text4=autoCompleteTxtJenisKelamin.text.toString()
 //            var text5=autoCompleteTxtjenisRole.text.toString()
 //            Log.d("ubah btn", "$text1,$text2,$text3,$text4,$text5")
+            reqUpdateProfile(loginData,ubahProfileURL,getViewTextProfile())
         }
         btnKembali.setOnClickListener{
             onBackPressed()
@@ -146,11 +149,95 @@ class ketuaProfileActivity : AppCompatActivity() {
         val staff_textfield_editor_nama=findViewById<TextInputEditText>(R.id.staff_textfield_editor_nama)
         val staff_textfield_editor_telepon=findViewById<TextInputEditText>(R.id.staff_textfield_editor_telepon)
         val staff_textfield_editor_password=findViewById<TextInputEditText>(R.id.staff_textfield_editor_password)
-        autoCompleteTxtJenisKelamin.setText(dataStaff.jenis_kelamin)
-        autoCompleteTxtjenisRole.setText(dataStaff.role)
+        if(dataStaff.jenis_kelamin=="Laki-Laki"){
+            autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(0).toString(), false);
+        }else{
+            autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(1).toString(), false);
+        }
+
+        if(dataStaff.role=="Kolektor"){
+            autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(0).toString(), false);
+        }else if(dataStaff.role=="Bendahara")
+        {
+            autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(1).toString(), false);
+        }
+        else{
+            autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(2).toString(), false);
+        }
+//        autoCompleteTxtJenisKelamin.setText(dataStaff.jenis_kelamin)
+//        autoCompleteTxtjenisRole.setText(dataStaff.role)
         staff_textfield_editor_nama.setText(dataStaff.fullname)
         staff_textfield_editor_telepon.setText(dataStaff.no_telepon)
-        staff_textfield_editor_password.setText(password)
+        staff_textfield_editor_password.setText(dataStaff.password)
+    }
+
+    fun getViewTextProfile():Staff{
+        val autoCompleteTxtJenisKelamin = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_jeniskelamin)
+        val autoCompleteTxtjenisRole = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_role)
+        val staff_textfield_editor_nama=findViewById<TextInputEditText>(R.id.staff_textfield_editor_nama)
+        val staff_textfield_editor_telepon=findViewById<TextInputEditText>(R.id.staff_textfield_editor_telepon)
+        val staff_textfield_editor_password=findViewById<TextInputEditText>(R.id.staff_textfield_editor_password)
+        var DataProfileStaff=Staff(staff_textfield_editor_nama.text.toString(),autoCompleteTxtjenisRole.text.toString(),autoCompleteTxtJenisKelamin.text.toString(),staff_textfield_editor_telepon.text.toString(),staff_textfield_editor_password.text.toString())
+        return DataProfileStaff
+    }
+
+
+    fun reqUpdateProfile(loginData: LoginData, URL:String,DataProfileStaff:Staff){
+        val queue = Volley.newRequestQueue(this)
+        val jsonString = Gson().toJson(DataProfileStaff)
+        val jsonObject= JSONObject(jsonString)
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.PUT, URL,jsonObject,
+            Response.Listener { response ->
+                Log.d("Req", "Request Success")
+                try {
+                    updateViewProfile(DataProfileStaff)
+                    Log.d("Res", response.toString())
+                    Toast.makeText(this@ketuaProfileActivity, "Data Updated", Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+
+            }, Response.ErrorListener { error ->
+                if (error is TimeoutError || error is NoConnectionError) {
+                    Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail1", error.toString())
+                } else if (error is AuthFailureError) {
+                    Log.d("httpfail2", error.toString())
+                    if(error.networkResponse.statusCode==401){
+                        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                        var editor = sharedPreference.edit()
+                        editor.putInt("user_id",-1)
+                        editor.putString("role",null)
+                        editor.putString("token",null)
+                        editor.commit()
+                        val intent = Intent(this@ketuaProfileActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else if (error.networkResponse.statusCode==403){
+                        Toast.makeText(this@ketuaProfileActivity, "Forbiden", Toast.LENGTH_LONG).show()
+                    }
+                } else if (error is ServerError) {
+                    Toast.makeText(this@ketuaProfileActivity, "Input Data Invalid", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail13", error.toString())
+                } else if (error is NetworkError) {
+                    Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail14", error.toString())
+                } else if (error is ParseError) {
+                    Toast.makeText(this@ketuaProfileActivity, "Parse Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail15", error.toString())
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String>? {
+                val map = HashMap<String, String>()
+                map["Accept"] = "application/json"
+                map["Content-Type"] = "application/json"
+                return map
+            }
+        }
+        queue.add(jsonObjectRequest)
     }
 
     fun reqGetProfile(loginData: LoginData, URL:String){
@@ -160,6 +247,8 @@ class ketuaProfileActivity : AppCompatActivity() {
             Response.Listener { response ->
                 Log.d("Req", "Request Success")
                 try {
+                    var DataProfileStaff=Staff(response.getString("fullname"),response.getString("role"),response.getString("jenis_kelamin"),response.getString("no_telepon"),response.getString("password"))
+                    updateViewProfile(DataProfileStaff)
                     Log.d("Res", response.toString())
                 } catch (e: JSONException) {
                     e.printStackTrace()
