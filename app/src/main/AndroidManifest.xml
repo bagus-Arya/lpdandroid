@@ -3,6 +3,7 @@
     package="com.go.sispentra">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -13,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".bendaharaHistoryTransaksiActivity"
+            android:exported="false"
+            android:parentActivityName=".BendaharaHomeActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
@@ -103,10 +108,7 @@
             android:exported="true"
             android:parentActivityName=".KolektorHomeActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".KolektorRegistNasabahActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".KolektorSetorTunaiActivity"
             android:exported="true"
@@ -164,8 +166,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@
     tools:context=".BendaharaHomeActivity">
 
     <TextView
+        android:textSize="17dp"
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,33 +55,33 @@
             android:padding="10dp">
 
             <Button
-                android:id="@+id/btn_dt_profile_nasabah"
+                android:id="@+id/btn_nasabah_profile_saya"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Profil Saya"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_req_penarikan"
+                app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_request_penarikan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_tabungan_nasabah"
+                android:id="@+id/btn_nasabah_tabungan"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Tabungan"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_logout_nasabah"
+                app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_req_penarikan" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_request_penarikan" />
 
             <Button
-                android:id="@+id/btn_logout_nasabah"
+                android:id="@+id/btn_nasabah_logout"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
@@ -90,20 +91,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_tabungan_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_tabungan" />
 
             <Button
-                android:id="@+id/btn_req_penarikan"
+                android:id="@+id/btn_nasabah_request_penarikan"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Request Penarikan"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_tabungan_nasabah"
+                app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_tabungan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_profile_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_profile_saya" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

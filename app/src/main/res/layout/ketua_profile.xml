@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:hint="Nama Bendahara"
+                android:hint="Nama Staff"
                 android:textColorHint="@color/muted"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_jeniskelamin"
@@ -157,7 +157,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/textColor"
-                app:layout_constraintBottom_toTopOf="@+id/btn_tambah_staff"
+                app:layout_constraintBottom_toTopOf="@+id/btn_ubah_staff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +172,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_tambah_staff"
+                android:id="@+id/btn_ubah_staff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -191,8 +191,8 @@
                 android:text="Kembali"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btn_tambah_staff"
-                app:layout_constraintTop_toTopOf="@+id/btn_tambah_staff" />
+                app:layout_constraintStart_toEndOf="@+id/btn_ubah_staff"
+                app:layout_constraintTop_toTopOf="@+id/btn_ubah_staff" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -12,6 +12,7 @@
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
+        android:textSize="17dp"
         android:layout_height="wrap_content"
         android:text="Sistem Pencatatan Tabungan"
         android:textColor="@color/textColor"
@@ -45,13 +46,13 @@
             android:padding="10dp">
 
             <Button
-                android:id="@+id/btn_dt_kolektor"
+                android:id="@+id/btn_koletor_profile_saya"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="Profile Saya"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_dt_kolektor_nasabah"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_nasabah"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +69,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_kolektor_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_nasabah" />
 
             <Button
                 android:id="@+id/btn_kolektor_validasi_penarikan"
@@ -77,27 +78,27 @@
                 android:backgroundTint="@color/secondary"
                 android:text="Validasi Penarikan"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_history"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_history_penarikan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_setoran" />
 
             <Button
-                android:id="@+id/btn_kolektor_history"
+                android:id="@+id/btn_kolektor_history_penarikan"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
                 android:text="History Transaksi"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_penarikan" />
 
             <Button
-                android:id="@+id/btn_dt_kolektor_nasabah"
+                android:id="@+id/btn_kolektor_nasabah"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
@@ -107,10 +108,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_dt_kolektor" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_koletor_profile_saya" />
 
             <Button
-                android:id="@+id/btn_logout"
+                android:id="@+id/btn_kolektor_logout"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:backgroundTint="@color/secondary"
@@ -120,7 +121,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_history" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_history_penarikan" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

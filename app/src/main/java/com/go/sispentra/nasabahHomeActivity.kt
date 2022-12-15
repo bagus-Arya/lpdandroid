@@ -1,38 +1,131 @@
 package com.go.sispentra
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.Toast
+import com.android.volley.*
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
+import org.json.JSONException
 
 class nasabahHomeActivity : AppCompatActivity() {
+    private var loginData= LoginData(null,null,-1)
+    private var logOutURL = "http://192.168.1.66:80/LPD_Android/public/api/logout/${loginData.token}"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nasabah_dashboard)
-        transparentNavigation()
-        supportActionBar?.hide()
+        basicStarter()
+        layoutComponentAndListener()
+    }
 
-        val btn_show_nasabah_profile = findViewById<Button>(R.id.btn_dt_profile_nasabah)
-        val btn_show_req_penarikan = findViewById<Button>(R.id.btn_req_penarikan)
-        val btn_show_tabungan = findViewById<Button>(R.id.btn_tabungan_nasabah)
-        val btn_show_logout = findViewById<Button>(R.id.btn_logout_nasabah)
+    fun layoutComponentAndListener(){
+        val btn_nasabah_profile_saya = findViewById<Button>(R.id.btn_nasabah_profile_saya)
+        val btn_nasabah_request_penarikan = findViewById<Button>(R.id.btn_nasabah_request_penarikan)
+        val btn_nasabah_tabungan = findViewById<Button>(R.id.btn_nasabah_tabungan)
+        val btn_nasabah_logout = findViewById<Button>(R.id.btn_nasabah_logout)
 
-        btn_show_nasabah_profile.setOnClickListener{
+        btn_nasabah_profile_saya.setOnClickListener{
             val intent = Intent(this@nasabahHomeActivity, nasabahProfileActivity::class.java)
             startActivity(intent)
         }
-        btn_show_req_penarikan.setOnClickListener{
+        btn_nasabah_request_penarikan.setOnClickListener{
             val intent = Intent(this@nasabahHomeActivity, nasabahRequestPenarikan::class.java)
             startActivity(intent)
         }
-        btn_show_tabungan.setOnClickListener{
+        btn_nasabah_tabungan.setOnClickListener{
             val intent = Intent(this@nasabahHomeActivity, nasabahTabunganActivity::class.java)
             startActivity(intent)
         }
+
+        btn_nasabah_logout.setOnClickListener{
+            logOutRequest(loginData,logOutURL)
+        }
+    }
+
+    fun logOutRequest(loginData: LoginData, URL:String){
+        val queue = Volley.newRequestQueue(this)
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.DELETE, URL,null,
+            Response.Listener { response ->
+                Log.d("Req", "Request Success")
+                try {
+                    val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                    var editor = sharedPreference.edit()
+                    editor.putInt("user_id",-1)
+                    editor.putString("role",null)
+                    editor.putString("token",null)
+                    editor.commit()
+                    Log.d("Res", response.toString())
+                    val intent = Intent(this@nasabahHomeActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+
+            }, Response.ErrorListener { error ->
+                if (error is TimeoutError || error is NoConnectionError) {
+                    Toast.makeText(this@nasabahHomeActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail1", error.toString())
+                } else if (error is AuthFailureError) {
+                    Log.d("httpfail2", error.toString())
+                    if(error.networkResponse.statusCode==401){
+                        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                        var editor = sharedPreference.edit()
+                        editor.putInt("user_id",-1)
+                        editor.putString("role",null)
+                        editor.putString("token",null)
+                        editor.commit()
+                        val intent = Intent(this@nasabahHomeActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else if (error.networkResponse.statusCode==403){
+                        Toast.makeText(this@nasabahHomeActivity, "Forbiden", Toast.LENGTH_LONG).show()
+                    }
+                } else if (error is ServerError) {
+                    Toast.makeText(this@nasabahHomeActivity, "Server Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail13", error.toString())
+                } else if (error is NetworkError) {
+                    Toast.makeText(this@nasabahHomeActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail14", error.toString())
+                } else if (error is ParseError) {
+                    Toast.makeText(this@nasabahHomeActivity, "Parse Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail15", error.toString())
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String>? {
+                val map = HashMap<String, String>()
+                map["Accept"] = "application/json"
+                map["Content-Type"] = "application/json"
+                return map
+            }
+        }
+        queue.add(jsonObjectRequest)
+    }
+
+    fun getAndUpdateTokenLoginData(){
+        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+        loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
+        logOutURL = "http://192.168.1.66:80/LPD_Android/public/api/logout/${loginData.token}"
+//        Log.d("LOG", loginData.toString())
+    }
+
+    fun basicStarter(){
+        transparentNavigation()
+        supportActionBar?.hide()
     }
 
     fun transparentNavigation(){

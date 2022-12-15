@@ -1,8 +1,8 @@
 package com.go.sispentra
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,27 +10,43 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.ActionBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.go.sispentra.controller.UserController
-import com.go.sispentra.model.LoginModelResponse
+import com.android.volley.*
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.KeyboardUtils
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
-
+    private val loginUrl = "http://192.168.1.66:80/LPD_Android/public/api/login"
+//    private val loginUrl = "https://httpdump.app/dumps/c09f611b-8ffe-4d71-a668-e7dd0a9cd690"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        basicStarter()
+        layoutComponentAndListener()
+    }
+
+    fun layoutComponentAndListener(){
+        val btnlogin = findViewById<Button>(R.id.btn_login)
+        val username= findViewById<EditText>(R.id.usrname)
+        val password= findViewById<EditText>(R.id.pwsword)
+
+        btnlogin.setOnClickListener{
+            Log.d("Logbutton", "login button pressed")
+//            val intent = Intent(this@MainActivity,KolektorNasabahTabungan::class.java)
+//            startActivity(intent)
+            login(username,password)
+        }
+    }
+
+    fun basicStarter(){
+
         setContentView(R.layout.activity_main)
         transparentNavigation()
         supportActionBar?.hide()
-        initAction()
-
-
-
 
         //Check Keyboard
         KeyboardUtils.addKeyboardToggleListener(this, object :
@@ -57,22 +73,97 @@ class MainActivity : AppCompatActivity() {
                 Log.d("keyboard", "keyboard visible: $isVisible")
             }
         })
-    }
 
-    fun initAction(){
-        val btnlogin = findViewById<Button>(R.id.btn_login)
-        btnlogin.setOnClickListener{
-            Log.d("Logbutton", "login button pressed")
-            val intent = Intent(this@MainActivity,KolektorNasabahTabungan::class.java)
-            startActivity(intent)
-        //            login()
+    }
+    fun login(username:EditText,password:EditText){
+        val loginRequest = JSONObject()
+        loginRequest.put("username", username.getText().toString())
+        loginRequest.put("password", password.getText().toString())
+        val queue = Volley.newRequestQueue(this)
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, loginUrl,loginRequest,
+            Response.Listener { response ->
+                Log.d("Login", "Login Success")
+                try {
+                    val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                    var editor = sharedPreference.edit()
+                    editor.putInt("user_id",response.getInt("user_id"))
+                    editor.putString("role",response.getString("role"))
+                    editor.putString("token",response.getString("token"))
+                    editor.commit()
+                    Log.d("Token", response.toString())
+                    if(sharedPreference.getString("role",null)=="Ketua"){
+                        val intent = Intent(this@MainActivity, ketuaHomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else if(sharedPreference.getString("role",null)=="Bendahara"){
+                        val intent = Intent(this@MainActivity, BendaharaHomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else if(sharedPreference.getString("role",null)=="Kolektor"){
+                        val intent = Intent(this@MainActivity, KolektorHomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else if(sharedPreference.getString("role",null)=="Nasabah"){
+                        val intent = Intent(this@MainActivity, nasabahHomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else{
+                        val intent = Intent(this@MainActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+
+            }, Response.ErrorListener { error ->
+                if (error is TimeoutError || error is NoConnectionError) {
+                    Toast.makeText(this@MainActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail1", error.toString())
+                } else if (error is AuthFailureError) {
+                    if(error.networkResponse.statusCode==401){
+                        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                        var editor = sharedPreference.edit()
+                        editor.putInt("user_id",-1)
+                        editor.putString("role",null)
+                        editor.putString("token",null)
+                        editor.commit()
+                        Toast.makeText(this@MainActivity, "Username Atau Password Salah", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    else if (error.networkResponse.statusCode==403){
+                        Toast.makeText(this@MainActivity, "Forbiden", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError) {
+                    Toast.makeText(this@MainActivity, "Server Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail13", error.toString())
+                } else if (error is NetworkError) {
+                    Toast.makeText(this@MainActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail14", error.toString())
+                } else if (error is ParseError) {
+                    Toast.makeText(this@MainActivity, "Parse Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail15", error.toString())
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String>? {
+                val map = HashMap<String, String>()
+                map["Accept"] = "application/json"
+                map["Content-Type"] = "application/json"
+                return map
+            }
         }
+        queue.add(jsonObjectRequest)
     }
 
-    fun login(){
 
-
-    }
     fun transparentNavigation(){
         if (Build.VERSION.SDK_INT >= 21) {
             val window = window
