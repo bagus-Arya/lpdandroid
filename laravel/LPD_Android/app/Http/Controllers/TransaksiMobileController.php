@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class TransaksiMobileController extends Controller
 {
-    public function index(Request $request,Token $token){
+    public function index(Request $request,$token){
         if($request->get('login_user')->role=="Bendahara"){
             return Transaksi::with('bukutabungan.nasabah.kolektor')->get();
         }

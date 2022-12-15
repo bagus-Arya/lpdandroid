@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class TabunganMobileController extends Controller
 {
-    public function index(Request $request,Token $token){
+    public function index(Request $request,$token){
         $nasabah=Nasabah::where('id',$request->get('login_user')->id)->with('kolektor')->with('bukutabungan.transaksis')->firstOrFail();
         $nasabah['saldo']=(Transaksi::where('buku_tabungan_id',$nasabah->bukutabungan->id)
             ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$nasabah->bukutabungan->id)

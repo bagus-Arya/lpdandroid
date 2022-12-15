@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 
 Route::post('/login',[LoginMobileController::class,'login']);
-Route::post('/logout',[LoginMobileController::class,'logout']);
+
 
 Route::group(['middleware'=>['CustomAuth']],function(){
     Route::group(['middleware'=>['KetuaCustomAuth'],'prefix'=>'staff'],function(){
@@ -71,6 +71,9 @@ Route::group(['middleware'=>['CustomAuth']],function(){
     Route::group(['prefix'=>'tabungan'],function(){
         Route::get('/{token}',[TabunganMobileController::class,'index'])->middleware(['NasabahCustomAuth']);
     });
+
+
+    Route::delete('/logout/{token}',[LoginMobileController::class,'logout']);
 });
 
 

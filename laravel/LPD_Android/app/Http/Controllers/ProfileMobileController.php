@@ -11,11 +11,11 @@ use \App\Models\Token;
 
 class ProfileMobileController extends Controller
 {
-    public function index(Request $request,Token $token){
+    public function index(Request $request,$token){
         return $request->get('login_user');
     }
 
-    public function update(Request $request,Token $token){
+    public function update(Request $request,$token){
         if($request->get('login_user')->token_type=="Staff"){
             $validate = $request->validate([
                 'fullname'=>'required|string',
@@ -27,7 +27,8 @@ class ProfileMobileController extends Controller
                     Rule::in(['Laki-Laki','Perempuan'])
                 ]
             ]);
-            return Staff::where('id','=',$request->get('login_user')->id)->update($validate);
+            Staff::where('id','=',$request->get('login_user')->id)->update($validate);
+            return  Staff::where('id','=',$request->get('login_user')->id)->first()->makeVisible(['password']);
         }
         return response()->json(['message' => 'Forbiden'], 403);
     }
