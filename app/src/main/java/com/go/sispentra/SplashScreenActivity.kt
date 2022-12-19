@@ -10,20 +10,21 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import org.json.JSONException
-import java.lang.NullPointerException
 
 class SplashScreenActivity : AppCompatActivity() {
+    var requestAllow: Boolean = true
     private var loginData=LoginData(null,null,-1)
     private var checkProfileUrl = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.splash_screen)
         basicStarter()
         Log.d("LOG1", loginData.toString())
         getAndUpdateTokenLoginData()
@@ -32,8 +33,17 @@ class SplashScreenActivity : AppCompatActivity() {
 //            startActivity(intent)
 //            finish()
             checkTokenProfile(loginData,checkProfileUrl)
-        }, 500)
+        }, 1000)
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requestAllow=false
+    }
+    override fun onResume() {
+        super.onResume()
+        requestAllow=true
     }
 
     fun getAndUpdateTokenLoginData(){
@@ -87,7 +97,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 }
 
             }, Response.ErrorListener { error ->
-                if (error is TimeoutError || error is NoConnectionError) {
+                if (error is TimeoutError || error is NoConnectionError||error is NetworkError) {
                     Toast.makeText(this@SplashScreenActivity, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
                 } else if (error is AuthFailureError) {
@@ -99,24 +109,34 @@ class SplashScreenActivity : AppCompatActivity() {
                         editor.putString("token",null)
                         editor.commit()
                     }
-                    else if (error.networkResponse.statusCode==403){
-                        Toast.makeText(this@SplashScreenActivity, "Forbiden", Toast.LENGTH_LONG)
-                            .show()
-                    }
                     Log.d("httpfail2", error.toString())
                     val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else if (error is ServerError) {
-                    Toast.makeText(this@SplashScreenActivity, "Server Error", Toast.LENGTH_LONG).show()
+                    if (error.networkResponse.statusCode==403){
+                        Toast.makeText(this@SplashScreenActivity, "Forbiden", Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==422){
+                        Toast.makeText(this@SplashScreenActivity, "Data Input Invalid", Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==404) {
+                        Toast.makeText(
+                            this@SplashScreenActivity,
+                            "Data Not Found",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                     Log.d("httpfail13", error.toString())
-                } else if (error is NetworkError) {
-                    Toast.makeText(this@SplashScreenActivity, "Network Error", Toast.LENGTH_LONG).show()
+                }  else if (error is ParseError) {
+//                    Toast.makeText(this@SplashScreenActivity, "Parse Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail14", error.toString())
-                } else if (error is ParseError) {
-                    Toast.makeText(this@SplashScreenActivity, "Parse Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail15", error.toString())
                 }
+                Handler().postDelayed({
+                    if (requestAllow){
+                        checkTokenProfile(loginData,checkProfileUrl)
+                    }
+                }, 7000)
             }) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String>? {

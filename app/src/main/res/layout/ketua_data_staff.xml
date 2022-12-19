@@ -33,38 +33,46 @@
         app:endIconTint="@color/textColor">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/staff_textfield_editor_nama"
+            android:id="@+id/search_ketua_staff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_data_staff"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="674dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/transparentColor"
+        android:layout_height="670dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_nama">
+        app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_nama"
+        app:layout_constraintVertical_bias="0.203"
+        android:id="@+id/refreshLayout">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_data_staff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            app:cardBackgroundColor="@color/transparentColor"
+            tools:listitem="@layout/cardview_staff">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_Tambah_Staff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="70dp"
         android:backgroundTint="@color/colorPrimary"
 
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
-        app:tint="@android:color/white"/>
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

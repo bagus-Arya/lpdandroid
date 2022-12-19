@@ -5,14 +5,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -25,10 +26,23 @@ import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import org.json.JSONException
 import org.json.JSONObject
 
+
 class ketuaProfileActivity : AppCompatActivity() {
     private var loginData= LoginData(null,null,-1)
     private var getProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
     private var ubahProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}/update"
+    var requestAllow: Boolean = true
+
+    override fun onPause() {
+        super.onPause()
+        requestAllow=false
+    }
+    override fun onResume() {
+        super.onResume()
+        requestAllow=true
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ketua_profile)
@@ -177,7 +191,7 @@ class ketuaProfileActivity : AppCompatActivity() {
         val staff_textfield_editor_nama=findViewById<TextInputEditText>(R.id.staff_textfield_editor_nama)
         val staff_textfield_editor_telepon=findViewById<TextInputEditText>(R.id.staff_textfield_editor_telepon)
         val staff_textfield_editor_password=findViewById<TextInputEditText>(R.id.staff_textfield_editor_password)
-        var DataProfileStaff=Staff(staff_textfield_editor_nama.text.toString(),autoCompleteTxtjenisRole.text.toString(),autoCompleteTxtJenisKelamin.text.toString(),staff_textfield_editor_telepon.text.toString(),staff_textfield_editor_password.text.toString())
+        var DataProfileStaff=Staff(staff_textfield_editor_nama.text.toString(),autoCompleteTxtjenisRole.text.toString(),autoCompleteTxtJenisKelamin.text.toString(),staff_textfield_editor_telepon.text.toString(),staff_textfield_editor_password.text.toString(),-1,null)
         return DataProfileStaff
     }
 
@@ -199,7 +213,7 @@ class ketuaProfileActivity : AppCompatActivity() {
                 }
 
             }, Response.ErrorListener { error ->
-                if (error is TimeoutError || error is NoConnectionError) {
+                if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
                 } else if (error is AuthFailureError) {
@@ -215,18 +229,23 @@ class ketuaProfileActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                    else if (error.networkResponse.statusCode==403){
+                } else if (error is ServerError) {
+                    if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@ketuaProfileActivity, "Forbiden", Toast.LENGTH_LONG).show()
                     }
-                } else if (error is ServerError) {
-                    Toast.makeText(this@ketuaProfileActivity, "Input Data Invalid", Toast.LENGTH_LONG).show()
+                    else if (error.networkResponse.statusCode==422){
+                        val fields = arrayOf<String>("fullname","username","no_telepon","password","role","jenis_kelamin")
+                        val respone=errorValidationFetcher(error.networkResponse,fields)
+
+                        Toast.makeText(this@ketuaProfileActivity,respone, Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==404){
+                        Toast.makeText(this@ketuaProfileActivity, "Data Not Found", Toast.LENGTH_LONG).show()
+                    }
                     Log.d("httpfail13", error.toString())
-                } else if (error is NetworkError) {
-                    Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail14", error.toString())
                 } else if (error is ParseError) {
                     Toast.makeText(this@ketuaProfileActivity, "Parse Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail15", error.toString())
+                    Log.d("httpfail14", error.toString())
                 }
             }) {
             @Throws(AuthFailureError::class)
@@ -239,6 +258,33 @@ class ketuaProfileActivity : AppCompatActivity() {
         }
         queue.add(jsonObjectRequest)
     }
+    fun errorValidationFetcher(response: NetworkResponse,fields:Array<String>):String{
+        val InResponse =(JSONObject(String(response.data, Charsets.UTF_8)).getJSONObject("errors"))
+        var compliteErrorMessage=""
+        var i=0
+        for(field in fields){
+            if(InResponse.has(field)){
+                compliteErrorMessage+=field+":\n["
+                val fieldErrors=InResponse.getJSONArray(field)
+                (0 until fieldErrors.length()).forEach {
+                    compliteErrorMessage+=fieldErrors[it].toString()
+                    if(it==fieldErrors.length()-1 && i==fields.size-1){
+                        compliteErrorMessage+="]"
+                    }
+                    else if(it==fieldErrors.length()-1 && i!=fields.size-1){
+                        compliteErrorMessage+="]\n\n"
+                    }
+                    else{
+                        compliteErrorMessage+="\n"
+                    }
+                }
+            }
+            i++
+        }
+        return compliteErrorMessage.removeRange(compliteErrorMessage.length-2,compliteErrorMessage.length-1)
+
+    }
+
 
     fun reqGetProfile(loginData: LoginData, URL:String){
         val queue = Volley.newRequestQueue(this)
@@ -247,7 +293,7 @@ class ketuaProfileActivity : AppCompatActivity() {
             Response.Listener { response ->
                 Log.d("Req", "Request Success")
                 try {
-                    var DataProfileStaff=Staff(response.getString("fullname"),response.getString("role"),response.getString("jenis_kelamin"),response.getString("no_telepon"),response.getString("password"))
+                    var DataProfileStaff=Staff(response.getString("fullname"),response.getString("role"),response.getString("jenis_kelamin"),response.getString("no_telepon"),response.getString("password"),-1,null)
                     updateViewProfile(DataProfileStaff)
                     Log.d("Res", response.toString())
                 } catch (e: JSONException) {
@@ -255,34 +301,37 @@ class ketuaProfileActivity : AppCompatActivity() {
                 }
 
             }, Response.ErrorListener { error ->
-                if (error is TimeoutError || error is NoConnectionError) {
-                    Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
+                if (error is AuthFailureError) {
                     Log.d("httpfail2", error.toString())
-                    if(error.networkResponse.statusCode==401){
-                        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                    if (error.networkResponse.statusCode == 401) {
+                        val sharedPreference =
+                            getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
-                        editor.putInt("user_id",-1)
-                        editor.putString("role",null)
-                        editor.putString("token",null)
+                        editor.putInt("user_id", -1)
+                        editor.putString("role", null)
+                        editor.putString("token", null)
                         editor.commit()
                         val intent = Intent(this@ketuaProfileActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
-                    else if (error.networkResponse.statusCode==403){
-                        Toast.makeText(this@ketuaProfileActivity, "Forbiden", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
+                        Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
+                        Log.d("httpfail1", error.toString())
+                    }  else if (error is ServerError) {
+                        Toast.makeText(this@ketuaProfileActivity, "Server Error", Toast.LENGTH_LONG).show()
+                        Log.d("httpfail13", error.toString())
+                    }  else if (error is ParseError) {
+                        Toast.makeText(this@ketuaProfileActivity, "Parse Error", Toast.LENGTH_LONG).show()
+                        Log.d("httpfail14", error.toString())
                     }
-                } else if (error is ServerError) {
-                    Toast.makeText(this@ketuaProfileActivity, "Server Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail13", error.toString())
-                } else if (error is NetworkError) {
-                    Toast.makeText(this@ketuaProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail14", error.toString())
-                } else if (error is ParseError) {
-                    Toast.makeText(this@ketuaProfileActivity, "Parse Error", Toast.LENGTH_LONG).show()
-                    Log.d("httpfail15", error.toString())
+                    Handler().postDelayed({
+                        if (requestAllow){
+                            reqGetProfile(loginData, URL)
+                        }
+                    }, 8000)
                 }
             }) {
             @Throws(AuthFailureError::class)

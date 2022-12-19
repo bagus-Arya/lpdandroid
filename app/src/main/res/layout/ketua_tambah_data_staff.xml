@@ -26,6 +26,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/staff_textfield_layout_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Username"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_nama"
+                app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/staff_textfield_editor_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
@@ -44,15 +63,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:hint="Nama Staff"
                 android:textColorHint="@color/muted"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_jeniskelamin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15">
+                app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_username">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/staff_textfield_editor_nama"
@@ -66,7 +81,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:hint="Jenis Kelamin"
                 android:textColorHint="@color/muted"
                 app:boxBackgroundColor="@color/white"
@@ -74,9 +88,6 @@
                 app:endIconTint="@color/secondary"
 
                 app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_telepon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_nama">
 
 
@@ -96,14 +107,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:hint="No Telepon"
                 android:textColorHint="@color/muted"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_role"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_jeniskelamin"
                 app:prefixText="+62"
                 app:prefixTextColor="@color/muted">
@@ -121,16 +128,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:hint="Role"
                 android:textColorHint="@color/muted"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:endIconTint="@color/secondary"
                 app:layout_constraintBottom_toTopOf="@+id/staff_textfield_layout_password"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_telepon">
 
 
@@ -150,16 +153,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:hint="Password"
                 android:textColorHint="@color/muted"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/textColor"
                 app:layout_constraintBottom_toTopOf="@+id/btn_tambah_staff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_role">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -174,9 +173,10 @@
                 android:id="@+id/btn_tambah_staff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="#095A0D"
                 android:text="Tambah"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_kembali"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

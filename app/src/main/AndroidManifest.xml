@@ -79,6 +79,7 @@
         <activity
             android:name=".ketuaDataStaffActivity"
             android:exported="false"
+
             android:parentActivityName=".ketuaHomeActivity" />
         <activity
             android:name=".ketuaProfileActivity"
