@@ -10,12 +10,12 @@ use \App\Models\Transaksi;
 use \App\Models\Staff;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\View;
 
 class PenarikanMobileController extends Controller
 {
 
-    public function index(Request $request,$token){
+    public function index(Request $request,Token $token){
         if($request->get('login_user')->role=="Bendahara"){
             return Transaksi::where('type_transaksi','Penarikan')->where('status','unvalidated')->with('bukutabungan.nasabah.kolektor')->get();
         }
@@ -31,7 +31,7 @@ class PenarikanMobileController extends Controller
         }
     }
 
-    public function store(Request $request,$token){
+    public function store(Request $request,Token $token){
         $validate = $request->validate([
             'nominal'=>'required|integer',
             'tgl_transaksi'=>'required|date_format:Y-m-d',
@@ -51,7 +51,7 @@ class PenarikanMobileController extends Controller
         return Transaksi::create($validate);
     }
 
-    public function updateValidasiBendahara(Request $request,$token,Transaksi $transaksi){
+    public function updateValidasiBendahara(Request $request,Token $token,Transaksi $transaksi){
         if($transaksi->type_transaksi=="Penarikan" && $transaksi->status=="unvalidated"){
             return $transaksi->update([
                 'status'=>'validated-bendahara'
@@ -60,7 +60,7 @@ class PenarikanMobileController extends Controller
         return response()->json(['message' => 'Unchanged'], 304);
     }
 
-    public function updateRejectBendahara(Request $request,$token,Transaksi $transaksi){
+    public function updateRejectBendahara(Request $request,Token $token,Transaksi $transaksi){
         if($transaksi->type_transaksi=="Penarikan" && $transaksi->status=="unvalidated"){
             return $transaksi->update([
                 'status'=>'rejected-bendahara'
@@ -69,7 +69,7 @@ class PenarikanMobileController extends Controller
         return response()->json(['message' => 'Unchanged'], 304);
     }
 
-    public function updateValidasiKolektor(Request $request,$token,Transaksi $transaksi){
+    public function updateValidasiKolektor(Request $request,Token $token,Transaksi $transaksi){
         
         if($request->get('login_user')->id!=$transaksi->bukutabungan->nasabah->staff_id){
             return response()->json(['message' => 'Forbiden'], 403);
@@ -82,7 +82,7 @@ class PenarikanMobileController extends Controller
         return response()->json(['message' => 'Unchanged'], 304);
     }
 
-    public function updateRejectKolektor(Request $request,$token,Transaksi $transaksi){
+    public function updateRejectKolektor(Request $request,Token $token,Transaksi $transaksi){
         if($request->get('login_user')->id!=$transaksi->bukutabungan->nasabah->staff_id){
             return response()->json(['message' => 'Forbiden'], 403);
         }
@@ -92,5 +92,15 @@ class PenarikanMobileController extends Controller
             ]);
         }
         return response()->json(['message' => 'Unchanged'], 304);
+    }
+
+    public function penarikan(Request $request,Token $token){
+        $data = Transaksi::where('type_transaksi','Penarikan')
+        ->where('status','validated-kolektor')
+        ->with('bukutabungan.nasabah.kolektor')
+        ->get();
+
+        // dump($data);
+        return view('penarikan',compact('data'));
     }
 }

@@ -25,20 +25,20 @@ class CustomAuth
         // $validate = $request->validate([
         //     'token'=>'required|string',
         // ]);
-        $token=Token::where('token', $request->token)->first();
+        $token=Token::where('token', '=', $request->token->token)->first();
 
         if ($token==null) {
             return response()->json(['message' => 'Token Invalid'], 401);
         }
         
         if($token->type=="Staff"){
-            $user=Staff::where('id','=',$token->user_id)->firstOrFail()->makeVisible(['password']);
+            $user=Staff::where('id','=',$token->user_id)->firstOrFail();
             $user['token']=$token->token;
             $user['token_type']="Staff";
             $request->attributes->add(['login_user' => $user]);
         }
         else{
-            $user=Nasabah::where('id','=',$token->user_id)->firstOrFail()->makeVisible(['password']);
+            $user=Nasabah::where('id','=',$token->user_id)->firstOrFail();
             $user['token']=$token->token;
             $user['token_type']="Nasabah";
             $user['role']="Nasabah";

@@ -42,8 +42,11 @@ class LoginMobileController extends Controller
         return response()->json(['message' => 'Username Atau Password Salah'], 401);
     }
 
-    public function logout(Request $request,$token){
-        $token=Token::where('token', '=', $token);
+    public function logout(Request $request){
+        $validate = $request->validate([
+            'token'=>'required|string',
+        ]);
+        $token=Token::where('token', '=', $validate['token']);
         if ($token->exists()) {
             $token->delete();
             return response()->json(['message' => 'Delete Berhasil'], 200);
