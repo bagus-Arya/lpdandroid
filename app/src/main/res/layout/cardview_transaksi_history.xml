@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         app:cardBackgroundColor="@color/cardBackgroundColor2"
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +34,7 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:text="Nama Nasabah"
                 android:textColor="@color/textColor"
@@ -44,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/nasabah_tipe_transaksi_nasabah"
+                android:id="@+id/cv_no_tabungan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No Tabungan"
@@ -52,11 +51,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nasabah_no_tabungan_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_kolektor"
                 app:layout_constraintTop_toTopOf="@+id/textView34" />
 
             <TextView
-                android:id="@+id/nasabah_nominal_nasabah"
+                android:id="@+id/cv_tipe_transaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipe Transaksi"
@@ -64,11 +63,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nasabah_tipe_transaksi_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_no_tabungan"
                 app:layout_constraintTop_toTopOf="@+id/textView38" />
 
             <TextView
-                android:id="@+id/nasabah_nominal_nasabah2"
+                android:id="@+id/cv_tgl_transaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Transaksi"
@@ -76,11 +75,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nasabah_nominal_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
                 app:layout_constraintTop_toTopOf="@+id/textView40" />
 
             <TextView
-                android:id="@+id/nasabah_nominal_nasabah3"
+                android:id="@+id/cv_nominal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nominal"
@@ -88,11 +87,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nasabah_nominal_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
                 app:layout_constraintTop_toTopOf="@+id/textView36" />
 
             <TextView
-                android:id="@+id/nasabah_nominal_nasabah4"
+                android:id="@+id/cv_status_penarikan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status"
@@ -100,7 +99,7 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nasabah_nominal_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
                 app:layout_constraintTop_toTopOf="@+id/textView44" />
 
             <TextView
@@ -111,7 +110,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView21"
-                app:layout_constraintTop_toBottomOf="@+id/nasabah_nama_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_nasabah" />
 
             <TextView
                 android:id="@+id/textView34"
@@ -121,7 +120,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView31"
-                app:layout_constraintTop_toBottomOf="@+id/nasabah_no_tabungan_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_kolektor" />
 
             <TextView
                 android:id="@+id/textView38"
@@ -131,7 +130,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView34"
-                app:layout_constraintTop_toBottomOf="@+id/nasabah_tipe_transaksi_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
 
             <TextView
                 android:id="@+id/textView40"
@@ -141,7 +140,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView38"
-                app:layout_constraintTop_toBottomOf="@+id/nasabah_nominal_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_tipe_transaksi" />
 
             <TextView
                 android:id="@+id/textView44"
@@ -217,7 +216,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView36" />
 
             <TextView
-                android:id="@+id/nasabah_nama_nasabah"
+                android:id="@+id/cv_nama_nasabah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Nasabah"
@@ -229,7 +228,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView21" />
 
             <TextView
-                android:id="@+id/nasabah_no_tabungan_nasabah"
+                android:id="@+id/cv_nama_kolektor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Kolektor"
@@ -237,7 +236,7 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/nasabah_nama_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_nasabah"
                 app:layout_constraintTop_toTopOf="@+id/textView31" />
 
             <TextView
@@ -248,7 +247,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView40"
-                app:layout_constraintTop_toBottomOf="@+id/nasabah_nominal_nasabah2" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_transaksi" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
