@@ -10,10 +10,11 @@ use \App\Models\Transaksi;
 use \App\Models\Staff;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\View;
 
 class TransaksiMobileController extends Controller
 {
-    public function index(Request $request,$token){
+    public function index(Request $request,Token $token){
         if($request->get('login_user')->role=="Bendahara"){
             return Transaksi::with('bukutabungan.nasabah.kolektor')->get();
         }
@@ -28,4 +29,9 @@ class TransaksiMobileController extends Controller
             return response()->json(['message' => 'No content'], 204);
         }
     }
+
+    public function grafik(Request $request,Token $token){
+        return view('grafik'); 
+    }
+
 }

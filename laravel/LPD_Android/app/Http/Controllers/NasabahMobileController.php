@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class NasabahMobileController extends Controller
 {
-    public function index(Request $request,$token){
+    public function index(Request $request,Token $token){
         $filters=$request->validate([
             'fullname'=>'string',
         ]);
@@ -29,7 +29,7 @@ class NasabahMobileController extends Controller
         // return Nasabah::latest()->filter($filters)->get()->except($request->get('login_user')->id);
     }
 
-    public function show(Request $request,$token,Nasabah $nasabah){
+    public function show(Request $request,Token $token,Nasabah $nasabah){
         if($request->get('login_user')->id!=$nasabah->staff_id){
             return response()->json(['message' => 'Forbiden'], 403);
         }
@@ -40,7 +40,7 @@ class NasabahMobileController extends Controller
         return $nasabah;
     }
 
-    public function store(Request $request,$token){
+    public function store(Request $request,Token $token){
         // validate input
         $validate = $request->validate([
             'fullname'=>'required|string',
@@ -74,14 +74,14 @@ class NasabahMobileController extends Controller
             }
         });
     }
-    public function destroy(Request $request,$token,Nasabah $nasabah){
+    public function destroy(Request $request,Token $token,Nasabah $nasabah){
         if($request->get('login_user')->id!=$nasabah->staff_id){
             return response()->json(['message' => 'Forbiden'], 403);
         }
         return $nasabah->delete();
     }
 
-    public function update(Request $request,$token,Nasabah $nasabah){
+    public function update(Request $request,Token $token,Nasabah $nasabah){
         if($request->get('login_user')->id!=$nasabah->staff_id){
             return response()->json(['message' => 'Forbiden'], 403);
         }
