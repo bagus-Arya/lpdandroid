@@ -53,23 +53,8 @@
                 android:text="Profile Saya"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_nasabah"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btn_kolektor_validasi_setoran"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                android:text="Validasi Setoran"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_validasi_penarikan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_nasabah" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="10dp" />
 
             <Button
                 android:id="@+id/btn_kolektor_validasi_penarikan"
@@ -79,10 +64,8 @@
                 android:text="Validasi Penarikan"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_history_penarikan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_setoran" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_nasabah"
+                tools:layout_editor_absoluteX="16dp" />
 
             <Button
                 android:id="@+id/btn_kolektor_history_penarikan"
@@ -92,10 +75,8 @@
                 android:text="History Transaksi"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_logout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_penarikan" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_validasi_penarikan"
+                tools:layout_editor_absoluteX="10dp" />
 
             <Button
                 android:id="@+id/btn_kolektor_nasabah"
@@ -104,11 +85,9 @@
                 android:backgroundTint="@color/secondary"
                 android:text="Nasabah"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_validasi_setoran"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_koletor_profile_saya" />
+                app:layout_constraintBottom_toTopOf="@+id/btn_kolektor_validasi_penarikan"
+                app:layout_constraintTop_toBottomOf="@+id/btn_koletor_profile_saya"
+                tools:layout_editor_absoluteX="4dp" />
 
             <Button
                 android:id="@+id/btn_kolektor_logout"
@@ -118,10 +97,8 @@
                 android:text="Logout"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_history_penarikan" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_kolektor_history_penarikan"
+                tools:layout_editor_absoluteX="10dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

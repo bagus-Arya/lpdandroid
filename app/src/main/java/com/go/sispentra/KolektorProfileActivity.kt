@@ -1,9 +1,12 @@
 package com.go.sispentra
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.InputType
 import android.util.Log
 import android.view.View
@@ -11,27 +14,50 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.*
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.go.sispentra.model.UserModel
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
+import com.rw.keyboardlistener.com.go.sispentra.data.Staff
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class KolektorProfileActivity : AppCompatActivity(){
+    private var loginData= LoginData(null,null,-1)
+    private var getProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
+    private var ubahProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}/update"
+    var requestAllow: Boolean = true
 
+    override fun onPause() {
+        super.onPause()
+        requestAllow=false
+    }
+    override fun onResume() {
+        super.onResume()
+        requestAllow=true
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.kolektor_profile)
 
-        transparentNavigation()
-        supportActionBar?.show()
-        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
-        setTitle("Profile Saya")
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        getAndUpdateTokenLoginData()
+        basicStarter()
+        layoutComponentAndListener()
+        reqGetProfile(loginData,getProfileURL)
+    }
 
+    fun layoutComponentAndListener(){
         //Input Select Gender
         var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")
+
         val autoCompleteTxtJenisKelamin = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_jeniskelamin)
         autoCompleteTxtJenisKelamin.setDropDownBackgroundDrawable(ColorDrawable(Color.WHITE));
         var adapterItemsJenisKelamin: ArrayAdapter<String>? =
@@ -42,6 +68,7 @@ class KolektorProfileActivity : AppCompatActivity(){
         //Input Select Role
         val layoutStaffRole=findViewById<TextInputLayout>(R.id.staff_textfield_layout_role)
         layoutStaffRole.setHint(null);
+
         var jenisRole= arrayOf("Kolektor", "Bendahara","Ketua")
         val autoCompleteTxtjenisRole = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_role)
         autoCompleteTxtjenisRole.setDropDownBackgroundDrawable(ColorDrawable(Color.WHITE));
@@ -49,7 +76,6 @@ class KolektorProfileActivity : AppCompatActivity(){
             ArrayAdapter<String>(this, R.layout.list_role, jenisRole)
         autoCompleteTxtjenisRole.setAdapter(adapterItemsjenisRole);
         autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(0).toString(), false);
-
 
         //        hide softkeyboard
         if (Build.VERSION.SDK_INT >= 21) {
@@ -70,8 +96,13 @@ class KolektorProfileActivity : AppCompatActivity(){
         }
 
         //Button
-        val btnUbah = findViewById<Button>(R.id.btn_tambah_staff)
+        val btnUbah = findViewById<Button>(R.id.btn_ubah_staff)
         val btnKembali = findViewById<Button>(R.id.btn_kembali)
+
+        //other
+        val staff_textfield_editor_nama=findViewById<TextInputEditText>(R.id.staff_textfield_editor_nama)
+        val staff_textfield_editor_telepon=findViewById<TextInputEditText>(R.id.staff_textfield_editor_telepon)
+        val staff_textfield_editor_password=findViewById<TextInputEditText>(R.id.staff_textfield_editor_password)
 
 
         //Listener
@@ -114,11 +145,223 @@ class KolektorProfileActivity : AppCompatActivity(){
 //            Toast.makeText(applicationContext, "Item: $position", Toast.LENGTH_SHORT).show()
         })
         btnUbah.setOnClickListener{
-            Toast.makeText(applicationContext, "Ubah Button Pressed", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext, "Ubah Button Pressed", Toast.LENGTH_SHORT).show()
+//            var text1=staff_textfield_editor_nama.text.toString()
+//            var text2=staff_textfield_editor_telepon.text.toString()
+//            var text3=staff_textfield_editor_password.text.toString()
+//            var text4=autoCompleteTxtJenisKelamin.text.toString()
+//            var text5=autoCompleteTxtjenisRole.text.toString()
+//            Log.d("ubah btn", "$text1,$text2,$text3,$text4,$text5")
+            reqUpdateProfile(loginData,ubahProfileURL,getViewTextProfile())
         }
         btnKembali.setOnClickListener{
             onBackPressed()
         }
+    }
+
+    fun updateViewProfile(dataStaff: Staff){
+        val autoCompleteTxtJenisKelamin = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_jeniskelamin)
+        val autoCompleteTxtjenisRole = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_role)
+        val staff_textfield_editor_nama=findViewById<TextInputEditText>(R.id.staff_textfield_editor_nama)
+        val staff_textfield_editor_telepon=findViewById<TextInputEditText>(R.id.staff_textfield_editor_telepon)
+        val staff_textfield_editor_password=findViewById<TextInputEditText>(R.id.staff_textfield_editor_password)
+        if(dataStaff.jenis_kelamin=="Laki-Laki"){
+            autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(0).toString(), false);
+        }else{
+            autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(1).toString(), false);
+        }
+
+        if(dataStaff.role=="Kolektor"){
+            autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(0).toString(), false);
+        }else if(dataStaff.role=="Bendahara")
+        {
+            autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(1).toString(), false);
+        }
+        else{
+            autoCompleteTxtjenisRole.setText(autoCompleteTxtjenisRole.getAdapter().getItem(2).toString(), false);
+        }
+//        autoCompleteTxtJenisKelamin.setText(dataStaff.jenis_kelamin)
+//        autoCompleteTxtjenisRole.setText(dataStaff.role)
+        staff_textfield_editor_nama.setText(dataStaff.fullname)
+        staff_textfield_editor_telepon.setText(dataStaff.no_telepon)
+        staff_textfield_editor_password.setText(dataStaff.password)
+    }
+
+    fun getViewTextProfile(): Staff {
+        val autoCompleteTxtJenisKelamin = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_jeniskelamin)
+        val autoCompleteTxtjenisRole = findViewById<AutoCompleteTextView>(R.id.staff_autotextfield_editor_role)
+        val staff_textfield_editor_nama=findViewById<TextInputEditText>(R.id.staff_textfield_editor_nama)
+        val staff_textfield_editor_telepon=findViewById<TextInputEditText>(R.id.staff_textfield_editor_telepon)
+        val staff_textfield_editor_password=findViewById<TextInputEditText>(R.id.staff_textfield_editor_password)
+        var DataProfileStaff= Staff(staff_textfield_editor_nama.text.toString(),autoCompleteTxtjenisRole.text.toString(),autoCompleteTxtJenisKelamin.text.toString(),staff_textfield_editor_telepon.text.toString(),staff_textfield_editor_password.text.toString(),-1,null)
+        return DataProfileStaff
+    }
+
+
+    fun reqUpdateProfile(loginData: LoginData, URL:String,DataProfileStaff: Staff){
+        val queue = Volley.newRequestQueue(this)
+        val jsonString = Gson().toJson(DataProfileStaff)
+        val jsonObject= JSONObject(jsonString)
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.PUT, URL,jsonObject,
+            com.android.volley.Response.Listener { response ->
+                Log.d("Req", "Request Success")
+                try {
+                    updateViewProfile(DataProfileStaff)
+                    Log.d("Res", response.toString())
+                    Toast.makeText(this@KolektorProfileActivity, "Data Updated", Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+
+            }, com.android.volley.Response.ErrorListener { error ->
+                if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
+                    Toast.makeText(this@KolektorProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail1", error.toString())
+                } else if (error is AuthFailureError) {
+                    Log.d("httpfail2", error.toString())
+                    if(error.networkResponse.statusCode==401){
+                        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                        var editor = sharedPreference.edit()
+                        editor.putInt("user_id",-1)
+                        editor.putString("role",null)
+                        editor.putString("token",null)
+                        editor.commit()
+                        val intent = Intent(this@KolektorProfileActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                } else if (error is ServerError) {
+                    if (error.networkResponse.statusCode==403){
+                        Toast.makeText(this@KolektorProfileActivity, "Forbiden", Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==422){
+                        val fields = arrayOf<String>("fullname","username","no_telepon","password","role","jenis_kelamin")
+                        val respone=errorValidationFetcher(error.networkResponse,fields)
+
+                        Toast.makeText(this@KolektorProfileActivity,respone, Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==404){
+                        Toast.makeText(this@KolektorProfileActivity, "Data Not Found", Toast.LENGTH_LONG).show()
+                    }
+                    Log.d("httpfail13", error.toString())
+                } else if (error is ParseError) {
+                    Toast.makeText(this@KolektorProfileActivity, "Parse Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail14", error.toString())
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String>? {
+                val map = HashMap<String, String>()
+                map["Accept"] = "application/json"
+                map["Content-Type"] = "application/json"
+                return map
+            }
+        }
+        queue.add(jsonObjectRequest)
+    }
+    fun errorValidationFetcher(response: NetworkResponse, fields:Array<String>):String{
+        val InResponse =(JSONObject(String(response.data, Charsets.UTF_8)).getJSONObject("errors"))
+        var compliteErrorMessage=""
+        var i=0
+        for(field in fields){
+            if(InResponse.has(field)){
+                compliteErrorMessage+=field+":\n["
+                val fieldErrors=InResponse.getJSONArray(field)
+                (0 until fieldErrors.length()).forEach {
+                    compliteErrorMessage+=fieldErrors[it].toString()
+                    if(it==fieldErrors.length()-1 && i==fields.size-1){
+                        compliteErrorMessage+="]"
+                    }
+                    else if(it==fieldErrors.length()-1 && i!=fields.size-1){
+                        compliteErrorMessage+="]\n\n"
+                    }
+                    else{
+                        compliteErrorMessage+="\n"
+                    }
+                }
+            }
+            i++
+        }
+        return compliteErrorMessage.removeRange(compliteErrorMessage.length-2,compliteErrorMessage.length-1)
+
+    }
+
+
+    fun reqGetProfile(loginData: LoginData, URL:String){
+        val queue = Volley.newRequestQueue(this)
+        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, URL,null,
+            com.android.volley.Response.Listener { response ->
+                Log.d("Req", "Request Success")
+                try {
+                    var DataProfileStaff= Staff(response.getString("fullname"),response.getString("role"),response.getString("jenis_kelamin"),response.getString("no_telepon"),response.getString("password"),-1,null)
+                    updateViewProfile(DataProfileStaff)
+                    Log.d("Res", response.toString())
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+
+            }, com.android.volley.Response.ErrorListener { error ->
+                if (error is AuthFailureError) {
+                    Log.d("httpfail2", error.toString())
+                    if (error.networkResponse.statusCode == 401) {
+                        val sharedPreference =
+                            getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                        var editor = sharedPreference.edit()
+                        editor.putInt("user_id", -1)
+                        editor.putString("role", null)
+                        editor.putString("token", null)
+                        editor.commit()
+                        val intent = Intent(this@KolektorProfileActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+                else{
+                    if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
+                        Toast.makeText(this@KolektorProfileActivity, "Network Error", Toast.LENGTH_LONG).show()
+                        Log.d("httpfail1", error.toString())
+                    }  else if (error is ServerError) {
+                        Toast.makeText(this@KolektorProfileActivity, "Server Error", Toast.LENGTH_LONG).show()
+                        Log.d("httpfail13", error.toString())
+                    }  else if (error is ParseError) {
+                        Toast.makeText(this@KolektorProfileActivity, "Parse Error", Toast.LENGTH_LONG).show()
+                        Log.d("httpfail14", error.toString())
+                    }
+                    Handler().postDelayed({
+                        if (requestAllow){
+                            reqGetProfile(loginData, URL)
+                        }
+                    }, 8000)
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String>? {
+                val map = HashMap<String, String>()
+                map["Accept"] = "application/json"
+                map["Content-Type"] = "application/json"
+                return map
+            }
+        }
+        queue.add(jsonObjectRequest)
+    }
+
+    fun getAndUpdateTokenLoginData(){
+        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+        loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
+        getProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
+        ubahProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}/update"
+    }
+
+    fun basicStarter(){
+        transparentNavigation()
+        supportActionBar?.show()
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
+        setTitle("Profile Saya")
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
 
         //Check Keyboard
         KeyboardUtils.addKeyboardToggleListener(this, object :
@@ -146,6 +389,7 @@ class KolektorProfileActivity : AppCompatActivity(){
             }
         })
     }
+
     fun transparentNavigation(){
         if (Build.VERSION.SDK_INT >= 21) {
             val window = window

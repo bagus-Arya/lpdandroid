@@ -21,6 +21,7 @@ import org.json.JSONException
 class KolektorHomeActivity: AppCompatActivity(){
     private var loginData= LoginData(null,null,-1)
     private var logOutURL = "http://192.168.1.66:80/LPD_Android/public/api/logout/${loginData.token}"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.kolektor_dashboard)
@@ -33,7 +34,6 @@ class KolektorHomeActivity: AppCompatActivity(){
     fun layoutComponentAndListener(){
         val btn_koletor_profile_saya = findViewById<Button>(R.id.btn_koletor_profile_saya)
         val btn_kolektor_nasabah = findViewById<Button>(R.id.btn_kolektor_nasabah)
-        val btn_kolektor_validasi_setoran = findViewById<Button>(R.id.btn_kolektor_validasi_setoran)
         val btn_kolektor_validasi_penarikan = findViewById<Button>(R.id.btn_kolektor_validasi_penarikan)
         val btn_kolektor_history_penarikan = findViewById<Button>(R.id.btn_kolektor_history_penarikan)
         val btn_kolektor_logout = findViewById<Button>(R.id.btn_kolektor_logout)
@@ -54,10 +54,7 @@ class KolektorHomeActivity: AppCompatActivity(){
             startActivity(intent)
         }
 
-        btn_kolektor_validasi_setoran.setOnClickListener{
-            val intent = Intent(this@KolektorHomeActivity, KolektorValidasiSetoran::class.java)
-            startActivity(intent)
-        }
+
 
         btn_kolektor_history_penarikan.setOnClickListener{
             val intent = Intent(this@KolektorHomeActivity, KolektorHistoryTransaksi::class.java)

@@ -189,18 +189,16 @@ class ketuaDataStaffActivity : AppCompatActivity() {
             Response.Listener { response ->
                 Log.d("Req", "Request Success")
                 if(!response.isNull(0)){
-                    staffs=createArrayStaffs(response)
-                    updateRv(staffs)
+                    try {
+                        staffs=createArrayStaffs(response)
+                        updateRv(staffs)
+                        Log.d("Res", staffs.toString())
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
                 }
                 else{
-                    Log.d("Req", "null")
-                }
-
-                try {
-                    val staffs=createArrayStaffs(response)
-                    Log.d("Res", staffs.toString())
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+                    Toast.makeText(this@ketuaDataStaffActivity, "Data Kosong", Toast.LENGTH_LONG).show()
                 }
                 val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
                 refreshLayout.setRefreshing(false)

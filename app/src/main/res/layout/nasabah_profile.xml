@@ -37,7 +37,7 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/btn_transaksi_nasabah"
+                        android:id="@+id/btn_nasabah_tabungan"
                         android:layout_width="123dp"
                         android:layout_height="45dp"
                         android:layout_marginTop="10dp"
@@ -66,6 +66,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/textColor"
+                            android:enabled="false"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +90,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
+                            android:enabled="false"
                             android:textColor="@color/textColor"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -113,6 +115,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/textColor"
+                            android:enabled="false"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,7 +141,7 @@
                         android:text="Foto KTP"
                         android:textColor="@color/textColor"
                         android:textSize="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_foto_ktp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_alamat" />
 
@@ -155,13 +158,14 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_transaksi_nasabah">
+                        app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_tabungan">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/nasabah_textfield_editor_nama"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/textColor"
+                            android:enabled="false"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,6 +197,7 @@
                             android:popupBackground="@color/white"
                             android:popupTheme="@color/white"
                             android:textColor="@color/textColor"
+                            android:enabled="false"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -218,44 +223,34 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
+                            android:enabled="false"
                             android:textColor="@color/textColor"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:id="@+id/btn_tambah_nasabah"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:backgroundTint="@color/ubahColor"
-                        android:text="Ubah"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_kembali"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
-
-                    <Button
                         android:id="@+id/btn_kembali"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="15dp"
                         android:backgroundTint="@color/muted"
                         android:text="Kembali"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/btn_tambah_nasabah"
-                        app:layout_constraintTop_toTopOf="@+id/btn_tambah_nasabah" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_foto_ktp" />
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+
+                        android:id="@+id/nasabah_foto_ktp"
                         android:layout_width="332dp"
                         android:layout_height="177dp"
-                        app:layout_constraintBottom_toTopOf="@+id/btn_tambah_nasabah"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"
+                        android:enabled="false"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
