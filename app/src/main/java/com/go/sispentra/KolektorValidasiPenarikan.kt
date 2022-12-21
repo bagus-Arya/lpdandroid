@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.*
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.StaffAdapter
@@ -30,6 +31,7 @@ import org.json.JSONException
 class KolektorValidasiPenarikan : AppCompatActivity() {
     private var loginData= LoginData(null,null,-1)
     private var getDataPenarikanURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}"
+    private var validasiOrRejectURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}/"
     private lateinit var mPenarikanAdapter: ValidasiPenarikanAdapter
     private lateinit var penarikans:ArrayList<Transaksi>
     lateinit var refreshLayout:SwipeRefreshLayout
@@ -43,32 +45,38 @@ class KolektorValidasiPenarikan : AppCompatActivity() {
         reqGetPenarikan(loginData, getDataPenarikanURL)
     }
 
-    fun reqGetPenarikan(loginData: LoginData, URL:String){
+    fun reqValidasiOrRejctPenarikan(loginData: LoginData,transaksi:Transaksi,validasi:Boolean=true,position:Int,mPenarikanAdapter:ValidasiPenarikanAdapter){
+        var URL = validasiOrRejectURL
+        if(validasi){
+            URL +="validasi_kolektor/"+transaksi.id
+        }
+        else{
+            URL +="reject_kolektor/"+transaksi.id
+        }
         val queue = Volley.newRequestQueue(this)
-        val jsonObjectArray: JsonArrayRequest = object : JsonArrayRequest(
-            Method.GET, URL,null,
+        val jsonObject: JsonObjectRequest = object : JsonObjectRequest(
+            Method.PUT, URL,null,
             Response.Listener { response ->
                 Log.d("Req", "Request Success")
-                if(!response.isNull(0)){
-                    try {
-                        penarikans=createArrayPenarikans(response)
-                        updateRv(penarikans)
-                        Log.d("Res", penarikans.toString())
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
+                if(validasi){
+
+                    Toast.makeText(this@KolektorValidasiPenarikan, "Validasi Berhasil", Toast.LENGTH_LONG).show()
                 }
                 else{
-                    Toast.makeText(this@KolektorValidasiPenarikan, "Data Kosong", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@KolektorValidasiPenarikan, "Reject Berhasil", Toast.LENGTH_LONG).show()
                 }
-                refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
-                refreshLayout.setRefreshing(false)
+                try {
+                    mPenarikanAdapter.transaksis.removeAt(position)
+                    mPenarikanAdapter.notifyItemRemoved(position)
+                    mPenarikanAdapter.notifyItemRangeChanged(position,mPenarikanAdapter.transaksis.size)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }, Response.ErrorListener { error ->
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@KolektorValidasiPenarikan, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                }  else if (error is ServerError ||error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -80,9 +88,7 @@ class KolektorValidasiPenarikan : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@KolektorValidasiPenarikan, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){
@@ -91,6 +97,87 @@ class KolektorValidasiPenarikan : AppCompatActivity() {
                     else if (error.networkResponse.statusCode==404){
                         Toast.makeText(this@KolektorValidasiPenarikan, "Data Not Found", Toast.LENGTH_LONG).show()
                     }
+                    else if (error.networkResponse.statusCode==400){
+                        Toast.makeText(this@KolektorValidasiPenarikan, "Data Sudah Terubah Sebelumnya", Toast.LENGTH_LONG).show()
+                    }
+                    try {
+                        mPenarikanAdapter.transaksis.removeAt(position)
+                        mPenarikanAdapter.notifyItemRemoved(position)
+                        mPenarikanAdapter.notifyItemRangeChanged(position,mPenarikanAdapter.transaksis.size)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+//                    Toast.makeText(this@ketuaDataStaffActivity, "Server Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail13", error.toString())
+                } else if (error is ParseError) {
+                    Toast.makeText(this@KolektorValidasiPenarikan, "Parse Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail15", error.toString())
+                }
+            }) {
+
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String>? {
+                val map = HashMap<String, String>()
+                map["Accept"] = "application/json"
+                map["Content-Type"] = "application/json"
+                return map
+            }
+        }
+        queue.add(jsonObject)
+    }
+
+    fun reqGetPenarikan(loginData: LoginData, URL:String){
+        val queue = Volley.newRequestQueue(this)
+        val jsonObjectArray: JsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, URL,null,
+            Response.Listener { response ->
+                Log.d("Req", "Request Success")
+                if(!response.isNull(0)){
+                    val rv_emptying = findViewById<RecyclerView>(R.id.rv_validasi_penarikan)
+                    rv_emptying.visibility=View.VISIBLE
+                    try {
+                        penarikans=createArrayPenarikans(response)
+                        updateRv(penarikans)
+                        Log.d("Res", penarikans.toString())
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+                else{
+                    val rv_emptying = findViewById<RecyclerView>(R.id.rv_validasi_penarikan)
+                    rv_emptying.visibility=View.GONE
+                    Toast.makeText(this@KolektorValidasiPenarikan, "Data Kosong", Toast.LENGTH_LONG).show()
+                }
+                refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+                refreshLayout.setRefreshing(false)
+            }, Response.ErrorListener { error ->
+                if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
+                    Toast.makeText(this@KolektorValidasiPenarikan, "Network Error", Toast.LENGTH_LONG).show()
+                    Log.d("httpfail1", error.toString())
+                } else if (error is ServerError ||error is AuthFailureError) {
+                    if(error.networkResponse.statusCode==401){
+                        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+                        var editor = sharedPreference.edit()
+                        editor.putInt("user_id",-1)
+                        editor.putString("role",null)
+                        editor.putString("token",null)
+                        editor.commit()
+                        val intent = Intent(this@KolektorValidasiPenarikan, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else if (error.networkResponse.statusCode==403){
+                        Toast.makeText(this@KolektorValidasiPenarikan, "Forbiden", Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==422){
+                        Toast.makeText(this@KolektorValidasiPenarikan, "Data Input Invalid", Toast.LENGTH_LONG).show()
+                    }
+                    else if (error.networkResponse.statusCode==404){
+                        Toast.makeText(this@KolektorValidasiPenarikan, "Data Not Found", Toast.LENGTH_LONG).show()
+                    }
+//                    else if (error.networkResponse.statusCode==400){
+//                        Toast.makeText(this@KolektorValidasiPenarikan, "Data Sudah Terubah Sebelumnya", Toast.LENGTH_LONG).show()
+//                    }
 //                    Toast.makeText(this@ketuaDataStaffActivity, "Server Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail13", error.toString())
                 } else if (error is ParseError) {
@@ -113,7 +200,19 @@ class KolektorValidasiPenarikan : AppCompatActivity() {
     }
 
     fun updateRv(transaksis:ArrayList<Transaksi>){
-        mPenarikanAdapter= ValidasiPenarikanAdapter(transaksis)
+        mPenarikanAdapter= ValidasiPenarikanAdapter(transaksis,object:ValidasiPenarikanAdapter.OnAdapterListener{
+            override fun onReject(currentItem: Transaksi, position: Int) {
+                reqValidasiOrRejctPenarikan(loginData,currentItem,false,position,mPenarikanAdapter)
+            }
+
+            override fun onValidasi(currentItem: Transaksi, position: Int) {
+                reqValidasiOrRejctPenarikan(loginData,currentItem,true,position,mPenarikanAdapter)
+//                transaksis.removeAt(position)
+//                mPenarikanAdapter.notifyItemRemoved(position)
+//                mPenarikanAdapter.notifyItemRangeChanged(position,transaksis.size)
+//                Toast.makeText(this@KolektorValidasiPenarikan, "Validasi", Toast.LENGTH_LONG).show()
+            }
+        })
 
 
         val rv_validasi_penarikan=findViewById<RecyclerView>(R.id.rv_validasi_penarikan)
@@ -163,6 +262,7 @@ class KolektorValidasiPenarikan : AppCompatActivity() {
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
         getDataPenarikanURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}"
+        validasiOrRejectURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}/"
     }
 
     fun basicStarter(){

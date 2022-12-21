@@ -148,8 +148,7 @@ class nasabahRequestPenarikan : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@nasabahRequestPenarikan, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError||error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -161,8 +160,7 @@ class nasabahRequestPenarikan : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@nasabahRequestPenarikan, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){

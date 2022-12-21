@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_marginBottom="10dp">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         app:cardBackgroundColor="@color/cardBackgroundColor2"
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"

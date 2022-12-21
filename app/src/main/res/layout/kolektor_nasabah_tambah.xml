@@ -36,76 +36,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nasabah_textfield_layout_alamat"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Alamat"
-                        android:textColorHint="@color/muted"
-                        app:boxStrokeColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/textView17"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_no_ktp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/nasabah_textfield_editor_alamat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textColor"
-                            android:textSize="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nasabah_textfield_layout_no_ktp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="No KTP"
-                        android:textColorHint="@color/muted"
-                        app:boxStrokeColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_alamat"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_telepon">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/nasabah_textfield_editor_no_ktp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:textColor="@color/textColor"
-                            android:textSize="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nasabah_textfield_layout_tgl_lahir"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Tanggal Lahir"
-                        android:textColorHint="@color/muted"
-                        app:boxStrokeColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_telepon"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_jeniskelamin">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/nasabah_textfield_editor_tgl_lahir"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textColor"
-                            android:textSize="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <TextView
                         android:id="@+id/textView15"
                         android:layout_width="wrap_content"
@@ -119,105 +49,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Foto KTP"
-                        android:textColor="@color/textColor"
-                        android:textSize="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/imageButton"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_alamat" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nasabah_textfield_layout_nama"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Nama Nasabah"
-                        android:textColorHint="@color/muted"
-                        app:boxStrokeColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_jeniskelamin"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView15">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/nasabah_textfield_editor_nama"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textColor"
-                            android:textSize="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nasabah_textfield_layout_jeniskelamin"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Jenis Kelamin"
-                        android:textColorHint="@color/muted"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/colorPrimary"
-
-                        app:endIconTint="@color/secondary"
-                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_tgl_lahir"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_nama">
-
-
-                        <AutoCompleteTextView
-                            android:id="@+id/nasabah_autotextfield_editor_jeniskelamin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:inputType="none"
-                            android:popupBackground="@color/white"
-                            android:popupTheme="@color/white"
-                            android:textColor="@color/textColor"
-                            android:textSize="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nasabah_textfield_layout_telepon"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="No Telepon"
-                        android:textColorHint="@color/muted"
-                        app:boxStrokeColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_no_ktp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_tgl_lahir"
-                        app:prefixText="+62"
-                        app:prefixTextColor="@color/muted">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/nasabah_textfield_editor_telepon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="phone"
-                            android:textColor="@color/textColor"
-                            android:textSize="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <Button
                         android:id="@+id/btn_tambah_nasabah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:backgroundTint="#095A0D"
                         android:text="Tambah"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -237,13 +73,209 @@
                         app:layout_constraintStart_toEndOf="@+id/btn_tambah_nasabah"
                         app:layout_constraintTop_toTopOf="@+id/btn_tambah_nasabah" />
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_tgl_lahir"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="Tanggal Lahir"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_telepon"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_jeniskelamin"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_tgl_lahir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_alamat"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="Alamat"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_password"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_no_ktp"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_alamat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_no_ktp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="No KTP"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_alamat"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_telepon"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_no_ktp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_password"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="Password"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:endIconMode="password_toggle"
+                        app:endIconTint="@color/textColor"
+                        app:layout_constraintBottom_toTopOf="@+id/textView17"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_alamat"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_username"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:hint="Username Nasabah"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_nama"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Foto KTP"
+                        android:textColor="@color/textColor"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_password" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_nama"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="Nama Nasabah"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_jeniskelamin"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_username"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_nama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_jeniskelamin"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="Jenis Kelamin"
+                        android:textColorHint="@color/muted"
+                        app:boxBackgroundColor="@color/white"
+
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:endIconTint="@color/secondary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_tgl_lahir"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_nama"
+                        tools:layout_editor_absoluteX="0dp">
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/nasabah_autotextfield_editor_jeniskelamin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:inputType="none"
+                            android:popupBackground="@color/white"
+                            android:popupTheme="@color/white"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nasabah_textfield_layout_telepon"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:hint="No Telepon"
+                        android:textColorHint="@color/muted"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_no_ktp"
+                        app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_tgl_lahir"
+                        app:prefixText="+62"
+                        app:prefixTextColor="@color/muted"
+                        tools:layout_editor_absoluteX="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nasabah_textfield_editor_telepon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:textColor="@color/textColor"
+                            android:textSize="16dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <ImageButton
                         android:id="@+id/imageButton"
                         android:layout_width="332dp"
                         android:layout_height="177dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="15dp"
                         app:layout_constraintBottom_toTopOf="@+id/btn_tambah_nasabah"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />

@@ -33,13 +33,14 @@ class nasabahTabunganActivity : AppCompatActivity() {
     private var loginData= LoginData(null,null,-1)
     private var getTabunganUrl = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/${loginData.token}"
     private var getTabunganTransaksiUrl = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/${loginData.token}/transaksis"
-
+//    rv_tabungan_transaksi.visibility=View.VISIBLE
     lateinit var nasabah_nama_nasabah:TextView
     lateinit var nasabah_no_tabungan_nasabah:TextView
     lateinit var nasabah_no_telepon_nasabah:TextView
     lateinit var nasabah_nama_kolektor_nasabah:TextView
     lateinit var nasabah_saldo_nasabah:TextView
     lateinit var refreshLayout:SwipeRefreshLayout
+    lateinit var rv_tabungan_transaksi:RecyclerView
 
     private lateinit var transaksis:ArrayList<Transaksi>
     private lateinit var mTransaksiAdapter: TabunganTransaksiAdapter
@@ -47,8 +48,8 @@ class nasabahTabunganActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nasabah_tabungan)
-        basicStarter()
         getAndUpdateTokenLoginData()
+        basicStarter()
         setComponent()
         reqGetTabungan(loginData,getTabunganUrl)
         reqGetTabunganTransaksi(loginData,getTabunganTransaksiUrl)
@@ -82,8 +83,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@nasabahTabunganActivity, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError||error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -95,9 +95,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@nasabahTabunganActivity, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){
@@ -112,8 +110,6 @@ class nasabahTabunganActivity : AppCompatActivity() {
                     Toast.makeText(this@nasabahTabunganActivity, "Parse Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail15", error.toString())
                 }
-                val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
-                refreshLayout.setRefreshing(false)
             }) {
 
             @Throws(AuthFailureError::class)
@@ -132,6 +128,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
             Method.GET, URL,null,
             Response.Listener { response ->
                 if(!response.isNull(0)){
+                    rv_tabungan_transaksi.visibility=View.VISIBLE
                     try {
                         transaksis =createArrayTransaksis(response)
                         updateRv(transaksis)
@@ -141,6 +138,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
                     }
                 }
                 else{
+                    rv_tabungan_transaksi.visibility=View.GONE
                     Toast.makeText(this@nasabahTabunganActivity, "Data Kosong", Toast.LENGTH_LONG).show()
                 }
                 refreshLayout.setRefreshing(false)
@@ -148,8 +146,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@nasabahTabunganActivity, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                }else if (error is ServerError||error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -161,9 +158,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@nasabahTabunganActivity, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){
@@ -178,7 +173,6 @@ class nasabahTabunganActivity : AppCompatActivity() {
                     Toast.makeText(this@nasabahTabunganActivity, "Parse Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail15", error.toString())
                 }
-                val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
                 refreshLayout.setRefreshing(false)
             }) {
 
@@ -253,8 +247,10 @@ class nasabahTabunganActivity : AppCompatActivity() {
         nasabah_nama_kolektor_nasabah=findViewById<TextView>(R.id.nasabah_nama_kolektor_nasabah)
         nasabah_saldo_nasabah=findViewById<TextView>(R.id.nasabah_saldo_nasabah)
         refreshLayout=findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        rv_tabungan_transaksi=findViewById<RecyclerView>(R.id.rv_tabungan_transaksi)
 
         refreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            reqGetTabungan(loginData,getTabunganUrl)
             reqGetTabunganTransaksi(loginData,getTabunganTransaksiUrl)
         })
     }

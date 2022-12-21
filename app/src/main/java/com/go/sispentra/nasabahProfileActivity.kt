@@ -186,7 +186,7 @@ class nasabahProfileActivity : AppCompatActivity() {
             autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(1).toString(), false);
         }
         try {
-            val pureBase64Encoded: String = dataNasabah.ktp_photo.substring(dataNasabah.ktp_photo.indexOf(",") + 1)
+            val pureBase64Encoded: String = dataNasabah.ktp_photo!!.substring(dataNasabah.ktp_photo!!.indexOf(",") + 1)
             val imageBytes = Base64.decode(pureBase64Encoded, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
             nasabah_foto_ktp.setImageBitmap(decodedImage)

@@ -34,6 +34,7 @@ import org.json.JSONException
 class ketuaDataStaffActivity : AppCompatActivity() {
     private var loginData= LoginData(null,null,-1)
     private var getDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}"
+    private var deleteDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/delete/"
     private lateinit var mStaffAdapter: StaffAdapter
     private lateinit var staffs:ArrayList<Staff>
 //    lateinit var staffs:Array<Staff>
@@ -60,7 +61,8 @@ class ketuaDataStaffActivity : AppCompatActivity() {
     }
 
     fun deleteStaffReq(loginData: LoginData, staffId:Int,position:Int,mStaffAdapter:StaffAdapter){
-        var URL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/delete/${staffId}"
+        var URL =deleteDataStaffURL
+        URL+= "$staffId"
         val queue = Volley.newRequestQueue(this)
         val  jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.DELETE, URL,null,
@@ -69,18 +71,17 @@ class ketuaDataStaffActivity : AppCompatActivity() {
                 try {
                     mStaffAdapter.staff.removeAt(position)
                     mStaffAdapter.notifyItemRemoved(position)
-                    mStaffAdapter.notifyItemRangeChanged(position,staffs.size)
+                    mStaffAdapter.notifyItemRangeChanged(position,mStaffAdapter.staff.size)
                     Log.d("staffs", staffs.toString())
                     Toast.makeText(this@ketuaDataStaffActivity, "Staff Deleted", Toast.LENGTH_SHORT).show()
-                } catch (e: JSONException) {
+                } catch (e:Exception) {
                     e.printStackTrace()
                 }
             }, Response.ErrorListener { error ->
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@ketuaDataStaffActivity, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError|| error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -92,19 +93,22 @@ class ketuaDataStaffActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@ketuaDataStaffActivity, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){
                         Toast.makeText(this@ketuaDataStaffActivity, "Data Input Invalid", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==404){
+                        Toast.makeText(this@ketuaDataStaffActivity, "Data Not Found", Toast.LENGTH_LONG).show()
+                    }
+                    try {
                         mStaffAdapter.staff.removeAt(position)
                         mStaffAdapter.notifyItemRemoved(position)
-                        mStaffAdapter.notifyItemRangeChanged(position,staffs.size)
-                        Toast.makeText(this@ketuaDataStaffActivity, "Data Not Found", Toast.LENGTH_LONG).show()
+                        mStaffAdapter.notifyItemRangeChanged(position,mStaffAdapter.staff.size)
+                        Log.d("staffs", staffs.toString())
+                    } catch (e:Exception) {
+                        e.printStackTrace()
                     }
 //                    Toast.makeText(this@ketuaDataStaffActivity, "Server Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail13", error.toString())
@@ -189,6 +193,8 @@ class ketuaDataStaffActivity : AppCompatActivity() {
             Response.Listener { response ->
                 Log.d("Req", "Request Success")
                 if(!response.isNull(0)){
+                    val rv_emptying = findViewById<RecyclerView>(R.id.rv_data_staff)
+                    rv_emptying.visibility=View.VISIBLE
                     try {
                         staffs=createArrayStaffs(response)
                         updateRv(staffs)
@@ -198,6 +204,8 @@ class ketuaDataStaffActivity : AppCompatActivity() {
                     }
                 }
                 else{
+                    val rv_emptying = findViewById<RecyclerView>(R.id.rv_data_staff)
+                    rv_emptying.visibility=View.GONE
                     Toast.makeText(this@ketuaDataStaffActivity, "Data Kosong", Toast.LENGTH_LONG).show()
                 }
                 val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
@@ -206,8 +214,7 @@ class ketuaDataStaffActivity : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@ketuaDataStaffActivity, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError ||error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -219,9 +226,7 @@ class ketuaDataStaffActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@ketuaDataStaffActivity, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){
@@ -255,6 +260,7 @@ class ketuaDataStaffActivity : AppCompatActivity() {
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
         getDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}"
+        deleteDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/delete/"
     }
 
     fun listenerComponent(floatingButtonTambah:FloatingActionButton,search_ketua_staff:TextInputEditText,refreshLayout:SwipeRefreshLayout){

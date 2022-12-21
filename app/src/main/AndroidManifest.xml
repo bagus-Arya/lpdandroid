@@ -47,7 +47,8 @@
             android:parentActivityName=".KolektorNasabahTabungan" />
         <activity
             android:name=".KolektorNasabahTabungan"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahActivity"/>
         <activity
             android:name=".KolektorNasabahActivity"
             android:exported="false"

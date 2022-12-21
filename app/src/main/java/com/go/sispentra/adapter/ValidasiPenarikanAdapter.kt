@@ -4,12 +4,14 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.go.sispentra.R
+import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
 
-class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>): RecyclerView.Adapter<ValidasiPenarikanAdapter.MyViewHolder>() {
+class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>,val listener: ValidasiPenarikanAdapter.OnAdapterListener): RecyclerView.Adapter<ValidasiPenarikanAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val cv_nama_nasabah: TextView =itemView.findViewById(R.id.cv_nama_nasabah)
         val cv_nama_kolektor: TextView =itemView.findViewById(R.id.cv_nama_kolektor)
@@ -17,6 +19,8 @@ class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
         val cv_tgl_transaksi: TextView =itemView.findViewById(R.id.cv_tgl_transaksi)
         val cv_jumlah_penarikan: TextView =itemView.findViewById(R.id.cv_jumlah_penarikan)
         val cv_status_penarikan: TextView =itemView.findViewById(R.id.cv_status_penarikan)
+        val btn_reject: Button =itemView.findViewById(R.id.btn_reject)
+        val btn_validasi: TextView =itemView.findViewById(R.id.btn_validasi)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -61,9 +65,17 @@ class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
             }
         }
         holder.cv_tgl_transaksi.text=currentItem.tgl_transaksi
+        holder.btn_reject.setOnClickListener { listener.onReject( currentItem,position) }
+        holder.btn_validasi.setOnClickListener { listener.onValidasi( currentItem,position) }
     }
 
     override fun getItemCount(): Int {
         return transaksis.size
+    }
+
+
+    interface OnAdapterListener {
+        fun onReject(currentItem: Transaksi, position:Int)
+        fun onValidasi(currentItem: Transaksi, position:Int)
     }
 }

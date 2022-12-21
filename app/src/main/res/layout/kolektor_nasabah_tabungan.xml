@@ -4,30 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?actionBarSize"
-    android:paddingHorizontal="15dp"
     android:background="@drawable/bg_page"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="?actionBarSize"
     tools:context=".nasabahTabunganActivity">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        tools:listitem="@layout/cardview_nasabah_tabungan_history"
-        android:id="@+id/rv_tabungan_transaksi"
-        android:layout_width="382dp"
-        android:layout_height="600dp"
-        android:layout_marginTop="5dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tabungan_transaksi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/cardview_nasabah_tabungan_history" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:padding="15dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/refreshLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

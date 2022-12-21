@@ -40,15 +40,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="670dp"
+        android:layout_height="570dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/staff_textfield_layout_nama"
-        app:layout_constraintVertical_bias="0.203"
-        android:id="@+id/refreshLayout">
+        app:layout_constraintVertical_bias="0.203">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_data_staff"
             android:layout_width="match_parent"
