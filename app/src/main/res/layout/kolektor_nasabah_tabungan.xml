@@ -11,6 +11,8 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/cardview_nasabah_tabungan_history"
+        android:id="@+id/rv_tabungan_transaksi"
         android:layout_width="382dp"
         android:layout_height="600dp"
         android:layout_marginTop="5dp"

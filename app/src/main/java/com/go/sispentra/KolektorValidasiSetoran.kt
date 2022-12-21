@@ -9,12 +9,20 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 
 class KolektorValidasiSetoran : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.kolektor_validasi_setoran)
+        basicStarter()
 
+    }
+
+
+
+    fun basicStarter(){
         transparentNavigation()
         supportActionBar?.show()
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
