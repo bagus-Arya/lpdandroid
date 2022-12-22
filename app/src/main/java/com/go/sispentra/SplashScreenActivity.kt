@@ -15,13 +15,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import org.json.JSONException
 
 class SplashScreenActivity : AppCompatActivity() {
+    var baseUrl=BaseURL()
+//    ${baseUrl.url}
     var requestAllow: Boolean = true
     private var loginData=LoginData(null,null,-1)
-    private var checkProfileUrl = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
+    private var checkProfileUrl = "${baseUrl.url}/api/profile/${loginData.token}"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
@@ -49,7 +52,7 @@ class SplashScreenActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData",Context.MODE_PRIVATE)
         loginData=LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        checkProfileUrl = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
+        checkProfileUrl = "${baseUrl.url}/api/profile/${loginData.token}"
 //        Log.d("LOG", loginData.toString())
     }
 

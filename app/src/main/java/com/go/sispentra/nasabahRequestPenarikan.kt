@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import org.json.JSONException
@@ -29,8 +30,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class nasabahRequestPenarikan : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var postPenarikanUrl = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}/create"
+    private var postPenarikanUrl = "${baseUrl.url}/api/penarikan/${loginData.token}/create"
 
     val myFormat="yyyy-MM-dd"
     lateinit var nasabah_textfield_editor_tgl_penarikan:TextInputEditText
@@ -222,7 +225,7 @@ class nasabahRequestPenarikan : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        postPenarikanUrl = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}/create"
+        postPenarikanUrl = "${baseUrl.url}/api/penarikan/${loginData.token}/create"
     }
 
     fun basicStarter(){

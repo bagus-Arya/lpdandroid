@@ -23,17 +23,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.NasabahListAdapter
-import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
-import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
-import com.rw.keyboardlistener.com.go.sispentra.data.Staff
-import com.rw.keyboardlistener.com.go.sispentra.data.Tabungan
+import com.rw.keyboardlistener.com.go.sispentra.data.*
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.Serializable
 
 class KolektorNasabahActivity : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var getDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}"
+    private var getDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}"
     private lateinit var search_kolektor_nasabah:TextInputEditText
     private lateinit var rv_nasabah_list:RecyclerView
     private lateinit var refreshLayout:SwipeRefreshLayout
@@ -246,7 +245,7 @@ class KolektorNasabahActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}"
+        getDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}"
     }
 
     fun basicStarter(){

@@ -20,14 +20,17 @@ import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.HistoryTransaksiAdapter
 import com.rw.keyboardlistener.com.go.sispentra.adapter.TabunganTransaksiAdapter
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
 import org.json.JSONArray
 import org.json.JSONException
 
 class KolektorHistoryTransaksi : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var getHistoryTransaksiUrl = "http://192.168.1.66:80/LPD_Android/public/api/transaksi/${loginData.token}"
+    private var getHistoryTransaksiUrl = "${baseUrl.url}/api/transaksi/${loginData.token}"
     private lateinit var transaksis:ArrayList<Transaksi>
     private lateinit var mHistoryTransaksiAdapter: HistoryTransaksiAdapter
     private lateinit var refreshLayout:SwipeRefreshLayout
@@ -110,8 +113,7 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@KolektorHistoryTransaksi, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError||error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -123,9 +125,7 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@KolektorHistoryTransaksi, "Forbiden", Toast.LENGTH_LONG).show()
                     }
                     else if (error.networkResponse.statusCode==422){
@@ -158,7 +158,7 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getHistoryTransaksiUrl = "http://192.168.1.66:80/LPD_Android/public/api/transaksi/${loginData.token}"
+        getHistoryTransaksiUrl = "${baseUrl.url}/api/transaksi/${loginData.token}"
     }
 
     fun basicStarter(){

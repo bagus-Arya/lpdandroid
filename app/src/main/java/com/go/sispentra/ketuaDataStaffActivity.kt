@@ -26,15 +26,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.StaffAdapter
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import org.json.JSONArray
 import org.json.JSONException
 
 class ketuaDataStaffActivity : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var getDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}"
-    private var deleteDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/delete/"
+    private var getDataStaffURL = "${baseUrl.url}/api/staff/${loginData.token}"
+    private var deleteDataStaffURL = "${baseUrl.url}/api/staff/${loginData.token}/delete/"
     private lateinit var mStaffAdapter: StaffAdapter
     private lateinit var staffs:ArrayList<Staff>
 //    lateinit var staffs:Array<Staff>
@@ -259,8 +262,8 @@ class ketuaDataStaffActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}"
-        deleteDataStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/delete/"
+        getDataStaffURL = "${baseUrl.url}/api/staff/${loginData.token}"
+        deleteDataStaffURL = "${baseUrl.url}/api/staff/${loginData.token}/delete/"
     }
 
     fun listenerComponent(floatingButtonTambah:FloatingActionButton,search_ketua_staff:TextInputEditText,refreshLayout:SwipeRefreshLayout){

@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import org.json.JSONException
 import org.json.JSONObject
@@ -27,10 +28,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class KolektorNasabahSetoran : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     val myFormat="yyyy-MM-dd"
     private var loginData= LoginData(null,null,-1)
     private var nasabahId: Int=-1
-    private var postSetoran = "http://192.168.1.66:80/LPD_Android/public/api/setoran/${loginData.token}/create/${nasabahId}"
+    private var postSetoran = " ${baseUrl.url}/api/setoran/${loginData.token}/create/${nasabahId}"
 
     private lateinit var nasabah_textfield_editor_nominal_setoran:TextInputEditText
     private lateinit var nasabah_textfield_editor_tgl_setoran:TextInputEditText
@@ -48,7 +51,7 @@ class KolektorNasabahSetoran : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        postSetoran = "http://192.168.1.66:80/LPD_Android/public/api/setoran/${loginData.token}/create/${nasabahId}"
+        postSetoran = "${baseUrl.url}/api/setoran/${loginData.token}/create/${nasabahId}"
     }
 
     fun setComponnet(){

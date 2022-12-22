@@ -50,7 +50,7 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/dt_nama_koletor" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_kolektor" />
 
             <TextView
                 android:textColor="@color/textColor"
@@ -61,7 +61,7 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/dt_nama_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_nasabah" />
 
             <TextView
                 android:textColor="@color/textColor"
@@ -72,7 +72,7 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/dt_jumlah_setoran" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_jumlah_setoran" />
 
             <TextView
                 android:textColor="@color/textColor"
@@ -83,7 +83,7 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/dt_tgl_setoran" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_transaksi" />
 
             <TextView
                 android:textColor="@color/textColor"
@@ -94,7 +94,7 @@
                 android:text=":"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -104,7 +104,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/dt_nama_koletor" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_kolektor" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -114,7 +114,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/dt_nama_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_nasabah" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -124,7 +124,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/dt_no_nasabah" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -134,7 +134,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/dt_jumlah_setoran" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_jumlah_setoran" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -144,11 +144,11 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/dt_tgl_setoran" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_transaksi" />
 
             <TextView
                 android:textColor="@color/textColor"
-                android:id="@+id/dt_nama_koletor"
+                android:id="@+id/cv_nama_kolektor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Kolektor"
@@ -159,7 +159,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
 
             <TextView
-                android:id="@+id/dt_nama_nasabah"
+                android:id="@+id/cv_nama_nasabah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Nasabah"
@@ -167,11 +167,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/dt_nama_koletor"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_kolektor"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
-                android:id="@+id/dt_no_nasabah"
+                android:id="@+id/cv_no_tabungan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No Tabungan"
@@ -179,11 +179,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/dt_nama_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_nasabah"
                 app:layout_constraintTop_toTopOf="@+id/textView18" />
 
             <TextView
-                android:id="@+id/dt_jumlah_setoran"
+                android:id="@+id/cv_jumlah_setoran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jumlah Setoran"
@@ -191,11 +191,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/dt_no_nasabah"
+                app:layout_constraintStart_toStartOf="@+id/cv_no_tabungan"
                 app:layout_constraintTop_toTopOf="@+id/textView20" />
 
             <TextView
-                android:id="@+id/dt_tgl_setoran"
+                android:id="@+id/cv_tgl_transaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Setoran"
@@ -203,11 +203,11 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/dt_jumlah_setoran"
+                app:layout_constraintStart_toStartOf="@+id/cv_jumlah_setoran"
                 app:layout_constraintTop_toTopOf="@+id/textView22" />
 
             <TextView
-                android:id="@+id/dt_status_transaksi"
+                android:id="@+id/cv_status_setoran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status Transaksi"
@@ -228,7 +228,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btn_validasi"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dt_status_transaksi" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_status_setoran" />
 
             <Button
                 android:id="@+id/btn_validasi"

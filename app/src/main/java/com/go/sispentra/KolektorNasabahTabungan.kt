@@ -22,19 +22,19 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.TabunganTransaksiAdapter
-import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
-import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
-import com.rw.keyboardlistener.com.go.sispentra.data.Tabungan
-import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
+import com.rw.keyboardlistener.com.go.sispentra.data.*
 import org.json.JSONArray
 import org.json.JSONException
 
 class KolektorNasabahTabungan : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
     private var nasabahId: Int=-1
-    private var getDataNasabahTabungan = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/staff/${loginData.token}/${nasabahId}"
-    private var getDataNasabahTabunganTransaksi = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/staff/${loginData.token}/${nasabahId}/transaksis"
-    private var deleteDataNasabah= "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/delete/${nasabahId}"
+    private var getDataNasabahTabungan = "${baseUrl.url}/api/tabungan/staff/${loginData.token}/${nasabahId}"
+    private var getDataNasabahTabunganTransaksi = "${baseUrl.url}/api/tabungan/staff/${loginData.token}/${nasabahId}/transaksis"
+    private var deleteDataNasabah= "${baseUrl.url}/api/nasabah/${loginData.token}/delete/${nasabahId}"
+
 
     private lateinit var btn_setoran_nasabah :Button
     private lateinit var btn_ubah_nasabah :Button
@@ -349,9 +349,9 @@ class KolektorNasabahTabungan : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getDataNasabahTabungan = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/staff/${loginData.token}/${nasabahId}"
-        getDataNasabahTabunganTransaksi = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/staff/${loginData.token}/${nasabahId}/transaksis"
-        deleteDataNasabah= "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/delete/${nasabahId}"
+        getDataNasabahTabungan = "${baseUrl.url}/api/tabungan/staff/${loginData.token}/${nasabahId}"
+        getDataNasabahTabunganTransaksi = "${baseUrl.url}/api/tabungan/staff/${loginData.token}/${nasabahId}/transaksis"
+        deleteDataNasabah= "${baseUrl.url}/api/nasabah/${loginData.token}/delete/${nasabahId}"
     }
 
     fun basicStarter(){

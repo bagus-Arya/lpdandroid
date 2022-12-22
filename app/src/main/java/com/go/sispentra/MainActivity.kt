@@ -12,16 +12,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import org.json.JSONException
 import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
-    private val loginUrl = "http://192.168.1.66:80/LPD_Android/public/api/login"
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
+    private val loginUrl = "${baseUrl.url}/api/login"
 //    private val loginUrl = "https://httpdump.app/dumps/c09f611b-8ffe-4d71-a668-e7dd0a9cd690"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +34,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun layoutComponentAndListener(){
-        val btnlogin = findViewById<Button>(R.id.btn_login)
-        val username= findViewById<EditText>(R.id.usrname)
-        val password= findViewById<EditText>(R.id.pwsword)
+        val btnlogin = findViewById<AppCompatButton>(R.id.submitButton)
+        val username= findViewById<EditText>(R.id.username)
+        val password= findViewById<EditText>(R.id.passwordText)
 
         btnlogin.setOnClickListener{
             Log.d("Logbutton", "login button pressed")

@@ -23,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
 import org.json.JSONException
@@ -31,8 +32,10 @@ import java.util.*
 
 
 class nasabahProfileActivity : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var getProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
+    private var getProfileURL = " ${baseUrl.url}/api/profile/${loginData.token}"
 
     val myFormat="yyyy-MM-dd"
     var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")
@@ -203,7 +206,7 @@ class nasabahProfileActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getProfileURL = "http://192.168.1.66:80/LPD_Android/public/api/profile/${loginData.token}"
+        getProfileURL = " ${baseUrl.url}/api/profile/${loginData.token}"
     }
 
     fun reqGetProfile(loginData: LoginData, URL:String){

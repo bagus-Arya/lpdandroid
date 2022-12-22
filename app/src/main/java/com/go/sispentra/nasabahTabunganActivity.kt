@@ -22,17 +22,16 @@ import com.android.volley.toolbox.Volley
 import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.StaffAdapter
 import com.rw.keyboardlistener.com.go.sispentra.adapter.TabunganTransaksiAdapter
-import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
-import com.rw.keyboardlistener.com.go.sispentra.data.Staff
-import com.rw.keyboardlistener.com.go.sispentra.data.Tabungan
-import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
+import com.rw.keyboardlistener.com.go.sispentra.data.*
 import org.json.JSONArray
 import org.json.JSONException
 
 class nasabahTabunganActivity : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var getTabunganUrl = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/${loginData.token}"
-    private var getTabunganTransaksiUrl = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/${loginData.token}/transaksis"
+    private var getTabunganUrl = " ${baseUrl.url}/api/tabungan/${loginData.token}"
+    private var getTabunganTransaksiUrl = " ${baseUrl.url}/api/tabungan/${loginData.token}/transaksis"
 //    rv_tabungan_transaksi.visibility=View.VISIBLE
     lateinit var nasabah_nama_nasabah:TextView
     lateinit var nasabah_no_tabungan_nasabah:TextView
@@ -236,8 +235,8 @@ class nasabahTabunganActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getTabunganUrl = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/${loginData.token}"
-        getTabunganTransaksiUrl = "http://192.168.1.66:80/LPD_Android/public/api/tabungan/${loginData.token}/transaksis"
+        getTabunganUrl = " ${baseUrl.url}/api/tabungan/${loginData.token}"
+        getTabunganTransaksiUrl = " ${baseUrl.url}/api/tabungan/${loginData.token}/transaksis"
     }
 
     fun setComponent(){

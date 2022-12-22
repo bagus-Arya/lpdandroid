@@ -26,6 +26,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
 import org.json.JSONException
@@ -37,6 +38,8 @@ import java.util.*
 
 class KolektorNasabahTambah : AppCompatActivity() {
     val myFormat="yyyy-MM-dd"
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private lateinit var nasabah_textfield_editor_username:TextInputEditText
     private lateinit var nasabah_textfield_editor_nama:TextInputEditText
     private lateinit var nasabah_autotextfield_editor_jeniskelamin:AutoCompleteTextView
@@ -55,7 +58,7 @@ class KolektorNasabahTambah : AppCompatActivity() {
     private val CAMERA = 2
 
     private var loginData= LoginData(null,null,-1)
-    private var postDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/create"
+    private var postDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}/create"
 
     var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")
 
@@ -70,7 +73,7 @@ class KolektorNasabahTambah : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        postDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/create"
+        postDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}/create"
     }
 
     fun getViewTextNasabah():Nasabah{

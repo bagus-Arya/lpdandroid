@@ -28,6 +28,7 @@ import com.go.sispentra.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
 import org.json.JSONException
@@ -39,12 +40,14 @@ import java.util.*
 
 
 class KolektorNasabahUbah : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     val myFormat="yyyy-MM-dd"
     var nasabahId=-1
     var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")
     private var loginData= LoginData(null,null,-1)
-    private var getDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/show/${nasabahId}"
-    private var putDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/update/${nasabahId}"
+    private var getDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}/show/${nasabahId}"
+    private var putDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}/update/${nasabahId}"
     private lateinit var nasabah: Nasabah
     private var maxSizePicture=1*1000000
     private var qualityPictureCompressed=30
@@ -90,8 +93,8 @@ class KolektorNasabahUbah : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/show/${nasabahId}"
-        putDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/update/${nasabahId}"
+        getDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}/show/${nasabahId}"
+        putDataNasabahURL = "${baseUrl.url}/api/nasabah/${loginData.token}/update/${nasabahId}"
 //        putDataNasabahURL="https://httpdump.app/dumps/470dac0d-e772-49f9-86e3-76cb9094f8f5"
 
     }

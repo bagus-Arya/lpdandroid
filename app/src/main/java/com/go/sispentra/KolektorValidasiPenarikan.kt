@@ -22,6 +22,7 @@ import com.rw.keyboardlistener.KeyboardUtils
 import com.rw.keyboardlistener.com.go.sispentra.adapter.StaffAdapter
 import com.rw.keyboardlistener.com.go.sispentra.adapter.TabunganTransaksiAdapter
 import com.rw.keyboardlistener.com.go.sispentra.adapter.ValidasiPenarikanAdapter
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
@@ -29,9 +30,11 @@ import org.json.JSONArray
 import org.json.JSONException
 
 class KolektorValidasiPenarikan : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var getDataPenarikanURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}"
-    private var validasiOrRejectURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}/"
+    private var getDataPenarikanURL = "${baseUrl.url}/api/penarikan/${loginData.token}"
+    private var validasiOrRejectURL = "${baseUrl.url}/api/penarikan/${loginData.token}/"
     private lateinit var mPenarikanAdapter: ValidasiPenarikanAdapter
     private lateinit var penarikans:ArrayList<Transaksi>
     lateinit var refreshLayout:SwipeRefreshLayout
@@ -261,8 +264,8 @@ class KolektorValidasiPenarikan : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        getDataPenarikanURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}"
-        validasiOrRejectURL = "http://192.168.1.66:80/LPD_Android/public/api/penarikan/${loginData.token}/"
+        getDataPenarikanURL = "${baseUrl.url}/api/penarikan/${loginData.token}"
+        validasiOrRejectURL = "${baseUrl.url}/api/penarikan/${loginData.token}/"
     }
 
     fun basicStarter(){

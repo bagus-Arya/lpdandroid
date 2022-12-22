@@ -14,12 +14,15 @@ import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import org.json.JSONException
 
 class nasabahHomeActivity : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var logOutURL = "http://192.168.1.66:80/LPD_Android/public/api/logout/${loginData.token}"
+    private var logOutURL = "${baseUrl.url}/api/logout/${loginData.token}"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,7 +122,7 @@ class nasabahHomeActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        logOutURL = "http://192.168.1.66:80/LPD_Android/public/api/logout/${loginData.token}"
+        logOutURL = "${baseUrl.url}/api/logout/${loginData.token}"
 //        Log.d("LOG", loginData.toString())
     }
 

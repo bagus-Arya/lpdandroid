@@ -20,14 +20,17 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
 import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import org.json.JSONException
 import org.json.JSONObject
 
 class ketuaTambahDataStaffActivity : AppCompatActivity() {
+    var baseUrl= BaseURL()
+    //    ${baseUrl.url}
     private var loginData= LoginData(null,null,-1)
-    private var postStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/create"
+    private var postStaffURL = "${baseUrl.url}/api/staff/${loginData.token}/create"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ketua_tambah_data_staff)
@@ -144,7 +147,7 @@ class ketuaTambahDataStaffActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        postStaffURL = "http://192.168.1.66:80/LPD_Android/public/api/staff/${loginData.token}/create"
+        postStaffURL = "${baseUrl.url}/api/staff/${loginData.token}/create"
     }
 
     fun layoutComponentAndListener(){
