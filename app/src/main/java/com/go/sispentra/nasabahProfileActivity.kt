@@ -179,6 +179,7 @@ class nasabahProfileActivity : AppCompatActivity() {
         nasabah_textfield_editor_telepon.setText(dataNasabah.no_telepon)
         nasabah_textfield_editor_no_ktp.setText(dataNasabah.no_ktp)
         nasabah_textfield_editor_alamat.setText(dataNasabah.alamat)
+        tgl_lahir_editor.setText(dataNasabah.tgl_lahir)
         if (dataNasabah.jenis_kelamin=="Laki-Laki"){
             autoCompleteTxtJenisKelamin.setText(autoCompleteTxtJenisKelamin.getAdapter().getItem(0).toString(), false);
         }

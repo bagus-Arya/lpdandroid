@@ -154,8 +154,12 @@ class KolektorNasabahActivity : AppCompatActivity() {
                     staff: Staff,
                     position: Int
                 ) {
+                    val sharedPreference =  getSharedPreferences("selectedNasabah", Context.MODE_PRIVATE)
+                    var editor = sharedPreference.edit()
+                    editor.putInt("id",nasabah.id)
+                    editor.commit()
+//                    Toast.makeText(this@KolektorNasabahActivity,sharedPreference.getInt("id",-1).toString() , Toast.LENGTH_LONG).show()
                     val intent = Intent(this@KolektorNasabahActivity, KolektorNasabahTabungan::class.java)
-                    intent.putExtra("nasabahId",nasabah.id)
                     startActivity(intent)
                 }
 
@@ -246,6 +250,12 @@ class KolektorNasabahActivity : AppCompatActivity() {
     }
 
     fun basicStarter(){
+        val intent = Intent(this@KolektorNasabahActivity, KolektorNasabahTabungan::class.java)
+        val sharedPreference =  getSharedPreferences("seletedNasabah", Context.MODE_PRIVATE)
+        var editor = sharedPreference.edit()
+        editor.putInt("id",-1)
+        editor.commit()
+
         transparentNavigation()
         supportActionBar?.show()
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))

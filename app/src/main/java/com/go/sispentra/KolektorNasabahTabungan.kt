@@ -119,7 +119,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@KolektorNasabahTabungan, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
+                } else if (error is ServerError||error is AuthFailureError) {
                     Log.d("httpfail2", error.toString())
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
@@ -132,9 +132,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                   else  if (error.networkResponse.statusCode==403){
                         val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahActivity::class.java)
                         intent.putExtra("message","Data Nasabah Tidak Boleh Diakses")
                         startActivity(intent)
@@ -301,8 +299,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@KolektorNasabahTabungan, "Network Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail1", error.toString())
-                } else if (error is AuthFailureError) {
-                    Log.d("httpfail2", error.toString())
+                } else if (error is ServerError|| error is AuthFailureError) {
                     if(error.networkResponse.statusCode==401){
                         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
@@ -314,9 +311,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-
-                } else if (error is ServerError) {
-                    if (error.networkResponse.statusCode==403){
+                    else if (error.networkResponse.statusCode==403){
                         val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahActivity::class.java)
                         intent.putExtra("message","Data Nasabah Tidak Boleh Diakses")
                         startActivity(intent)
@@ -360,19 +355,11 @@ class KolektorNasabahTabungan : AppCompatActivity() {
     }
 
     fun basicStarter(){
-
-        if (this.intent.extras != null && this.intent.extras!!.containsKey("nasabahId")) {
-            nasabahId=intent.getIntExtra("nasabahId",-1)
-            if(nasabahId==-1){
-                val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahActivity::class.java)
-                intent.putExtra("message","Value Gagal Didapatkan Dari Kolektor Nasabah Activity")
-                startActivity(intent)
-                finish()
-            }
-        }
-        else{
+        val sharedPreference =  getSharedPreferences("selectedNasabah",Context.MODE_PRIVATE)
+        nasabahId = sharedPreference.getInt("id",-1)
+        if (nasabahId == -1) {
             val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahActivity::class.java)
-            intent.putExtra("message","Value Gagal Didapatkan Dari Kolektor Nasabah Activity")
+            intent.putExtra("message", "Value Gagal Didapatkan Dari Kolektor Nasabah Activity")
             startActivity(intent)
             finish()
         }

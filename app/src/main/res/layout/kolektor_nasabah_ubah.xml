@@ -43,9 +43,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:hint="Password"
+                        app:endIconMode="password_toggle"
                         android:textColorHint="@color/muted"
                         app:boxStrokeColor="@color/colorPrimary"
-                        app:endIconMode="password_toggle"
                         app:endIconTint="@color/textColor"
                         app:layout_constraintBottom_toTopOf="@+id/textView17"
                         app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_alamat">
@@ -54,6 +54,7 @@
                             android:id="@+id/nasabah_textfield_editor_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="textPassword"
                             android:textColor="@color/textColor"
                             android:textSize="16dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -216,7 +217,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:id="@+id/btn_tambah_nasabah"
+                        android:id="@+id/btn_ubah_nasabah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -236,15 +237,15 @@
                         android:text="Kembali"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/btn_tambah_nasabah"
-                        app:layout_constraintTop_toTopOf="@+id/btn_tambah_nasabah" />
+                        app:layout_constraintStart_toEndOf="@+id/btn_ubah_nasabah"
+                        app:layout_constraintTop_toTopOf="@+id/btn_ubah_nasabah" />
 
                     <ImageButton
                         android:id="@+id/imageButton"
                         android:layout_width="332dp"
                         android:layout_height="177dp"
                         android:layout_marginBottom="15dp"
-                        app:layout_constraintBottom_toTopOf="@+id/btn_tambah_nasabah"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_ubah_nasabah"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"
