@@ -322,7 +322,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                     }
                     else if (error.networkResponse.statusCode==404){
                         val intent = Intent(this@KolektorNasabahTabungan, KolektorNasabahActivity::class.java)
-                        intent.putExtra("message","Data Nasabah Tidak Boleh Diakses")
+                        intent.putExtra("message","Data Nasabah Tidak Ada")
                         startActivity(intent)
                         finish()
                     }
@@ -355,6 +355,10 @@ class KolektorNasabahTabungan : AppCompatActivity() {
     }
 
     fun basicStarter(){
+        if (this.intent.extras != null && this.intent.extras!!.containsKey("message")) {
+            Toast.makeText(this@KolektorNasabahTabungan, this.intent.extras!!.get("message").toString(), Toast.LENGTH_LONG).show()
+        }
+
         val sharedPreference =  getSharedPreferences("selectedNasabah",Context.MODE_PRIVATE)
         nasabahId = sharedPreference.getInt("id",-1)
         if (nasabahId == -1) {

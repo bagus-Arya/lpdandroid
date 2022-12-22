@@ -42,7 +42,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nominal Setoran"
+                android:hint="Nominal Penarikan"
                 android:textColorHint="@color/muted"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/btn_kembali_penarikan"

@@ -1,16 +1,17 @@
 package com.go.sispentra
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import android.text.InputType
 import android.util.Base64
 import android.util.Log
@@ -23,6 +24,7 @@ import androidx.core.graphics.drawable.toBitmap
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.go.sispentra.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.rw.keyboardlistener.KeyboardUtils
@@ -31,18 +33,21 @@ import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class KolektorNasabahUbah : AppCompatActivity() {
-    val myFormat="dd-MM-yyyy"
+    val myFormat="yyyy-MM-dd"
     var nasabahId=-1
     var jenisKelamin = arrayOf("Laki-Laki", "Perempuan")
     private var loginData= LoginData(null,null,-1)
     private var getDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/show/${nasabahId}"
     private var putDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/update/${nasabahId}"
     private lateinit var nasabah: Nasabah
+    private var maxSizePicture=1*1000000
+    private var qualityPictureCompressed=30
 
     private lateinit var adapterItemsJenisKelamin: ArrayAdapter<String>
     private lateinit var tgl_lahir_editor:TextInputEditText
@@ -57,17 +62,11 @@ class KolektorNasabahUbah : AppCompatActivity() {
     private lateinit var imageButton:ImageButton
     private lateinit var btn_ubah_nasabah:Button
     private lateinit var btn_kembali:Button
-
     var requestAllow: Boolean = true
 
-    override fun onPause() {
-        super.onPause()
-        requestAllow=false
-    }
-    override fun onResume() {
-        super.onResume()
-        requestAllow=true
-    }
+    private lateinit var binding:ActivityMainBinding
+    private val GALLERY = 1
+    private val CAMERA = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,11 +77,23 @@ class KolektorNasabahUbah : AppCompatActivity() {
         reqGetProfile(loginData, getDataNasabahURL)
     }
 
+    override fun onPause() {
+        super.onPause()
+        requestAllow=false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requestAllow=true
+    }
+
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
         getDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/show/${nasabahId}"
         putDataNasabahURL = "http://192.168.1.66:80/LPD_Android/public/api/nasabah/${loginData.token}/update/${nasabahId}"
+//        putDataNasabahURL="https://httpdump.app/dumps/470dac0d-e772-49f9-86e3-76cb9094f8f5"
+
     }
 
     fun errorValidationFetcher(response: NetworkResponse,fields:Array<String>):String{
@@ -121,7 +132,7 @@ class KolektorNasabahUbah : AppCompatActivity() {
         val password=nasabah_textfield_editor_password.text.toString()
         val tgl_lahir=tgl_lahir_editor.text.toString()
         val jenis_kelamin=autoCompleteTxtJenisKelamin.text.toString()
-        var ktp_photo="lol"
+        var ktp_photo=""
         try {
 //            val image = (imageButton.getDrawable() as BitmapDrawable).bitmap
 //            val outputStream = ByteArrayOutputStream()
@@ -131,14 +142,17 @@ class KolektorNasabahUbah : AppCompatActivity() {
             var drawable=imageButton.drawable
             var bitmap=drawable.toBitmap()
             var outputStream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            if(bitmap.allocationByteCount>maxSizePicture){
+                bitmap.compress(Bitmap.CompressFormat.JPEG, qualityPictureCompressed, outputStream)
+            }
+            else{
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
+
             var byteArray: ByteArray = outputStream.toByteArray()
             ktp_photo = Base64.encodeToString(byteArray, Base64.DEFAULT)
-            val imageBytes = Base64.decode(ktp_photo, Base64.DEFAULT)
-            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-            imageButton.setImageBitmap(decodedImage)
+//            Toast.makeText(this@KolektorNasabahUbah,byteArray.size.toString() , Toast.LENGTH_LONG).show()
 
-//            Toast.makeText(this@KolektorNasabahUbah, ktp_photo, Toast.LENGTH_LONG).show()
             Log.d("dead", "ok")
         } catch (e: Exception) {
             Log.e("dead", e.toString())
@@ -157,7 +171,6 @@ class KolektorNasabahUbah : AppCompatActivity() {
         )
         return nasabah
     }
-
 
     fun reqUpdateNasabah(loginData: LoginData, URL:String,nasabah: Nasabah){
         val queue = Volley.newRequestQueue(this)
@@ -218,7 +231,8 @@ class KolektorNasabahUbah : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
-                    Log.d("httpfail13", error.toString())
+                    var body = String(error.networkResponse.data)
+                    Log.d("httpfail13", body)
                 } else if (error is ParseError) {
                     Toast.makeText(this@KolektorNasabahUbah, "Parse Error", Toast.LENGTH_LONG).show()
                     Log.d("httpfail14", error.toString())
@@ -453,6 +467,7 @@ class KolektorNasabahUbah : AppCompatActivity() {
         })
 
         btn_ubah_nasabah.setOnClickListener {
+            getViewTextNasabah()
             reqUpdateNasabah(loginData,putDataNasabahURL ,getViewTextNasabah())
         }
 
@@ -460,6 +475,96 @@ class KolektorNasabahUbah : AppCompatActivity() {
             onBackPressed()
         }
         imageButton.setOnClickListener {
+            showPictureDialog()
+        }
+    }
+
+    private fun showPictureDialog() {
+        val pictureDialog = AlertDialog.Builder(this)
+        pictureDialog.setTitle("Pilih Media")
+        val pictureDialogItems = arrayOf("Ambil Dari Gallery", "Ambil Dari Kamera")
+        pictureDialog.setItems(pictureDialogItems
+        ) { dialog, which ->
+            when (which) {
+                0 -> choosePhotoFromGallary()
+                1 -> takePhotoFromCamera()
+            }
+        }
+        pictureDialog.show()
+    }
+
+    fun choosePhotoFromGallary() {
+        val galleryIntent = Intent(Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, GALLERY)
+    }
+
+    private fun takePhotoFromCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMERA)
+    }
+
+    public override fun onActivityResult(requestCode:Int, resultCode:Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+         if (resultCode == RESULT_CANCELED)
+         {
+         return
+         }
+        if (requestCode == GALLERY)
+        {
+            if (data != null)
+            {
+                val contentURI = data!!.data
+                try
+                {
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
+                    Log.e("before",bitmap.allocationByteCount.toString())
+
+                    var outputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, qualityPictureCompressed, outputStream)
+                    var byteArray: ByteArray = outputStream.toByteArray()
+                    Log.e("after",byteArray.size.toString())
+
+                    if(byteArray.size>(1*maxSizePicture)){
+                        Toast.makeText(this@KolektorNasabahUbah, "Image To Big", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(this@KolektorNasabahUbah, "Image Saved!", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@KolektorNasabahUbah,bitmap.allocationByteCount.toString() , Toast.LENGTH_LONG).show()
+                        imageButton!!.setImageBitmap(bitmap)
+                    }
+                    //                    val bitmapCompressed = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+//                    val bitmapCompressed=getResizedBitmap(bitmap,1000)
+//                    Log.e("after", byteArray.size.toString())
+                }
+                catch (e: IOException) {
+                    e.printStackTrace()
+                    Toast.makeText(this@KolektorNasabahUbah, "Failed!", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        }
+        else if (requestCode == CAMERA)
+        {
+            val bitmap = data!!.extras!!.get("data") as Bitmap
+            Log.e("before",bitmap.allocationByteCount.toString())
+
+            var outputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, qualityPictureCompressed, outputStream)
+            var byteArray: ByteArray = outputStream.toByteArray()
+            Log.e("after",byteArray.size.toString())
+
+            if(byteArray.size>(1*maxSizePicture)){
+                Toast.makeText(this@KolektorNasabahUbah, "Image To Big", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                imageButton!!.setImageBitmap(bitmap)
+                Toast.makeText(this@KolektorNasabahUbah, "Image Saved!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@KolektorNasabahUbah,thumbnail.allocationByteCount.toString() , Toast.LENGTH_LONG).show()
+            }
+
 
         }
     }
@@ -530,5 +635,18 @@ class KolektorNasabahUbah : AppCompatActivity() {
         tgl_lahir_editor.setText(sdf.format(myCalendar.time))
     }
 
+//    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
+//        var width = image.width
+//        var height = image.height
+//        val bitmapRatio = width.toFloat() / height.toFloat()
+//        if (bitmapRatio > 1) {
+//            width = maxSize
+//            height = (width / bitmapRatio).toInt()
+//        } else {
+//            height = maxSize
+//            width = (height * bitmapRatio).toInt()
+//        }
+//        return Bitmap.createScaledBitmap(image, width, height, true)
+//    }
 
 }

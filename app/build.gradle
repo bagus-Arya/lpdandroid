@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures{
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -62,4 +66,9 @@ dependencies {
 
     //cardview
     implementation 'androidx.cardview:cardview:1.0.0'
+
+//    user permision
+    implementation 'com.karumi:dexter:6.2.3'
+//    coil
+    implementation("io.coil-kt:coil:2.0.0-rc02")
 }
