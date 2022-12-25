@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
             'no_telepon'=>'123456789',
             'no_ktp'=>'123456789',
             'password'=>'password',
+            'alamat'=>'jln ngawur'
         ]);
 
         BukuTabungan::create([

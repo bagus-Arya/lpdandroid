@@ -21,24 +21,25 @@ class CustomAuth
      */
     public function handle(Request $request, Closure $next)
     {
-
+        // return response()->json(['message' => 'Token Invalid'], 404);
         // $validate = $request->validate([
         //     'token'=>'required|string',
         // ]);
-        $token=Token::where('token', '=', $request->token->token)->first();
+        
+        $token=Token::where('token', $request->token)->first();
 
         if ($token==null) {
             return response()->json(['message' => 'Token Invalid'], 401);
         }
         
         if($token->type=="Staff"){
-            $user=Staff::where('id','=',$token->user_id)->firstOrFail();
+            $user=Staff::where('id','=',$token->user_id)->firstOrFail()->makeVisible(['password']);
             $user['token']=$token->token;
             $user['token_type']="Staff";
             $request->attributes->add(['login_user' => $user]);
         }
         else{
-            $user=Nasabah::where('id','=',$token->user_id)->firstOrFail();
+            $user=Nasabah::where('id','=',$token->user_id)->firstOrFail()->makeVisible(['password']);
             $user['token']=$token->token;
             $user['token_type']="Nasabah";
             $user['role']="Nasabah";

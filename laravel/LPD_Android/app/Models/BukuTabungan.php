@@ -13,6 +13,13 @@ class BukuTabungan extends Model
         'nasabah_id',
     ];
 
+    public function scopeFilter($query,array $filters)
+    {
+        $query->when($filters['fullname'] ?? false,function($query,$fullname){
+            return $query->where('no_tabungan','like','%'.$fullname.'%');
+        });
+    }
+
     public function transaksis(){
         return $this->hasMany(Transaksi::class);
     }

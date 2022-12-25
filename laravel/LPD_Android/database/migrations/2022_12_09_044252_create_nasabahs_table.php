@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('no_telepon');
             $table->string('no_ktp');
             $table->string('password');
+            $table->string('alamat');
             $table->timestamps();
             $table->softDeletes();
         });

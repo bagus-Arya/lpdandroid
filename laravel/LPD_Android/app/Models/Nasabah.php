@@ -19,12 +19,13 @@ class Nasabah extends Model
         'no_telepon',
         'no_ktp',
         'password',
-        'jenis_kelamin'
-        
+        'jenis_kelamin',
+        'alamat'
     ];
 
     protected $hidden = [
         'password',
+        'username'
     ];
     protected $dates = ['deleted_at'];
 
@@ -32,6 +33,13 @@ class Nasabah extends Model
     {
         $query->when($filters['fullname'] ?? false,function($query,$fullname){
             return $query->where('fullname','like','%'.$fullname.'%');
+        });
+    }
+
+    public function scopeFilteror($query,array $filters)
+    {
+        $query->when($filters['fullname'] ?? false,function($query,$fullname){
+            return $query->orWhere('fullname','like','%'.$fullname.'%');
         });
     }
 

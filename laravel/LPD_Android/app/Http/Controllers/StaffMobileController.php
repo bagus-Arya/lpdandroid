@@ -11,14 +11,14 @@ use Illuminate\Validation\Rule;
 
 class StaffMobileController extends Controller
 {
-    public function index(Request $request,Token $token){
+    public function index(Request $request,$token){
         $filters=$request->validate([
             'fullname'=>'string',
         ]);
         return Staff::latest()->filter($filters)->get()->except($request->get('login_user')->id);
     }
     
-    public function store(Request $request,Token $token){
+    public function store(Request $request,$token){
          // validate input
          $validate = $request->validate([
             'fullname'=>'required|string',
@@ -39,7 +39,9 @@ class StaffMobileController extends Controller
         return Staff::create($validate);
     }
 
-    public function destory(Request $request,Token $token,Staff $staff){
-        return $staff->delete();
+    public function destory(Request $request,$token,Staff $staff){
+        Token::where('type','Staff')->where('user_id',$staff->id)->delete();
+        $staff->delete();
+        return response()->json(['message' => 'Staff Deleted'], 200);
     }
 }
