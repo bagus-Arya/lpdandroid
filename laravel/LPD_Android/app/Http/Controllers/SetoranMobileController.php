@@ -8,6 +8,7 @@ use \App\Models\Nasabah;
 use \App\Models\BukuTabungan;
 use \App\Models\Transaksi;
 use \App\Models\Staff;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -38,8 +39,10 @@ class SetoranMobileController extends Controller
 
     public function updateValidasiBendahara(Request $request,$token,Transaksi $transaksi){
         if($transaksi->type_transaksi=="Setoran" && $transaksi->status=="unvalidated"){
+            $todayDate = Carbon::now()->format('Y-m-d');
             $transaksi->update([
-                'status'=>'validated-bendahara'
+                'status'=>'validated-bendahara',
+                'tgl_validasi_bendahara'=>$todayDate,
             ]);
             return response()->json(['message' => 'change success'], 200);
         }
@@ -48,8 +51,10 @@ class SetoranMobileController extends Controller
 
     public function updateRejectBendahara(Request $request,$token,Transaksi $transaksi){
         if($transaksi->type_transaksi=="Setoran" && $transaksi->status=="unvalidated"){
+            $todayDate = Carbon::now()->format('Y-m-d');
             $transaksi->update([
-                'status'=>'rejected-bendahara'
+                'status'=>'rejected-bendahara',
+                'tgl_validasi_bendahara'=>$todayDate,
             ]);
             return response()->json(['message' => 'change success'], 200);
         }

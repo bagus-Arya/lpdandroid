@@ -13,6 +13,8 @@ class Transaksi extends Model
         'nasabah_id',
         'buku_tabungan_id',
         'tgl_transaksi',
+        'tgl_validasi_bendahara',
+        'tgl_validasi_kolektor',
         'nominal',
         'status'
     ];

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->enum('status',['unvalidated','validated-bendahara','validated-kolektor','rejected-bendahara','rejected-kolektor']);
             $table->foreignId('buku_tabungan_id')->constrained('buku_tabungans')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_transaksi');
+            $table->date('tgl_validasi_bendahara')->nullable();;
+            $table->date('tgl_validasi_kolektor')->nullable();;
             $table->timestamps();
         });
     }
