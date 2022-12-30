@@ -31,7 +31,7 @@ class TransaksiMobileController extends Controller
     }
 
     public function grafik(Request $request,$token){
-        $year = ['2015','2016','2017','2018','2019','2020'];
+        $year = ['2017','2018','2019','2020','2021','2022'];
 
         $user = [];
         foreach ($year as $key => $value) {
