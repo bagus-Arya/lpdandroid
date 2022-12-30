@@ -37,7 +37,7 @@ class NasabahListAdapter (var nasabahs:ArrayList<Nasabah>,
         val bukuTabungan=bukuTabungans[position]
         val staff=staffs[position]
         holder.nasabah_nama_nasabah.text=nasabah.fullname
-        holder.nasabah_saldo_nasabah.text=bukuTabungan.saldo.toString()
+        holder.nasabah_saldo_nasabah.text="Rp."+bukuTabungan.saldo.toString()
         holder.nasabah_no_tabungan_nasabah.text=bukuTabungan.no_tabungan
         holder.nasabah_no_telepon_nasabah.text=nasabah.no_telepon
         holder.nasabah_nama_kolektor_nasabah.text=staff.fullname

@@ -1,5 +1,6 @@
 package com.go.sispentra
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -11,12 +12,20 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.rw.keyboardlistener.KeyboardUtils
+import com.rw.keyboardlistener.com.go.sispentra.data.BaseURL
+import com.rw.keyboardlistener.com.go.sispentra.data.LoginData
 
 class LaporanPenarikanBendaharaActivity : AppCompatActivity() {
+
+    var baseUrl= BaseURL()
+    private var loginData= LoginData(null,null,-1)
+    private var urls = "${baseUrl.url}/api/laporan/${loginData.token}/show_penarikan"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bendahara_laporan_penarikan)
 
+        getAndUpdateTokenLoginData()
         transparentNavigation()
         supportActionBar?.show()
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorPrimary)))
@@ -26,7 +35,7 @@ class LaporanPenarikanBendaharaActivity : AppCompatActivity() {
         val webView=findViewById<WebView>(R.id.webview_laporan_penarikan)
         webView.webViewClient = WebViewClient()
         webView.settings.javaScriptEnabled = true
-        webView.loadUrl("https://www.google.com")
+        webView.loadUrl(urls)
 
         //Check Keyboard
         KeyboardUtils.addKeyboardToggleListener(this, object :
@@ -53,6 +62,11 @@ class LaporanPenarikanBendaharaActivity : AppCompatActivity() {
                 Log.d("keyboard", "keyboard visible: $isVisible")
             }
         })
+    }
+    fun getAndUpdateTokenLoginData(){
+        val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
+        loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
+        urls = "${baseUrl.url}/api/laporan/${loginData.token}/show_penarikan"
     }
     fun transparentNavigation(){
         if (Build.VERSION.SDK_INT >= 21) {

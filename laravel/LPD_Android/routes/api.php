@@ -41,6 +41,12 @@ Route::group(['middleware'=>['CustomAuth']],function(){
         Route::put('/{token}/update',[ProfileMobileController::class,'update']);
     });
 
+    Route::group(['prefix'=>'laporan'],function(){
+        Route::get('/{token}/show_grafik',[TransaksiMobileController::class,'grafik']);
+        Route::get('/{token}/show_setoran',[SetoranMobileController::class,'setoran']);
+        Route::get('/{token}/show_penarikan',[PenarikanMobileController::class,'penarikan']);
+    });
+
     Route::group(['middleware'=>['KolektorCustomAuth'],'prefix'=>'nasabah'],function(){
         Route::get('/{token}',[NasabahMobileController::class,'index']);
         Route::post('/{token}/create',[NasabahMobileController::class,'store']);

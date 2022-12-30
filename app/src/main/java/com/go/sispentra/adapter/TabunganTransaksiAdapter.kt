@@ -33,7 +33,7 @@ class TabunganTransaksiAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
         holder.cv_tipe_transaksi.text=currentItem.type_transaksi
         holder.cv_status_penarikan.text=currentItem.status
         if(currentItem.type_transaksi=="Setoran"){
-            holder.cv_nominal_transaksi.text=currentItem.nominal.toString()
+            holder.cv_nominal_transaksi.text="Rp."+currentItem.nominal.toString()
             holder.cv_nominal_transaksi.setTextColor(Color.parseColor(green))
             if(currentItem.status=="unvalidated"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))

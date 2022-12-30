@@ -87,8 +87,8 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
-                app:layout_constraintTop_toTopOf="@+id/textView40" />
+                app:layout_constraintStart_toStartOf="@+id/cv_tgl_transaksi"
+                app:layout_constraintTop_toTopOf="@+id/textView46" />
 
             <TextView
                 android:id="@+id/cv_nominal"
@@ -99,7 +99,7 @@
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
+                app:layout_constraintStart_toStartOf="@+id/cv_tgl_validasi_bendahara"
                 app:layout_constraintTop_toTopOf="@+id/textView36" />
 
             <TextView
@@ -235,7 +235,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView29"
-                app:layout_constraintTop_toTopOf="@+id/textView40" />
+                app:layout_constraintTop_toTopOf="@+id/textView46" />
 
             <TextView
                 android:id="@+id/textView37"

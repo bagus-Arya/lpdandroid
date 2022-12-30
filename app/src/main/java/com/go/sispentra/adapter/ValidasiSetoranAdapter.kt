@@ -16,7 +16,6 @@ class ValidasiSetoranAdapter (val transaksis:ArrayList<Transaksi>, val listener:
         val cv_nama_kolektor: TextView =itemView.findViewById(R.id.cv_nama_kolektor)
         val cv_no_tabungan: TextView =itemView.findViewById(R.id.cv_no_tabungan)
         val cv_tgl_transaksi: TextView =itemView.findViewById(R.id.cv_tgl_transaksi)
-        val cv_tgl_validasi_bendahara: TextView =itemView.findViewById(R.id.cv_tgl_validasi_bendahara)
         val cv_jumlah_setoran: TextView =itemView.findViewById(R.id.cv_jumlah_setoran)
         val cv_status_setoran: TextView =itemView.findViewById(R.id.cv_status_setoran)
         val btn_reject: Button =itemView.findViewById(R.id.btn_reject)
@@ -39,7 +38,7 @@ class ValidasiSetoranAdapter (val transaksis:ArrayList<Transaksi>, val listener:
         holder.cv_nama_kolektor.text=currentItem.kolektor_name
         holder.cv_nama_nasabah.text=currentItem.nasabah_name
         if(currentItem.type_transaksi=="Setoran"){
-            holder.cv_jumlah_setoran.text=currentItem.nominal.toString()
+            holder.cv_jumlah_setoran.text="Rp."+currentItem.nominal.toString()
             holder.cv_jumlah_setoran.setTextColor(Color.parseColor(green))
             if(currentItem.status=="unvalidated"){
                 holder.cv_status_setoran.setTextColor(Color.parseColor(pending))
@@ -65,7 +64,6 @@ class ValidasiSetoranAdapter (val transaksis:ArrayList<Transaksi>, val listener:
             }
         }
         holder.cv_tgl_transaksi.text=currentItem.tgl_transaksi
-        holder.cv_tgl_validasi_bendahara.text=currentItem.tgl_validasi_bendahara
         holder.btn_reject.setOnClickListener { listener.onReject( currentItem,position) }
         holder.btn_validasi.setOnClickListener { listener.onValidasi( currentItem,position) }
     }

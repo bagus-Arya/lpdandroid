@@ -8,6 +8,7 @@ use \App\Models\Nasabah;
 use \App\Models\BukuTabungan;
 use \App\Models\Transaksi;
 use \App\Models\Staff;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -96,5 +97,20 @@ class PenarikanMobileController extends Controller
             return response()->json(['message' => 'change success'], 200);
         }
         return response()->json(['message' => 'Unchanged'], 400);
+    }
+
+    public function penarikan(Request $request, $token){
+        $todayDate = Carbon::now()->format('Y-m-d');
+        
+        $data = Transaksi::where('type_transaksi','Penarikan')
+        ->with('bukutabungan.nasabah.kolektor')
+        ->get();
+
+        $SumDay = Transaksi::where('type_transaksi','Penarikan')
+        ->where('tgl_transaksi',$todayDate)
+        ->with('bukutabungan.nasabah.kolektor')
+        ->sum('nominal');
+
+        return view('penarikan',compact('data','SumDay'));
     }
 }

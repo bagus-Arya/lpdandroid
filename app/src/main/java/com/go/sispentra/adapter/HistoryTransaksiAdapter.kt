@@ -16,6 +16,7 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
         val cv_no_tabungan: TextView =itemView.findViewById(R.id.cv_no_tabungan)
         val cv_tipe_transaksi: TextView =itemView.findViewById(R.id.cv_tipe_transaksi)
         val cv_tgl_transaksi: TextView =itemView.findViewById(R.id.cv_tgl_transaksi)
+        val cv_tgl_validasi_bendahara: TextView =itemView.findViewById(R.id.cv_tgl_validasi_bendahara)
         val cv_nominal: TextView =itemView.findViewById(R.id.cv_nominal)
         val cv_status_penarikan: TextView =itemView.findViewById(R.id.cv_status_penarikan)
     }
@@ -38,7 +39,7 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
         holder.cv_nama_kolektor.text=currentItem.kolektor_name
         holder.cv_nama_nasabah.text=currentItem.nasabah_name
         if(currentItem.type_transaksi=="Setoran"){
-            holder.cv_nominal.text=currentItem.nominal.toString()
+            holder.cv_nominal.text="Rp."+currentItem.nominal.toString()
             holder.cv_nominal.setTextColor(Color.parseColor(green))
             if(currentItem.status=="unvalidated"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))
@@ -64,7 +65,7 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
             }
         }
         holder.cv_tgl_transaksi.text=currentItem.tgl_transaksi
-
+        holder.cv_tgl_validasi_bendahara.text=currentItem.tgl_validasi_bendahara
     }
 
     override fun getItemCount(): Int {

@@ -6,6 +6,7 @@ data class Transaksi(
     var nominal:Int,
     var status:String,
     var tgl_transaksi:String,
+    var tgl_validasi_bendahara:String ? = null,
     var no_tabungan:String,
     var nasabah_name:String?,
     var kolektor_name:String?

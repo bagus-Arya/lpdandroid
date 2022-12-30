@@ -8,6 +8,7 @@ use \App\Models\Nasabah;
 use \App\Models\BukuTabungan;
 use \App\Models\Transaksi;
 use \App\Models\Staff;
+use DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -27,5 +28,16 @@ class TransaksiMobileController extends Controller
         else{
             return response()->json(['message' => 'No content'], 204);
         }
+    }
+
+    public function grafik(Request $request,$token){
+        $year = ['2015','2016','2017','2018','2019','2020'];
+
+        $user = [];
+        foreach ($year as $key => $value) {
+            $user[] = Transaksi::where(\DB::raw("DATE_FORMAT(created_at, '%Y')"),$value)->count();
+        }
+
+    	return view('grafik')->with('year',json_encode($year,JSON_NUMERIC_CHECK))->with('nominal',json_encode($user,JSON_NUMERIC_CHECK));
     }
 }
