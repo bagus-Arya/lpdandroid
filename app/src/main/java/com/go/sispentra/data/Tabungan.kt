@@ -6,6 +6,6 @@ data class Tabungan(
     var nasabah_id:Int,
     var nasabah_name:String?=null,
     var nasabah_kolektor:String?=null,
-    var saldo:Int?=null,
+    var saldo:Double?=null,
     var no_telepon:String?=null
 )

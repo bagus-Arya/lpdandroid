@@ -19,7 +19,7 @@ class GrafikBendaharaActivity : AppCompatActivity() {
 
     var baseUrl= BaseURL()
     private var loginData= LoginData(null,null,-1)
-    private var urls = "${baseUrl.url}/api/laporan/${loginData.token}/show_grafik"
+    private var urls = "${baseUrl.url}/grafik_kolektor/${loginData.token}"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +67,7 @@ class GrafikBendaharaActivity : AppCompatActivity() {
     fun getAndUpdateTokenLoginData(){
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData= LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
-        urls = "${baseUrl.url}/api/laporan/${loginData.token}/show_grafik"
+        urls = "${baseUrl.url}/grafik_kolektor/${loginData.token}"
     }
 
     fun transparentNavigation(){

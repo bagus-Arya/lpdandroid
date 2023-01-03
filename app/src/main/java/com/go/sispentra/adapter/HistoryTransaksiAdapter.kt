@@ -17,6 +17,8 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
         val cv_tipe_transaksi: TextView =itemView.findViewById(R.id.cv_tipe_transaksi)
         val cv_tgl_transaksi: TextView =itemView.findViewById(R.id.cv_tgl_transaksi)
         val cv_tgl_validasi_bendahara: TextView =itemView.findViewById(R.id.cv_tgl_validasi_bendahara)
+        val cv_tgl_validasi_kolektor: TextView =itemView.findViewById(R.id.cv_tgl_validasi_kolektor)
+        val cv_tgl_validasi_nasabah: TextView =itemView.findViewById(R.id.cv_tgl_validasi_nasabah)
         val cv_nominal: TextView =itemView.findViewById(R.id.cv_nominal)
         val cv_status_penarikan: TextView =itemView.findViewById(R.id.cv_status_penarikan)
     }
@@ -52,12 +54,12 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
             }
         }
         else{
-            holder.cv_nominal.text="-"+currentItem.nominal.toString()
+            holder.cv_nominal.text="-Rp."+currentItem.nominal.toString()
             holder.cv_nominal.setTextColor(Color.parseColor(red))
-            if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara"){
+            if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara" || currentItem.status=="validated-kolektor"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))
             }
-            else if( currentItem.status=="validated-kolektor"){
+            else if( currentItem.status=="validated-nasabah"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(green))
             }
             else{
@@ -66,6 +68,8 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
         }
         holder.cv_tgl_transaksi.text=currentItem.tgl_transaksi
         holder.cv_tgl_validasi_bendahara.text=currentItem.tgl_validasi_bendahara
+        holder.cv_tgl_validasi_kolektor.text=currentItem.tgl_validasi_kolektor
+        holder.cv_tgl_validasi_nasabah.text=currentItem.tgl_validasi_nasabah
     }
 
     override fun getItemCount(): Int {

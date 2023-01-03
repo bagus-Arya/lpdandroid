@@ -247,10 +247,12 @@ class ValidasiSetoranBendaharaActivity : AppCompatActivity() {
                 Transaksi(
                     transaksi.getInt("id"),
                     transaksi.getString("type_transaksi"),
-                    transaksi.getInt("nominal"),
+                    transaksi.getDouble("nominal"),
                     transaksi.getString("status"),
                     transaksi.getString("tgl_transaksi"),
                     transaksi.getString("tgl_validasi_bendahara"),
+                    transaksi.getString("tgl_validasi_kolektor"),
+                    transaksi.getString("tgl_validasi_nasabah"),
                     transaksi.getJSONObject("bukutabungan").getString("no_tabungan"),
                     transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getString("fullname"),
                     transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getJSONObject("kolektor").getString("fullname")

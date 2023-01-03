@@ -36,6 +36,7 @@ class nasabahHomeActivity : AppCompatActivity() {
         val btn_nasabah_request_penarikan = findViewById<Button>(R.id.btn_nasabah_request_penarikan)
         val btn_nasabah_tabungan = findViewById<Button>(R.id.btn_nasabah_tabungan)
         val btn_nasabah_logout = findViewById<Button>(R.id.btn_nasabah_logout)
+        val btn_nasabah_validasi_penarikan = findViewById<Button>(R.id.btn_nasabah_validasi_penarikan)
 
         btn_nasabah_profile_saya.setOnClickListener{
             val intent = Intent(this@nasabahHomeActivity, nasabahProfileActivity::class.java)
@@ -47,6 +48,10 @@ class nasabahHomeActivity : AppCompatActivity() {
         }
         btn_nasabah_tabungan.setOnClickListener{
             val intent = Intent(this@nasabahHomeActivity, nasabahTabunganActivity::class.java)
+            startActivity(intent)
+        }
+        btn_nasabah_validasi_penarikan.setOnClickListener{
+            val intent = Intent(this@nasabahHomeActivity, nasabahValidasiPenarikan::class.java)
             startActivity(intent)
         }
 

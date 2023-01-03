@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -15,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".nasabahValidasiPenarikan"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity"/>
         <activity
             android:name=".bendaharaHistoryTransaksiActivity"
             android:exported="false"
@@ -49,7 +55,7 @@
         <activity
             android:name=".KolektorNasabahTabungan"
             android:exported="false"
-            android:parentActivityName=".KolektorNasabahActivity"/>
+            android:parentActivityName=".KolektorNasabahActivity" />
         <activity
             android:name=".KolektorNasabahActivity"
             android:exported="false"
@@ -81,7 +87,6 @@
         <activity
             android:name=".ketuaDataStaffActivity"
             android:exported="false"
-
             android:parentActivityName=".ketuaHomeActivity" />
         <activity
             android:name=".ketuaProfileActivity"
@@ -111,7 +116,6 @@
             android:exported="true"
             android:parentActivityName=".KolektorHomeActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".KolektorSetorTunaiActivity"
             android:exported="true"
@@ -169,7 +173,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

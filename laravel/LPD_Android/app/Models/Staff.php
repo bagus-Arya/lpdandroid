@@ -30,4 +30,8 @@ class Staff extends Model
             return $query->where('fullname','like','%'.$fullname.'%');
         });
     }
+
+    public function nasabah(){
+        return $this->hasMany(Nasabah::class);
+    }
 }

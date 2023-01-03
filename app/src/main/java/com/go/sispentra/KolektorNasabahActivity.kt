@@ -120,7 +120,7 @@ class KolektorNasabahActivity : AppCompatActivity() {
                     data.getJSONObject("bukutabungan").getInt("nasabah_id"),
                     data.getString("fullname"),
                     data.getJSONObject("kolektor").getString("fullname"),
-                    data.getInt("saldo"),
+                    data.getDouble("saldo"),
                     data.getString("no_telepon")
                 )
             )

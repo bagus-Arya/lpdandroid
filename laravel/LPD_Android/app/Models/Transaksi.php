@@ -15,6 +15,7 @@ class Transaksi extends Model
         'tgl_transaksi',
         'tgl_validasi_bendahara',
         'tgl_validasi_kolektor',
+        'tgl_validasi_nasabah',
         'nominal',
         'status'
     ];

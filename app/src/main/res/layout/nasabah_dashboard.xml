@@ -40,7 +40,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="336dp"
-        android:layout_height="252dp"
+        android:layout_height="280dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,10 +62,30 @@
                 android:text="Profil Saya"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_request_penarikan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <Button
+                android:id="@+id/btn_nasabah_request_penarikan"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Request Penarikan"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_validasi_penarikan"
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_profile_saya"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <Button
+                android:id="@+id/btn_nasabah_validasi_penarikan"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Validasi Penarikan"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_tabungan"
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_request_penarikan"
+                tools:layout_editor_absoluteX="10dp" />
 
             <Button
                 android:id="@+id/btn_nasabah_tabungan"
@@ -75,10 +95,8 @@
                 android:text="Tabungan"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_logout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_request_penarikan" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_validasi_penarikan"
+                tools:layout_editor_absoluteX="10dp" />
 
             <Button
                 android:id="@+id/btn_nasabah_logout"
@@ -88,23 +106,9 @@
                 android:text="Logout"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_tabungan" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_tabungan"
+                tools:layout_editor_absoluteX="10dp" />
 
-            <Button
-                android:id="@+id/btn_nasabah_request_penarikan"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                android:text="Request Penarikan"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_nasabah_tabungan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_nasabah_profile_saya" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

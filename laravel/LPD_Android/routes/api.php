@@ -10,6 +10,8 @@ use App\Http\Controllers\SetoranMobileController;
 use App\Http\Controllers\PenarikanMobileController;
 use App\Http\Controllers\TransaksiMobileController;
 use App\Http\Controllers\TabunganMobileController;
+use App\Http\Controllers\BendaharaGrafikWebController;
+use App\Http\Controllers\LaporanWebController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,10 +43,9 @@ Route::group(['middleware'=>['CustomAuth']],function(){
         Route::put('/{token}/update',[ProfileMobileController::class,'update']);
     });
 
-    Route::group(['prefix'=>'laporan'],function(){
-        Route::get('/{token}/show_grafik',[TransaksiMobileController::class,'grafik']);
-        Route::get('/{token}/show_setoran',[SetoranMobileController::class,'setoran']);
-        Route::get('/{token}/show_penarikan',[PenarikanMobileController::class,'penarikan']);
+    Route::group(['middleware'=>['BendaharaCustomAuth'],'prefix'=>'laporan'],function(){
+        Route::get('/{token}/setoran',[LaporanWebController::class,'showSetoran'])->name('getLaporanSetoranData');
+        Route::get('/{token}/penarikan',[LaporanWebController::class,'showPenarikan'])->name('getLaporanPenarikanData');
     });
 
     Route::group(['middleware'=>['KolektorCustomAuth'],'prefix'=>'nasabah'],function(){
@@ -63,12 +64,14 @@ Route::group(['middleware'=>['CustomAuth']],function(){
     });
 
     Route::group(['prefix'=>'penarikan'],function(){
-        Route::get('/{token}',[PenarikanMobileController::class,'index'])->middleware(['StaffCustomAuth']);
+        Route::get('/{token}',[PenarikanMobileController::class,'index']);
         Route::post('/{token}/create',[PenarikanMobileController::class,'store'])->middleware(['NasabahCustomAuth']);
         Route::put('/{token}/validasi_bendahara/{transaksi}',[PenarikanMobileController::class,'updateValidasiBendahara'])->middleware(['BendaharaCustomAuth']);
         Route::put('/{token}/reject_bendahara/{transaksi}',[PenarikanMobileController::class,'updateRejectBendahara'])->middleware(['BendaharaCustomAuth']);
         Route::put('/{token}/validasi_kolektor/{transaksi}',[PenarikanMobileController::class,'updateValidasiKolektor'])->middleware(['KolektorCustomAuth']);
         Route::put('/{token}/reject_kolektor/{transaksi}',[PenarikanMobileController::class,'updateRejectKolektor'])->middleware(['KolektorCustomAuth']);
+        Route::put('/{token}/validasi_nasabah/{transaksi}',[PenarikanMobileController::class,'updateValidasiNasabah'])->middleware(['NasabahCustomAuth']);
+        Route::put('/{token}/reject_nasabah/{transaksi}',[PenarikanMobileController::class,'updateRejectNasabah'])->middleware(['NasabahCustomAuth']);
     });
 
     Route::group(['prefix'=>'transaksi'],function(){
@@ -87,6 +90,8 @@ Route::group(['middleware'=>['CustomAuth']],function(){
 
 
     Route::delete('/logout/{token}',[LoginMobileController::class,'logout']);
+
+    Route::get('/grafik_data/{token}',[BendaharaGrafikWebController::class,'getData'])->name('bendaharaGrafikApi')->middleware(['BendaharaCustomAuth']);
 });
 
 

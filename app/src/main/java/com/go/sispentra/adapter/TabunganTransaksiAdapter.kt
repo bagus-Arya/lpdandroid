@@ -46,12 +46,12 @@ class TabunganTransaksiAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
             }
         }
         else{
-            holder.cv_nominal_transaksi.text="-"+currentItem.nominal.toString()
+            holder.cv_nominal_transaksi.text="-Rp."+currentItem.nominal.toString()
             holder.cv_nominal_transaksi.setTextColor(Color.parseColor(red))
-            if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara"){
+            if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara" || currentItem.status=="validated-kolektor"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))
             }
-            else if( currentItem.status=="validated-kolektor"){
+            else if( currentItem.status=="validated-nasabah"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(green))
             }
             else{

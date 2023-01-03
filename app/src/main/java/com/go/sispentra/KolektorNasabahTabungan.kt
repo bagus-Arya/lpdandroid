@@ -66,7 +66,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
         nasabah_no_tabungan_nasabah.setText(dataTabungan.no_tabungan)
         nasabah_no_telepon_nasabah.setText(dataTabungan.no_telepon)
         nasabah_nama_kolektor_nasabah.setText(dataTabungan.nasabah_kolektor)
-        nasabah_saldo_nasabah.setText(dataTabungan.saldo.toString())
+        nasabah_saldo_nasabah.setText("Rp."+dataTabungan.saldo.toString())
     }
 
     fun setComponent(){
@@ -110,7 +110,7 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                     response.getInt("nasabah_id"),
                     response.getJSONObject("nasabah").getString("fullname"),
                     response.getJSONObject("nasabah").getJSONObject("kolektor").getString("fullname"),
-                    response.getInt("saldo"),
+                    response.getDouble("saldo"),
                     response.getJSONObject("nasabah").getString("no_telepon")
                 )
                 updateBukuTabunganComponent(dataTabungan)
@@ -235,10 +235,12 @@ class KolektorNasabahTabungan : AppCompatActivity() {
                 Transaksi(
                 transaksi.getInt("id"),
                 transaksi.getString("type_transaksi"),
-                transaksi.getInt("nominal"),
+                transaksi.getDouble("nominal"),
                 transaksi.getString("status"),
-                transaksi.getString("tgl_transaksi"),
-                transaksi.getString("tgl_validasi_bendahara"),
+                    transaksi.getString("tgl_transaksi"),
+                    transaksi.getString("tgl_validasi_bendahara"),
+                    transaksi.getString("tgl_validasi_kolektor"),
+                    transaksi.getString("tgl_validasi_nasabah"),
                 transaksi.getJSONObject("bukutabungan").getString("no_tabungan"),
                 transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getString("fullname"),
                 transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getJSONObject("kolektor").getString("fullname")

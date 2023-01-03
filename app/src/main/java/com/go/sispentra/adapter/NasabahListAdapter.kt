@@ -21,7 +21,7 @@ class NasabahListAdapter (var nasabahs:ArrayList<Nasabah>,
         val nasabah_no_tabungan_nasabah: TextView =itemView.findViewById(R.id.nasabah_no_tabungan_nasabah)
         val nasabah_no_telepon_nasabah: TextView =itemView.findViewById(R.id.nasabah_no_telepon_nasabah)
         val nasabah_nama_kolektor_nasabah: TextView =itemView.findViewById(R.id.nasabah_nama_kolektor_nasabah)
-        val nasabah_saldo_nasabah: TextView =itemView.findViewById(R.id.nasabah_nama_kolektor_nasabah)
+        val nasabah_saldo_nasabah: TextView =itemView.findViewById(R.id.nasabah_saldo_nasabah)
     }
 
     override fun onCreateViewHolder(

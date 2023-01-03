@@ -53,10 +53,10 @@ class ValidasiSetoranAdapter (val transaksis:ArrayList<Transaksi>, val listener:
         else{
             holder.cv_jumlah_setoran.text="-"+currentItem.nominal.toString()
             holder.cv_jumlah_setoran.setTextColor(Color.parseColor(red))
-            if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara"){
+            if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara" ||  currentItem.status=="validated-kolektor"){
                 holder.cv_status_setoran.setTextColor(Color.parseColor(pending))
             }
-            else if( currentItem.status=="validated-kolektor"){
+            else if( currentItem.status=="validated-nasabah"){
                 holder.cv_status_setoran.setTextColor(Color.parseColor(green))
             }
             else{
