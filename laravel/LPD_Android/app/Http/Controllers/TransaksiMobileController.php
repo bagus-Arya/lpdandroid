@@ -16,14 +16,18 @@ class TransaksiMobileController extends Controller
 {
     public function index(Request $request,$token){
         if($request->get('login_user')->role=="Bendahara"){
-            return Transaksi::latest('tgl_transaksi')->with('bukutabungan.nasabah.kolektor')->get();
+            return Transaksi::latest('tgl_transaksi')->with('bukutabungan.nasabah.kolektor',function ($q){
+                $q->withTrashed();
+            })->get();
         }
         elseif($request->get('login_user')->role=="Kolektor"){
             return Transaksi::latest('tgl_transaksi')->whereHas('bukutabungan',function($q) use($request){
                 $q->whereHas('nasabah',function($s) use($request){
                     $s->where('staff_id',$request->get('login_user')->id);
                 });
-            })->with('bukutabungan.nasabah.kolektor')->get();
+            })->with('bukutabungan.nasabah.kolektor',function ($q){
+                $q->withTrashed();
+            })->get();
         }
         else{
             return response()->json(['message' => 'No content'], 204);

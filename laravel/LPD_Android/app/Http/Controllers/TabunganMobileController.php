@@ -15,7 +15,9 @@ use Carbon\Carbon;
 class TabunganMobileController extends Controller
 {
     public function index(Request $request,$token){
-        $bukuTabungan=BukuTabungan::where('nasabah_id',$request->get('login_user')->id)->with('nasabah.kolektor')->firstOrFail();
+        $bukuTabungan=BukuTabungan::where('nasabah_id',$request->get('login_user')->id)->with('nasabah.kolektor',function ($q){
+            $q->withTrashed();
+        })->firstOrFail();
         $earliestDate=new Carbon(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)->min('tgl_transaksi'));
         $latestDate=new Carbon(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)->max('tgl_transaksi'));
         $diffInYears = $earliestDate->diffInYears($latestDate);
@@ -60,7 +62,9 @@ class TabunganMobileController extends Controller
             $q->whereHas('nasabah',function($x) use($request) { 
                 $x->where('id',$request->get('login_user')->id);
             });
-        })->with('bukutabungan.nasabah.kolektor')->get();
+        })->with('bukutabungan.nasabah.kolektor',function ($q){
+            $q->withTrashed();
+        })->get();
         return $transaksis;
     }
 

@@ -77,7 +77,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
                     response.getJSONObject("nasabah").getString("no_telepon")
                 )
                 updateBukuTabunganComponent(dataTabungan)
-                Log.d("Req", "Request Success")
+                Log.d("Req", response.toString())
             }, Response.ErrorListener { error ->
                 if (error is TimeoutError || error is NoConnectionError || error is NetworkError) {
                     Toast.makeText(this@nasabahTabunganActivity, "Network Error", Toast.LENGTH_LONG).show()

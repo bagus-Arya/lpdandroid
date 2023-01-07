@@ -17,7 +17,9 @@ class SetoranMobileController extends Controller
     
     public function index(Request $request,$token){
         if($request->get('login_user')->role=="Bendahara"){
-            return Transaksi::where('type_transaksi','Setoran')->where('status','unvalidated')->with('bukutabungan.nasabah.kolektor')->get();
+            return Transaksi::where('type_transaksi','Setoran')->where('status','unvalidated')->with('bukutabungan.nasabah.kolektor',function ($q){
+                $q->withTrashed();
+            })->get();
         }
         return response()->json(['message' => 'No content'], 204);
     }

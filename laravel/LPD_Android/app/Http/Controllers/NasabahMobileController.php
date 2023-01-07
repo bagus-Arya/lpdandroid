@@ -27,7 +27,9 @@ class NasabahMobileController extends Controller
                 });
         })->orWhere(function($q) use($request,$filters){
             $q->where('staff_id',$request->get('login_user')->id)->filter($filters);
-        })->with('kolektor')->with('bukutabungan')->get()->makeVisible(['password']);
+        })->with('kolektor',function ($q){
+            $q->withTrashed();
+        })->with('bukutabungan')->get()->makeVisible(['password']);
         foreach ($nasabahs as $nasabah) {
             $nasabah['saldo']=(Transaksi::where('buku_tabungan_id',$nasabah->bukutabungan->id)
             ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$nasabah->bukutabungan->id)
@@ -42,7 +44,9 @@ class NasabahMobileController extends Controller
         if($request->get('login_user')->id!=$nasabah->staff_id){
             return response()->json(['message' => 'Forbiden'], 403);
         }
-        $nasabah=Nasabah::where('id',$nasabah->id)->where('staff_id',$request->get('login_user')->id)->with('kolektor')->with('bukutabungan')->firstOrFail()->makeVisible(['password']);
+        $nasabah=Nasabah::where('id',$nasabah->id)->where('staff_id',$request->get('login_user')->id)->with('kolektor',function ($q){
+            $q->withTrashed();
+        })->with('bukutabungan')->firstOrFail()->makeVisible(['password']);
         $nasabah['saldo']=(Transaksi::where('buku_tabungan_id',$nasabah->bukutabungan->id)
             ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$nasabah->bukutabungan->id)
             ->where('type_transaksi','Penarikan')->whereNot('status','like','rejected%')->sum('nominal'));

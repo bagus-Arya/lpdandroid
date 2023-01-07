@@ -18,21 +18,27 @@ class PenarikanMobileController extends Controller
 
     public function index(Request $request,$token){
         if($request->get('login_user')->role=="Bendahara"){
-            return Transaksi::where('type_transaksi','Penarikan')->where('status','unvalidated')->with('bukutabungan.nasabah.kolektor')->get();
+            return Transaksi::where('type_transaksi','Penarikan')->where('status','unvalidated')->with('bukutabungan.nasabah.kolektor',function ($q){
+                $q->withTrashed();
+            })->get();
         }
         elseif($request->get('login_user')->role=="Kolektor"){
             return Transaksi::whereHas('bukutabungan',function($q) use($request){
                 $q->whereHas('nasabah',function($s) use($request){
                     $s->where('staff_id',$request->get('login_user')->id);
                 });
-            })->where('type_transaksi','Penarikan')->where('status','validated-bendahara')->with('bukutabungan.nasabah.kolektor')->get();
+            })->where('type_transaksi','Penarikan')->where('status','validated-bendahara')->with('bukutabungan.nasabah.kolektor',function ($q){
+                $q->withTrashed();
+            })->get();
         }
         elseif($request->get('login_user')->role=="Nasabah"){
             return Transaksi::whereHas('bukutabungan',function($q) use($request){
                 $q->whereHas('nasabah',function($s) use($request){
                     $s->where('id',$request->get('login_user')->id);
                 });
-            })->where('type_transaksi','Penarikan')->where('status','validated-kolektor')->with('bukutabungan.nasabah.kolektor')->get();
+            })->where('type_transaksi','Penarikan')->where('status','validated-kolektor')->with('bukutabungan.nasabah.kolektor',function ($q){
+                $q->withTrashed();
+            })->get();
         }
         else{
             return response()->json(['message' => 'No content'], 200);
@@ -44,7 +50,9 @@ class PenarikanMobileController extends Controller
             'nominal'=>'required|integer',
             'tgl_transaksi'=>'required|date_format:Y-m-d',
         ]);
-        $nasabah=Nasabah::where('id',$request->get('login_user')->id)->with('kolektor')->with('bukutabungan.transaksis')->firstOrFail();
+        $nasabah=Nasabah::where('id',$request->get('login_user')->id)->with('kolektor',function ($q){
+            $q->withTrashed();
+        })->with('bukutabungan.transaksis')->firstOrFail();
         $earliestDate=new Carbon(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)->min('tgl_transaksi'));
         $latestDate=new Carbon(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)->max('tgl_transaksi'));
         $diffInYears = $earliestDate->diffInYears($latestDate);
@@ -178,12 +186,16 @@ class PenarikanMobileController extends Controller
         $todayDate = Carbon::now()->format('Y-m-d');
         
         $data = Transaksi::where('type_transaksi','Penarikan')
-        ->with('bukutabungan.nasabah.kolektor')
+        ->with('bukutabungan.nasabah.kolektor',function ($q){
+            $q->withTrashed();
+        })
         ->get();
 
         $SumDay = Transaksi::where('type_transaksi','Penarikan')
         ->where('tgl_transaksi',$todayDate)
-        ->with('bukutabungan.nasabah.kolektor')
+        ->with('bukutabungan.nasabah.kolektor',function ($q){
+            $q->withTrashed();
+        })
         ->sum('nominal');
 
         return view('penarikan',compact('data','SumDay'));
