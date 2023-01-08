@@ -43,7 +43,7 @@
                       </div>
                       <div class="row ps-sm-4 ps-2">
                         <div class="col-auto px-0 fs-5">Tgl Transaksi   </div>
-                        <div class="col fs-5"> : <span id="kolektor_tgl_transaksi">{{ $validate['tgl_transaksi'] }}</span></div>
+                        <div class="col fs-5"> : <span id="kolektor_start_date">{{ $validate['start_date'] }}</span> ~ <span id="kolektor_end_date">{{ $validate['end_date'] }}</span></div>
                       </div>
                       <div class="row mt-4 ps-sm-4">
                         <div class="col-12">
@@ -54,6 +54,7 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Nasabah</th>
                                         <th scope="col">No Buku Tabungan</th>
+                                        <th scope="col">Tanggal Transaksi</th>
                                         <th scope="col">Nominal</th>
                                       </tr>
                                     </thead>
@@ -70,6 +71,7 @@
                                                     <td scope="col">{{$i}}</td>
                                                     <td scope="col">{{$transaksi->bukutabungan->nasabah->fullname}}</td>
                                                     <td scope="col">{{$transaksi->bukutabungan->no_tabungan}}</td>
+                                                    <td scope="col">{{$transaksi->tgl_transaksi}}</td>
                                                     <td scope="col">{{$transaksi->nominal}}</td>
                                                 </tr>
                                             @endforeach
@@ -79,12 +81,12 @@
                                     <tfoot>
                                         @if (count($transaksiArray)>0)
                                          <tr>
-                                            <td colspan="3"><h3>Total</h3></td>
+                                            <td colspan="4"><h3>Total</h3></td>
                                             <td><h3>Rp.<span id='totalTransaksi'>{{ $transaksiJml }}</span></h3></td>
                                           </tr>
                                         @else
                                         <tr>
-                                            <td colspan="3"><h3>Total</h3></td>
+                                            <td colspan="4"><h3>Total</h3></td>
                                             <td><h3>Rp.<span id='totalTransaksi'></span></h3></td>
                                           </tr>
                                         @endif

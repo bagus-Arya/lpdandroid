@@ -10,10 +10,14 @@
     <div class="container py-4">
         <form class="row g-3" action="javascript:void(0);">
             <div class="col-6">
-              <label for="inputDate" class="form-label">Select Date</label>
-              <input type="date" class="form-control" id="inputDate" value="{{now()->format('Y-m-d')}}">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date" class="form-control" id="startDate" value="{{now()->format('Y-m-d')}}">
             </div>
             <div class="col-6">
+              <label for="endDate" class="form-label">End Date</label>
+              <input type="date" class="form-control" id="endDate" value="{{now()->format('Y-m-d')}}">
+            </div>
+            <div class="col-12">
               <label for="inputKolektor" class="form-label">Kolektor Name</label>
               <select class="form-select" id="inputKolektor" aria-label="Default select example">
                 @if (count($staffs) > 0)
@@ -67,7 +71,7 @@
                       </div>
                       <div class="row ps-sm-4 ps-2">
                         <div class="col-auto px-0 fs-5">Tgl Transaksi   </div>
-                        <div class="col fs-5"> : <span id="kolektor_tgl_transaksi"></span></div>
+                        <div class="col fs-5"> : <span id="kolektor_start_date"></span> ~ <span id="kolektor_end_date"></span></div>
                       </div>
                       <div class="row mt-4 ps-sm-4">
                         <div class="col-12">
@@ -78,6 +82,7 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Nasabah</th>
                                         <th scope="col">No Buku Tabungan</th>
+                                        <th scope="col">Tanggal Transaksi</th>
                                         <th scope="col">Nominal</th>
                                       </tr>
                                     </thead>
@@ -87,7 +92,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="3"><h3>Total</h3></td>
+                                            <td colspan="4"><h3>Total</h3></td>
                                             <td><h3>Rp.<span id='totalTransaksi'></span></h3></td>
                                           </tr>
                                       </tfoot>
@@ -120,7 +125,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script>
-        const inputDate=document.getElementById('inputDate');
+        const startDate=document.getElementById('startDate');
+        const endDate=document.getElementById('endDate');
         const table_laporan_body=document.getElementById('table_laporan_body');
         const inputKolektor = document.getElementById('inputKolektor');
         const basicUrl='{{ route('getLaporanPenarikanData', ['token'=> $userLoginData->token]) }}'
@@ -129,12 +135,12 @@
         buttonSubmit.addEventListener("click", ()=>{
             const selectedOption = inputKolektor.options[inputKolektor.selectedIndex];
             const value = selectedOption.value;
-            getData(basicUrl,inputDate.value,value);
+            getData(basicUrl,startDate.value,endDate.value,value);
         });
         buttonDownload.addEventListener("click", ()=>{
             const selectedOption = inputKolektor.options[inputKolektor.selectedIndex];
             const value = selectedOption.value;
-            livesdownload='{{ route('downloadPenarikan', ['token'=> $userLoginData->token]) }}'+'?id_kolektor='+value+'&tgl_transaksi='+inputDate.value;
+            livesdownload='{{ route('downloadPenarikan', ['token'=> $userLoginData->token]) }}'+'?id_kolektor='+value+'&start_date='+startDate.value+'&end_date='+endDate.value;
             // console.log(livesdownload);
             // window.jsPDF = window.jspdf.jsPDF;
             // var pdf = new jsPDF();
@@ -170,13 +176,12 @@
             .catch(error => console.log(error));
         });
         buttonSubmit.click();
-        function getData(url,inputDate,inputKolektor) {
-            livesearchurl=basicUrl+'?id_kolektor='+inputKolektor+'&tgl_transaksi='+inputDate;
-            // console.log(livesearchurl);
+        function getData(url,startDate,endDate,inputKolektor) {
+            livesearchurl=basicUrl+'?id_kolektor='+inputKolektor+'&start_date='+startDate+'&end_date='+endDate;
+            console.log(livesearchurl);
             fetch(livesearchurl)
             .then(response => {
                 if (response.status === 200) {
-                    
                     return response.json();
                 } else {
                 console.log('Error!');
@@ -192,19 +197,21 @@
             const kolektor_fullname=document.getElementById('kolektor_fullname');
             const kolektor_role=document.getElementById('kolektor_role');
             const kolektor_no_telepon = document.getElementById('kolektor_no_telepon');
-            const kolektor_tgl_transaksi = document.getElementById('kolektor_tgl_transaksi');
+            const kolektor_start_date = document.getElementById('kolektor_start_date');
+            const kolektor_end_date = document.getElementById('kolektor_end_date');
             const totalTransaksi = document.getElementById('totalTransaksi');
             kolektor_fullname.textContent=json.staffData.fullname;
             kolektor_role.textContent=json.staffData.role;
             kolektor_no_telepon.textContent=json.staffData.no_telepon;
-            kolektor_tgl_transaksi.textContent=inputDate.value;
+            kolektor_start_date.textContent=startDate.value;
+            kolektor_end_date.textContent=endDate.value;
             if(json.transaksiArray.length>0){
                 table_laporan_body.innerHTML='';
                 i=0;
                 for (const rowData of json.transaksiArray) {
                     i++;
                     const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${i}</td><td>${rowData.bukutabungan.nasabah.fullname}</td><td>${rowData.bukutabungan.no_tabungan}</td><td>Rp.${rowData.nominal}</td>`;
+                    tr.innerHTML = `<td>${i}</td><td>${rowData.bukutabungan.nasabah.fullname}</td><td>${rowData.bukutabungan.no_tabungan}</td><td>${rowData.tgl_transaksi}</td><td>Rp.${rowData.nominal}</td>`;
                     table_laporan_body.appendChild(tr);
                 }
                 totalTransaksi.textContent=json.transaksiJml;
