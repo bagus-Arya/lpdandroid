@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
         'KolektorCustomAuth'=>\App\Http\Middleware\CustomAuthKolektorMiddleware::class,
         'NasabahCustomAuth'=>\App\Http\Middleware\CustomAuthNasabahMiddleware::class,
         'StaffCustomAuth'=>\App\Http\Middleware\CustomAuthStaffMiddleware::class,
+        'KetuaAndBendahara'=>\App\Http\Middleware\CustomAuthKetuaAndBendaharaMiddleware::class,
     ];
 }

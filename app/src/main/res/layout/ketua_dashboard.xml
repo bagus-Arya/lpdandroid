@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg_page"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".BendaharaHomeActivity">
+    tools:context=".ketuaHomeActivity">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -40,60 +40,120 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="336dp"
-        android:layout_height="252dp"
+        android:layout_height="350dp"
+
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.52">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:padding="10dp">
 
-            <Button
-                android:id="@+id/btn_ketua_profile"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                android:text="Profil Saya"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_ketua_data_staff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_ketua_logout"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                android:text="Logout"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ketua_data_staff" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
-            <Button
-                android:id="@+id/btn_ketua_data_staff"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:backgroundTint="@color/secondary"
-                android:text="Data Staff"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toTopOf="@+id/btn_ketua_logout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_ketua_profile" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <Button
+                        android:id="@+id/btn_ketua_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Profil Saya"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_ketua_data_staff"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_ketua_data_staff"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Data Staff"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_laporan_penarikan"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_ketua_profile" />
+
+                    <Button
+                        android:id="@+id/btn_bendahara_laporan_penarikan"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Laporan Penarikan"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_laporan_setoran"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_ketua_data_staff"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                    <Button
+                        android:id="@+id/btn_bendahara_laporan_setoran"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Laporan Setoran"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_history_transaksi"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_laporan_penarikan"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                    <Button
+                        android:id="@+id/btn_bendahara_history_transaksi"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="History Transaksi"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_grafik_kinerja"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_laporan_setoran"
+                        tools:layout_editor_absoluteX="4dp" />
+
+                    <Button
+                        android:id="@+id/btn_bendahara_grafik_kinerja"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Grafik Kinerja"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_ketua_logout"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_history_transaksi"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                    <Button
+                        android:id="@+id/btn_ketua_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Logout"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_grafik_kinerja" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+
     </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/textView12"

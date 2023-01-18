@@ -166,7 +166,8 @@
             android:name=".LaporanPenarikanBendaharaActivity"
             android:exported="true"
             android:parentActivityName=".BendaharaHomeActivity"
-            android:screenOrientation="portrait" /> <!-- Ketua -->
+            android:screenOrientation="portrait" />
+        <!-- Ketua -->
         <activity
             android:name=".HomeActivity"
             android:exported="true"

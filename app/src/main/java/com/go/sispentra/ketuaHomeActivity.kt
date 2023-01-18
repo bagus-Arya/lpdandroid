@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
@@ -34,6 +33,10 @@ class ketuaHomeActivity : AppCompatActivity() {
 
     fun layoutComponentAndListener(){
         val btn_ketua_profile = findViewById<Button>(R.id.btn_ketua_profile)
+        val btn_bendahara_laporan_penarikan = findViewById<Button>(R.id.btn_bendahara_laporan_penarikan)
+        val btn_bendahara_laporan_setoran = findViewById<Button>(R.id.btn_bendahara_laporan_setoran)
+        val btn_bendahara_grafik_kinerja = findViewById<Button>(R.id.btn_bendahara_grafik_kinerja)
+        val btn_bendahara_history_transaksi = findViewById<Button>(R.id.btn_bendahara_history_transaksi)
         val btn_ketua_data_staff = findViewById<Button>(R.id.btn_ketua_data_staff)
         val btn_ketua_logout = findViewById<Button>(R.id.btn_ketua_logout)
 
@@ -45,6 +48,24 @@ class ketuaHomeActivity : AppCompatActivity() {
             val intent = Intent(this@ketuaHomeActivity, ketuaDataStaffActivity::class.java)
             startActivity(intent)
         }
+        btn_bendahara_grafik_kinerja.setOnClickListener{
+            val intent = Intent(this@ketuaHomeActivity, GrafikBendaharaActivity::class.java)
+            startActivity(intent)
+        }
+        btn_bendahara_laporan_setoran.setOnClickListener{
+            val intent = Intent(this@ketuaHomeActivity, LaporanSetoranBendaharaActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_bendahara_laporan_penarikan.setOnClickListener{
+            val intent = Intent(this@ketuaHomeActivity, LaporanPenarikanBendaharaActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_bendahara_history_transaksi.setOnClickListener{
+            val intent = Intent(this@ketuaHomeActivity, bendaharaHistoryTransaksiActivity::class.java)
+            startActivity(intent)
+        }
         btn_ketua_logout.setOnClickListener{
             logOutRequest(loginData,logOutURL)
         }
@@ -54,7 +75,7 @@ class ketuaHomeActivity : AppCompatActivity() {
         val sharedPreference =  getSharedPreferences("LoginData", Context.MODE_PRIVATE)
         loginData=LoginData(sharedPreference.getString("token",null),sharedPreference.getString("role",null),sharedPreference.getInt("user_id",-1))
         logOutURL = "${baseUrl.url}/api/logout/${loginData.token}"
-//        Log.d("LOG", loginData.toString())
+        Log.d("LOG_Ketua_Home", loginData.role.toString())
     }
 
     fun logOutRequest(loginData:LoginData,URL:String){

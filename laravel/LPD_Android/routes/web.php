@@ -18,14 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/test',[TransaksiMobileController::class,'grafik']);
-
-
-Route::group(['middleware'=>['CustomAuth','BendaharaCustomAuth']],function(){
+Route::group(['middleware'=>['CustomAuth','KetuaAndBendahara']],function(){
     Route::get('/grafik_kolektor/{token}',[BendaharaGrafikWebController::class,'index']);
 });
 
-Route::group(['middleware'=>['CustomAuth','BendaharaCustomAuth'],'prefix'=>'laporan'],function(){
+Route::group(['middleware'=>['CustomAuth','KetuaAndBendahara'],'prefix'=>'laporan'],function(){
     Route::get('/penarikan/{token}',[LaporanWebController::class,'indexPenarikan']);
     Route::get('/penarikan/{token}/download',[LaporanWebController::class,'downloadPenarikan'])->name('downloadPenarikan');
     Route::get('/setoran/{token}',[LaporanWebController::class,'indexSetoran']);

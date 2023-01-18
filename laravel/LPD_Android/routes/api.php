@@ -43,7 +43,7 @@ Route::group(['middleware'=>['CustomAuth']],function(){
         Route::put('/{token}/update',[ProfileMobileController::class,'update']);
     });
 
-    Route::group(['middleware'=>['BendaharaCustomAuth'],'prefix'=>'laporan'],function(){
+    Route::group(['middleware'=>['KetuaAndBendahara'],'prefix'=>'laporan'],function(){
         Route::get('/{token}/setoran',[LaporanWebController::class,'showSetoran'])->name('getLaporanSetoranData');
         Route::get('/{token}/penarikan',[LaporanWebController::class,'showPenarikan'])->name('getLaporanPenarikanData');
     });
@@ -91,7 +91,7 @@ Route::group(['middleware'=>['CustomAuth']],function(){
 
     Route::delete('/logout/{token}',[LoginMobileController::class,'logout']);
 
-    Route::get('/grafik_data/{token}',[BendaharaGrafikWebController::class,'getData'])->name('bendaharaGrafikApi')->middleware(['BendaharaCustomAuth']);
+    Route::get('/grafik_data/{token}',[BendaharaGrafikWebController::class,'getData'])->name('bendaharaGrafikApi')->middleware(['KetuaAndBendahara']);
 });
 
 
