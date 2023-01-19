@@ -39,7 +39,7 @@
                       </div>
                       <div class="row ps-sm-4 ps-2">
                         <div class="col-auto px-0 fs-5">No Telepon   </div>
-                        <div class="col fs-5"> : <span id="kolektor_no_telepon">{{ $userLoginData->no_telepon }}</span></div>
+                        <div class="col fs-5"> : <span id="kolektor_no_telepon">(+62){{ $userLoginData->no_telepon }}</span></div>
                       </div>
                       <div class="row ps-sm-4 ps-2">
                         <div class="col-auto px-0 fs-5">Tgl Transaksi   </div>
@@ -72,7 +72,7 @@
                                                     <td scope="col">{{$transaksi->bukutabungan->nasabah->fullname}}</td>
                                                     <td scope="col">{{$transaksi->bukutabungan->no_tabungan}}</td>
                                                     <td scope="col">{{$transaksi->tgl_transaksi}}</td>
-                                                    <td scope="col">{{$transaksi->nominal}}</td>
+                                                    <td scope="col">Rp.{{rupiah($transaksi->nominal)}}</td>
                                                 </tr>
                                             @endforeach
                                         @endif

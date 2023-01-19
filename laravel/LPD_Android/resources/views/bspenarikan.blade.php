@@ -67,7 +67,7 @@
                       </div>
                       <div class="row ps-sm-4 ps-2">
                         <div class="col-auto px-0 fs-5">No Telepon   </div>
-                        <div class="col fs-5"> : <span id="kolektor_no_telepon"></span></div>
+                        <div class="col fs-5"> : (+62)<span id="kolektor_no_telepon"></span></div>
                       </div>
                       <div class="row ps-sm-4 ps-2">
                         <div class="col-auto px-0 fs-5">Tgl Transaksi   </div>
@@ -211,7 +211,8 @@
                 for (const rowData of json.transaksiArray) {
                     i++;
                     const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${i}</td><td>${rowData.bukutabungan.nasabah.fullname}</td><td>${rowData.bukutabungan.no_tabungan}</td><td>${rowData.tgl_transaksi}</td><td>Rp.${rowData.nominal}</td>`;
+                    const dt = rupiah(rowData.nominal);
+                    tr.innerHTML = `<td>${i}</td><td>${rowData.bukutabungan.nasabah.fullname}</td><td>${rowData.bukutabungan.no_tabungan}</td><td>${rowData.tgl_transaksi}</td><td>Rp.${dt}</td>`;
                     table_laporan_body.appendChild(tr);
                 }
                 totalTransaksi.textContent=json.transaksiJml;
@@ -219,6 +220,10 @@
                 table_laporan_body.innerHTML='';
                 totalTransaksi.textContent=0;
             }  
+        }
+        function rupiah(value){
+          let val = (value/1).toFixed(0).replace('.', ',')
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }
         
     </script>

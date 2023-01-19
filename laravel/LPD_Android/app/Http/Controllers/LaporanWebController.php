@@ -8,6 +8,7 @@ use \App\Models\Transaksi;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use PDF;
+use Helper;
 
 class LaporanWebController extends Controller
 {
@@ -30,7 +31,8 @@ class LaporanWebController extends Controller
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
-        $transaksiJml=$transaksiData->sum('nominal');
+        $transaksiJmls=$transaksiData->sum('nominal');
+        $transaksiJml= Helper::rupiah($transaksiJmls);
         $userLoginData=$request->get('login_user');
         // $pdf = PDF::loadView('bspenarikandownload',compact('transaksiArray','transaksiJml','userLoginData','validate'));
         // $pdf->setPaper('A4','potrait');
@@ -53,7 +55,8 @@ class LaporanWebController extends Controller
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
-        $transaksiJml=$transaksiData->sum('nominal');
+        $transaksiJmls=$transaksiData->sum('nominal');
+        $transaksiJml= Helper::rupiah($transaksiJmls);
         return response()->json(
             [
                 'staffData' => $staffData,
@@ -81,7 +84,8 @@ class LaporanWebController extends Controller
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
-        $transaksiJml=$transaksiData->sum('nominal');
+        $transaksiJmls=$transaksiData->sum('nominal');
+        $transaksiJml= Helper::rupiah($transaksiJmls);
         $userLoginData=$request->get('login_user');
         // $pdf = PDF::loadView('bspenarikandownload',compact('transaksiArray','transaksiJml','userLoginData','validate'));
         // $pdf->setPaper('A4','potrait');
@@ -103,7 +107,9 @@ class LaporanWebController extends Controller
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
-        $transaksiJml=$transaksiData->sum('nominal');
+        $transaksiJmls=$transaksiData->sum('nominal');
+        $transaksiJml= Helper::rupiah($transaksiJmls);
+        
         return response()->json(
             [
                 'staffData' => $staffData,
