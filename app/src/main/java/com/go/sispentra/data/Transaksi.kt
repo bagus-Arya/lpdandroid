@@ -12,5 +12,5 @@ data class Transaksi(
     var no_tabungan:String,
     var nasabah_name:String?,
     var kolektor_name:String?,
-    var saldo:Int?=0
+    var saldo:Double?=null
 )

@@ -18,6 +18,7 @@ class ValidasiSetoranAdapter (val transaksis:ArrayList<Transaksi>, val listener:
         val cv_tgl_transaksi: TextView =itemView.findViewById(R.id.cv_tgl_transaksi)
         val cv_jumlah_setoran: TextView =itemView.findViewById(R.id.cv_jumlah_setoran)
         val cv_status_setoran: TextView =itemView.findViewById(R.id.cv_status_setoran)
+        val cv_saldo_nasabah: TextView =itemView.findViewById(R.id.cv_saldo_nasabah)
         val btn_reject: Button =itemView.findViewById(R.id.btn_reject)
         val btn_validasi: TextView =itemView.findViewById(R.id.btn_validasi)
     }
@@ -37,6 +38,7 @@ class ValidasiSetoranAdapter (val transaksis:ArrayList<Transaksi>, val listener:
         holder.cv_no_tabungan.text=currentItem.no_tabungan
         holder.cv_nama_kolektor.text=currentItem.kolektor_name
         holder.cv_nama_nasabah.text=currentItem.nasabah_name
+        holder.cv_saldo_nasabah.text=currentItem.saldo.toString()
         if(currentItem.type_transaksi=="Setoran"){
             holder.cv_jumlah_setoran.text="Rp."+currentItem.nominal.toString()
             holder.cv_jumlah_setoran.setTextColor(Color.parseColor(green))

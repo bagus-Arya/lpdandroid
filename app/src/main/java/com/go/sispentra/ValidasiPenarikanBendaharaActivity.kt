@@ -253,7 +253,9 @@ class ValidasiPenarikanBendaharaActivity : AppCompatActivity() {
                     transaksi.getString("tgl_validasi_nasabah"),
                 transaksi.getJSONObject("bukutabungan").getString("no_tabungan"),
                 transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getString("fullname"),
-                transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getJSONObject("kolektor").getString("fullname")
+                transaksi.getJSONObject("bukutabungan").getJSONObject("nasabah").getJSONObject("kolektor").getString("fullname"),
+                    transaksi.getDouble("saldo")
+
             )
             )
 //            println("${book.get("book_name")} by ${book.get("author")}")

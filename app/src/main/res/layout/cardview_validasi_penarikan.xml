@@ -19,6 +19,39 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/cv_saldo_nasabah5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saldo Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
+
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
+
+            <TextView
+                android:id="@+id/cv_saldo_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="Saldo Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toEndOf="@+id/textView60"
+                app:layout_constraintTop_toTopOf="@+id/cv_saldo_nasabah5" />
+
+            <TextView
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,15 +119,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_tgl_transaksi" />
 
             <TextView
-                android:textColor="@color/textColor"
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text=":"
+                android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_saldo_nasabah" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -124,7 +157,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_saldo_nasabah5" />
 
             <TextView
                 android:id="@+id/textView22"
