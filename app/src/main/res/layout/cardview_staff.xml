@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardBackgroundColor2"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Nama Staff"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cv_no_telepon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Telepon"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_jenis_kelamin"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/cv_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Role"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_no_telepon"
+                app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+            <Button
+                android:id="@+id/cv_hapus_staff"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#DE623A"
+                android:text="Hapus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_Staff" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Telepon"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/cv_jenis_kelamin" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Role"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView34"
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_telepon" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toEndOf="@+id/textView31"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/cv_nama_Staff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Staff"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.112"
+                app:layout_constraintStart_toEndOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/cv_jenis_kelamin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_Staff"
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+

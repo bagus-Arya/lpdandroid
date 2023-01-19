@@ -1,0 +1,15 @@
+lpd android:
+	ketua-history error//critical
+	tampilan format uang laporan setoran and penarikan Rp. 200.000.000// ke benerin ni ar WKWKKWKWKWK 
+	tampilan no telepon di laporan setoran dan penarikan (+62)// ke benerin jg ini
+	error download pdf(permission)//blm ketemu
+	request hanya bisa sekali kalok blm di validasi (nasabah)//critical
+	validasi isi saldo //critical
+	ganti kolektor(kolektor resign) //tunggu revisi
+
+lpd_keunagan :
+	neraca percobaan:-tanggal periode mutasi hilangkan akun yang gak perlu
+	arus kas:-sesuai excel di dive
+	Perubbahan Modal:-Laba bersih sesuai dengan jml laba 2 pada laporan laba rugi
+	grafik dashboard filter per tahun sekarang
+	

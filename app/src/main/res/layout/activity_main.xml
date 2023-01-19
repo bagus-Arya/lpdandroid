@@ -1,72 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_page"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".MainActivity">
+    android:clickable="true"
+    android:focusableInTouchMode="true">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="235dp"
-        android:layout_height="242dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16"
-        app:srcCompat="@mipmap/logo_lpd_foreground" />
-
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/secondary"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwsword"
-        app:layout_constraintVertical_bias="0.205" />
-
-    <EditText
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/muted"
-        android:id="@+id/usrname"
-        android:layout_width="278dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/bg_shape"
-        android:ems="10"
-        android:hint="Username........."
-        android:inputType="textPersonName"
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:layout_weight="1.5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/muted"
-        android:id="@+id/pwsword"
-        android:layout_width="278dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_shape"
-        android:ems="10"
-        android:hint="Password........."
-        android:inputType="textPassword"
+        <ImageView
+            app:srcCompat="@mipmap/logo_lpd_foreground"
+            android:scaleType="fitXY"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sispentra"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:fontFamily="@font/poppins_bold"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.572"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usrname" />
+        android:layout_weight="1"
+        android:background="@drawable/bg_login_bawah"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOGIN"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="32dp"
+            android:fontFamily="@font/poppins_semibold"
+
+            />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/username"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableStart="@drawable/username"
+                android:drawablePadding="3dip"
+                android:inputType="text"
+                android:hint="Masukan Username"
+                android:textColorHint="@color/muted"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/poppins_semibold"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="30dp"/>
+
+            <EditText
+                android:id="@+id/passwordText"
+                android:textColorHint="@color/muted"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableStart="@drawable/keypassword"
+                android:drawablePadding="3dip"
+                android:textColor="@color/textColor"
+                android:inputType="textPassword"
+                android:hint="Masukan Password"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_height="50dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitButton"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textAllCaps="false"
+                android:text="SUBMIT"
+                android:layout_gravity="center"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button_submit"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

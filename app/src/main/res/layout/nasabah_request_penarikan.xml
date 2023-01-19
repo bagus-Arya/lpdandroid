@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_page"
+    android:paddingTop="?actionBarSize"
+    android:paddingHorizontal="15dp"
+    tools:context=".nasabahRequestPenarikan">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="373dp"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+
+            <Button
+                android:id="@+id/btn_kembali_penarikan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/muted"
+                android:text="Kembali"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_tarik_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/btn_tarik_nasabah" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nasabah_textfield_layout_nominal_setoran"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nominal Penarikan"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/btn_kembali_penarikan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_tgl_penarikan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nasabah_textfield_editor_nominal_setoran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/textColor"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nasabah_textfield_layout_tgl_penarikan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Tanggal Penarikan"
+                android:textColorHint="@color/muted"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/nasabah_textfield_layout_nominal_setoran"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nasabah_textfield_editor_tgl_penarikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Request Penarikan"
+                android:textColor="@color/textColor"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.382"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_tarik_nasabah"
+                android:layout_width="106dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#095A0D"
+                android:text="Tarik"
+                app:layout_constraintEnd_toStartOf="@+id/btn_kembali_penarikan"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_textfield_layout_nominal_setoran" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

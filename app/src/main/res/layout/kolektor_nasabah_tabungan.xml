@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_page"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="?actionBarSize"
+    tools:context=".nasabahTabunganActivity">
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tabungan_transaksi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/cardview_nasabah_tabungan_history" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:padding="15dp"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/refreshLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/btn_tambah_setoran"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#095A0D"
+                android:text="Setoran"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_ubah_nasabah"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_saldo_nasabah"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/btn_ubah_nasabah"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/ubahColor"
+                android:text="Ubah"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_hapus_nasabah"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_tambah_setoran"
+                app:layout_constraintTop_toTopOf="@+id/btn_tambah_setoran" />
+
+            <Button
+                android:id="@+id/btn_hapus_nasabah"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#DE623A"
+                android:text="Hapus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_ubah_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/btn_tambah_setoran"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Nama Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nasabah_no_telepon_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Telepon"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasabah_no_tabungan_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/nasabah_nama_kolektor_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Kolektor"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasabah_no_telepon_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/nasabah_saldo_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saldo"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasabah_nama_kolektor_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Tabungan"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_nama_nasabah" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Telepon"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_no_tabungan_nasabah" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Kolektor"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView34"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_no_telepon_nasabah" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saldo"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView38"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_nama_kolektor_nasabah" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView32"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/nasabah_nama_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.112"
+                app:layout_constraintStart_toEndOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/nasabah_no_tabungan_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Tabungan"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasabah_nama_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

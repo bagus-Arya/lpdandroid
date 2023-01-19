@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardBackgroundColor2"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView44" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="Nama Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cv_no_tabungan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Tabungan"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_kolektor"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/cv_tipe_transaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipe Transaksi"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_no_tabungan"
+                app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/cv_tgl_transaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Transaksi"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
+                app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/cv_tgl_validasi_bendahara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Validasi Bendahara"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_tgl_transaksi"
+                app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/cv_tgl_validasi_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Validasi Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_tgl_validasi_kolektor"
+                app:layout_constraintTop_toTopOf="@+id/textView48" />
+
+            <TextView
+                android:id="@+id/cv_tgl_validasi_kolektor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Validasi Kolektor"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_tgl_validasi_bendahara"
+                app:layout_constraintTop_toTopOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/cv_nominal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nominal"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_tgl_validasi_bendahara"
+                app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+            <TextView
+                android:id="@+id/cv_status_penarikan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_tipe_transaksi"
+                app:layout_constraintTop_toTopOf="@+id/textView44" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Kolektor"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_nasabah" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Tabungan"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/cv_nama_kolektor" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipe Transaksi"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView34"
+                app:layout_constraintTop_toBottomOf="@+id/cv_no_tabungan" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Transaksi"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView38"
+                app:layout_constraintTop_toBottomOf="@+id/cv_tipe_transaksi" />
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tgl.Val.Bendahara"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_transaksi" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tgl.Val.Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_validasi_kolektor" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tgl.Val.Kolektor"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_validasi_bendahara" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Status"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView36"
+                app:layout_constraintTop_toBottomOf="@+id/cv_nominal"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toEndOf="@+id/textView40"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView32"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView48" />
+
+            <TextView
+                android:id="@+id/cv_nama_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Nasabah"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.112"
+                app:layout_constraintStart_toEndOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/cv_nama_kolektor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Kolektor"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cv_nama_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nominal"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView46"
+                app:layout_constraintTop_toBottomOf="@+id/cv_tgl_validasi_nasabah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
+

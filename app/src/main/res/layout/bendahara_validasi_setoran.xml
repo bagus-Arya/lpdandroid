@@ -5,43 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgpage"
+    android:background="@drawable/bg_page"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".ValidasiSetoranBendaharaActivity">
+    tools:context=".ValidasiSetoranBendaharaActivity"
+    android:paddingTop="?attr/actionBarSize">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@mipmap/logo_lpd_foreground" />
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/rv_validasi_setoran"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/transparentColor">
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="228dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="36dp"
-        android:text="Sistem Pencatatan Transaksi Tabungan"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="359dp"
-        android:layout_height="553dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" >
-    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

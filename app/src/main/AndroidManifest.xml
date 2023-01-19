@@ -3,7 +3,11 @@
     package="com.go.sispentra">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +17,84 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".nasabahValidasiPenarikan"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity"/>
+        <activity
+            android:name=".bendaharaHistoryTransaksiActivity"
+            android:exported="false"
+            android:parentActivityName=".BendaharaHomeActivity" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".KolektorValidasiPenarikan"
+            android:exported="false"
+            android:parentActivityName=".KolektorHomeActivity" />
+        <activity
+            android:name=".KolektorValidasiSetoran"
+            android:exported="false"
+            android:parentActivityName=".KolektorHomeActivity" />
+        <activity
+            android:name=".KolektorNasabahSetoran"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahTabungan" />
+        <activity
+            android:name=".KolektorNasabahUbah"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahTabungan" />
+        <activity
+            android:name=".KolektorNasabahTabungan"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahActivity" />
+        <activity
+            android:name=".KolektorNasabahActivity"
+            android:exported="false"
+            android:parentActivityName=".KolektorHomeActivity" />
+        <activity
+            android:name=".KolektorNasabahTambah"
+            android:exported="false"
+            android:parentActivityName=".KolektorNasabahActivity" />
+        <activity
+            android:name=".nasabahTabunganActivity"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity" />
+        <activity
+            android:name=".nasabahRequestPenarikan"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity" />
+        <activity
+            android:name=".nasabahHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".nasabahProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".nasabahHomeActivity" />
+        <activity
+            android:name=".ketuaTambahDataStaffActivity"
+            android:exported="false"
+            android:label="@string/title_activity_ketua_tambah_data_staff"
+            android:parentActivityName=".ketuaDataStaffActivity" />
+        <activity
+            android:name=".ketuaDataStaffActivity"
+            android:exported="false"
+            android:parentActivityName=".ketuaHomeActivity" />
+        <activity
+            android:name=".ketuaProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".ketuaHomeActivity" />
+        <activity
+            android:name=".ketuaHomeActivity"
+            android:exported="false" />
         <activity
             android:name=".PageNotFound"
             android:exported="true"
@@ -22,15 +102,11 @@
         <activity
             android:name=".DataPeranActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DataUserActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-
-        <!-- Kolektor -->
+            android:screenOrientation="portrait" /> <!-- Kolektor -->
         <activity
             android:name=".KolektorHomeActivity"
             android:exported="true"
@@ -38,10 +114,7 @@
         <activity
             android:name=".KolektorProfileActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".KolektorRegistNasabahActivity"
-            android:exported="true"
+            android:parentActivityName=".KolektorHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".KolektorSetorTunaiActivity"
@@ -54,12 +127,12 @@
         <activity
             android:name=".KolektorHistoryTransaksi"
             android:exported="true"
+            android:parentActivityName=".KolektorHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".KolektorDataNasabahActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <!-- Bendahara -->
+            android:screenOrientation="portrait" /> <!-- Bendahara -->
         <activity
             android:name=".BendaharaHomeActivity"
             android:exported="true"
@@ -72,24 +145,28 @@
         <activity
             android:name=".GrafikBendaharaActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ValidasiSetoranBendaharaActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ValidasiPenarikanBendaharaActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LaporanSetoranBendaharaActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LaporanPenarikanBendaharaActivity"
             android:exported="true"
+            android:parentActivityName=".BendaharaHomeActivity"
             android:screenOrientation="portrait" />
-
         <!-- Ketua -->
         <activity
             android:name=".HomeActivity"
@@ -97,13 +174,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
