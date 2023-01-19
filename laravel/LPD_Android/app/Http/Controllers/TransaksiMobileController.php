@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 class TransaksiMobileController extends Controller
 {
     public function index(Request $request,$token){
-        if($request->get('login_user')->role=="Bendahara"){
+        if($request->get('login_user')->role=="Bendahara" || $request->get('login_user')->role=="Ketua"){
             return Transaksi::latest('tgl_transaksi')->with('bukutabungan.nasabah.kolektor',function ($q){
                 $q->withTrashed();
             })->get();

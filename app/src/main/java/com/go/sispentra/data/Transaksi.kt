@@ -11,5 +11,6 @@ data class Transaksi(
     var tgl_validasi_nasabah:String ? = null,
     var no_tabungan:String,
     var nasabah_name:String?,
-    var kolektor_name:String?
+    var kolektor_name:String?,
+    var saldo:Int?=0
 )

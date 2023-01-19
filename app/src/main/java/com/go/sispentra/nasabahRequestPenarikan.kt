@@ -163,6 +163,9 @@ class nasabahRequestPenarikan : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }
+                    else if (error.networkResponse.statusCode==400){
+                        Toast.makeText(this@nasabahRequestPenarikan, "Sudah Melakukan Penarikan", Toast.LENGTH_LONG).show()
+                    }
                     else if (error.networkResponse.statusCode==403){
                         Toast.makeText(this@nasabahRequestPenarikan, "Forbiden", Toast.LENGTH_LONG).show()
                     }
