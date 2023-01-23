@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.go.sispentra.R
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>,val listener: ValidasiPenarikanAdapter.OnAdapterListener): RecyclerView.Adapter<ValidasiPenarikanAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -29,6 +32,12 @@ class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>,val listener:
         return MyViewHolder(itemView)
     }
 
+    private fun formatRupiah(number: Double): String? {
+        val localeID = Locale("in", "ID")
+        val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return formatRupiah.format(number)
+    }
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var green="#0af248"
         var textPenarikan="#323332"
@@ -41,7 +50,7 @@ class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>,val listener:
         holder.cv_nama_nasabah.text=currentItem.nasabah_name
         holder.cv_saldo_nasabah.text=currentItem.saldo.toString()
         if(currentItem.type_transaksi=="Setoran"){
-            holder.cv_jumlah_penarikan.text=currentItem.nominal.toString()
+            holder.cv_jumlah_penarikan.text=formatRupiah(currentItem.nominal)
             holder.cv_jumlah_penarikan.setTextColor(Color.parseColor(green))
             if(currentItem.status=="unvalidated"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))
@@ -54,7 +63,7 @@ class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>,val listener:
             }
         }
         else{
-            holder.cv_jumlah_penarikan.text="-"+currentItem.nominal.toString()
+            holder.cv_jumlah_penarikan.text="-"+formatRupiah(currentItem.nominal)
             holder.cv_jumlah_penarikan.setTextColor(Color.parseColor(red))
             if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara" || currentItem.status=="validated-kolektor"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))

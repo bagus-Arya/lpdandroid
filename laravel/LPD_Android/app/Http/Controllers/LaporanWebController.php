@@ -33,7 +33,8 @@ class LaporanWebController extends Controller
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
         $transaksiJml= Helper::rupiah($transaksiJmls);
-        $userLoginData=$request->get('login_user');
+        $userLoginData=Staff::withTrashed()->where('id', $validate['id_kolektor'])->firstOrfail();
+        // $userLoginData=$request->get('login_user');
         // $pdf = PDF::loadView('bspenarikandownload',compact('transaksiArray','transaksiJml','userLoginData','validate'));
         // $pdf->setPaper('A4','potrait');
         // return $pdf->stream('bspenarikandownload.pdf');
@@ -86,7 +87,8 @@ class LaporanWebController extends Controller
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
         $transaksiJml= Helper::rupiah($transaksiJmls);
-        $userLoginData=$request->get('login_user');
+        $userLoginData=Staff::withTrashed()->where('id', $validate['id_kolektor'])->firstOrfail();
+        // $userLoginData=$request->get('login_user');
         // $pdf = PDF::loadView('bspenarikandownload',compact('transaksiArray','transaksiJml','userLoginData','validate'));
         // $pdf->setPaper('A4','potrait');
         // return $pdf->stream('bspenarikandownload.pdf');

@@ -10,6 +10,9 @@ import com.go.sispentra.R
 import com.rw.keyboardlistener.com.go.sispentra.data.Nasabah
 import com.rw.keyboardlistener.com.go.sispentra.data.Staff
 import com.rw.keyboardlistener.com.go.sispentra.data.Tabungan
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NasabahListAdapter (var nasabahs:ArrayList<Nasabah>,
                           var bukuTabungans:ArrayList<Tabungan>,
@@ -22,6 +25,12 @@ class NasabahListAdapter (var nasabahs:ArrayList<Nasabah>,
         val nasabah_no_telepon_nasabah: TextView =itemView.findViewById(R.id.nasabah_no_telepon_nasabah)
         val nasabah_nama_kolektor_nasabah: TextView =itemView.findViewById(R.id.nasabah_nama_kolektor_nasabah)
         val nasabah_saldo_nasabah: TextView =itemView.findViewById(R.id.nasabah_saldo_nasabah)
+    }
+
+    private fun formatRupiah(number: Double): String? {
+        val localeID = Locale("in", "ID")
+        val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return formatRupiah.format(number)
     }
 
     override fun onCreateViewHolder(
@@ -37,7 +46,7 @@ class NasabahListAdapter (var nasabahs:ArrayList<Nasabah>,
         val bukuTabungan=bukuTabungans[position]
         val staff=staffs[position]
         holder.nasabah_nama_nasabah.text=nasabah.fullname
-        holder.nasabah_saldo_nasabah.text="Rp."+bukuTabungan.saldo.toString()
+        holder.nasabah_saldo_nasabah.text=bukuTabungan.saldo?.let { formatRupiah(it) };
         holder.nasabah_no_tabungan_nasabah.text=bukuTabungan.no_tabungan
         holder.nasabah_no_telepon_nasabah.text=nasabah.no_telepon
         holder.nasabah_nama_kolektor_nasabah.text=staff.fullname

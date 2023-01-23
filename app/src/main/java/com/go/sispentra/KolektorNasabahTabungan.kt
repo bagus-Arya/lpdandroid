@@ -25,6 +25,10 @@ import com.rw.keyboardlistener.com.go.sispentra.adapter.TabunganTransaksiAdapter
 import com.rw.keyboardlistener.com.go.sispentra.data.*
 import org.json.JSONArray
 import org.json.JSONException
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class KolektorNasabahTabungan : AppCompatActivity() {
     var baseUrl= BaseURL()
@@ -61,12 +65,18 @@ class KolektorNasabahTabungan : AppCompatActivity() {
         reqGetTabunganTransaksi(loginData,getDataNasabahTabunganTransaksi)
     }
 
+    private fun formatRupiah(number: Double): String? {
+        val localeID = Locale("in", "ID")
+        val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return formatRupiah.format(number)
+    }
+
     fun updateBukuTabunganComponent(dataTabungan:Tabungan){
         nasabah_nama_nasabah.setText(dataTabungan.nasabah_name)
         nasabah_no_tabungan_nasabah.setText(dataTabungan.no_tabungan)
         nasabah_no_telepon_nasabah.setText(dataTabungan.no_telepon)
         nasabah_nama_kolektor_nasabah.setText(dataTabungan.nasabah_kolektor)
-        nasabah_saldo_nasabah.setText("Rp."+dataTabungan.saldo.toString())
+        nasabah_saldo_nasabah.setText(dataTabungan.saldo?.let { formatRupiah(it) })
     }
 
     fun setComponent(){

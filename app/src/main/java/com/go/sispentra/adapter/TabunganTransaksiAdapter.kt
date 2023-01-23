@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.go.sispentra.R
 import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TabunganTransaksiAdapter(val transaksis:ArrayList<Transaksi>): RecyclerView.Adapter<TabunganTransaksiAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -24,6 +27,12 @@ class TabunganTransaksiAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
         return MyViewHolder(itemView)
     }
 
+    private fun formatRupiah(number: Double): String? {
+        val localeID = Locale("in", "ID")
+        val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return formatRupiah.format(number)
+    }
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var green="#0af248"
         var textPenarikan="#323332"
@@ -33,7 +42,7 @@ class TabunganTransaksiAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
         holder.cv_tipe_transaksi.text=currentItem.type_transaksi
         holder.cv_status_penarikan.text=currentItem.status
         if(currentItem.type_transaksi=="Setoran"){
-            holder.cv_nominal_transaksi.text="Rp."+currentItem.nominal.toString()
+            holder.cv_nominal_transaksi.text=formatRupiah(currentItem.nominal)
             holder.cv_nominal_transaksi.setTextColor(Color.parseColor(green))
             if(currentItem.status=="unvalidated"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))
@@ -46,7 +55,7 @@ class TabunganTransaksiAdapter(val transaksis:ArrayList<Transaksi>): RecyclerVie
             }
         }
         else{
-            holder.cv_nominal_transaksi.text="-Rp."+currentItem.nominal.toString()
+            holder.cv_nominal_transaksi.text="-"+formatRupiah(currentItem.nominal)
             holder.cv_nominal_transaksi.setTextColor(Color.parseColor(red))
             if(currentItem.status=="unvalidated" || currentItem.status=="validated-bendahara" || currentItem.status=="validated-kolektor"){
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(pending))
