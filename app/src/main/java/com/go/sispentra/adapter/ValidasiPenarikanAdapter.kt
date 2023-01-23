@@ -48,7 +48,7 @@ class ValidasiPenarikanAdapter(val transaksis:ArrayList<Transaksi>,val listener:
         holder.cv_no_tabungan.text=currentItem.no_tabungan
         holder.cv_nama_kolektor.text=currentItem.kolektor_name
         holder.cv_nama_nasabah.text=currentItem.nasabah_name
-        holder.cv_saldo_nasabah.text=currentItem.saldo.toString()
+        holder.cv_saldo_nasabah.text= currentItem.saldo?.let { formatRupiah(it) }
         if(currentItem.type_transaksi=="Setoran"){
             holder.cv_jumlah_penarikan.text=formatRupiah(currentItem.nominal)
             holder.cv_jumlah_penarikan.setTextColor(Color.parseColor(green))
