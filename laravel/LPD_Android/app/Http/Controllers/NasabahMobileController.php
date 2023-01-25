@@ -104,6 +104,7 @@ class NasabahMobileController extends Controller
         }
         $validate = $request->validate([
             'fullname'=>'required|string',
+            'alamat'=>'required|string',
             'no_telepon'=>'required|string',
             'no_ktp'=>'required|string',
             'tgl_lahir'=>'required|date_format:Y-m-d',

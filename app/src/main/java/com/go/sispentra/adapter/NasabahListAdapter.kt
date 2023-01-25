@@ -48,7 +48,7 @@ class NasabahListAdapter (var nasabahs:ArrayList<Nasabah>,
         holder.nasabah_nama_nasabah.text=nasabah.fullname
         holder.nasabah_saldo_nasabah.text=bukuTabungan.saldo?.let { formatRupiah(it) };
         holder.nasabah_no_tabungan_nasabah.text=bukuTabungan.no_tabungan
-        holder.nasabah_no_telepon_nasabah.text=nasabah.no_telepon
+        holder.nasabah_no_telepon_nasabah.text="(+62)"+nasabah.no_telepon
         holder.nasabah_nama_kolektor_nasabah.text=staff.fullname
         holder.itemView.setOnClickListener { listener.onClick( nasabah,bukuTabungan,staff,position) }
     }

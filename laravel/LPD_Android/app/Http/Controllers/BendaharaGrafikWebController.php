@@ -27,7 +27,7 @@ class BendaharaGrafikWebController extends Controller
 
             $staffs=Staff::whereHas('nasabah.bukutabungan.transaksis',function($q){
                 $q->where('type_transaksi','Setoran')->where('status','validated-bendahara')
-                ->orWhere('type_transaksi','Penarikan')->where('status','validated-kolektor');
+                ->orWhere('type_transaksi','Penarikan')->where('status','validated-nasabah');
             })->get();
             $colorsData=[];
             $labelsData=[];
@@ -51,10 +51,10 @@ class BendaharaGrafikWebController extends Controller
                 array_push($pieChartData['backgroundColor'],$colorsData[$key]);
                 $transaksis=Transaksi::where(function ($q){
                                 $q->where('type_transaksi','Setoran')->where('status','validated-bendahara')
-                                ->orWhere('type_transaksi','Penarikan')->where('status','validated-kolektor');
+                                ->orWhere('type_transaksi','Penarikan')->where('status','validated-nasabah');
                             })->whereHas('bukutabungan.nasabah.kolektor',function ($s) use($staff){
                                 $s->where('id',$staff->id);
-                            })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
+                            })->whereDate('tgl_transaksi', '>=', $from_date)->whereDate('tgl_transaksi', '<=', $to_date)->count();
                 array_push($pieChartData['data'],$transaksis);
                 // while (strtotime($from_date) <= strtotime($to_date)) {
                 //     array_push($pieChartData['data'],
@@ -85,10 +85,10 @@ class BendaharaGrafikWebController extends Controller
                         "x"=>$from_date,
                         "y"=>Transaksi::where(function ($q){
                             $q->where('type_transaksi','Setoran')->where('status','validated-bendahara')
-                            ->orWhere('type_transaksi','Penarikan')->where('status','validated-kolektor');
+                            ->orWhere('type_transaksi','Penarikan')->where('status','validated-nasabah');
                         })->whereHas('bukutabungan.nasabah.kolektor',function ($s) use($staff){
                             $s->where('id',$staff->id);
-                        })->whereDate('created_at',$from_date)->count(),
+                        })->whereDate('tgl_transaksi',$from_date)->count(),
                     ]
                     );
                     $from_date = date ("Y-m-d", strtotime("+1 days", strtotime($from_date)));

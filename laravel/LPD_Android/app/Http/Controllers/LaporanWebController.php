@@ -29,6 +29,7 @@ class LaporanWebController extends Controller
         })->where('status','validated-nasabah')->where('type_transaksi','Penarikan')
             ->whereDate('tgl_transaksi','>=',$validate['start_date'])
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
+            ->orderBy('tgl_transaksi', 'asc')
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
@@ -54,6 +55,7 @@ class LaporanWebController extends Controller
         })->where('status','validated-nasabah')->where('type_transaksi','Penarikan')
             ->whereDate('tgl_transaksi','>=',$validate['start_date'])
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
+            ->orderBy('tgl_transaksi', 'asc')
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
@@ -83,6 +85,7 @@ class LaporanWebController extends Controller
         })->where('status','validated-bendahara')->where('type_transaksi','Setoran')
             ->whereDate('tgl_transaksi','>=',$validate['start_date'])
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
+            ->orderBy('tgl_transaksi', 'asc')
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
@@ -107,6 +110,7 @@ class LaporanWebController extends Controller
         })->where('status','validated-bendahara')->where('type_transaksi','Setoran')
             ->whereDate('tgl_transaksi','>=',$validate['start_date'])
             ->whereDate('tgl_transaksi','<=',$validate['end_date'])
+            ->orderBy('tgl_transaksi', 'asc')
         ->with('bukutabungan.nasabah');
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
