@@ -33,6 +33,8 @@ class BendaharaGrafikWebController extends Controller
             $labelsData=[];
             $pieChartData=[];
             $barChartData=[];
+            $barPendapatanNasabahData=[];
+            $piePendapatanNasabahData=[];
 
             // Generate label and color
             foreach ($staffs as $staff){
@@ -70,6 +72,21 @@ class BendaharaGrafikWebController extends Controller
                 // }
 
             }
+
+             // GeneratePie Pendapatan Nasabah Data
+             $piePendapatanNasabahData['labels']=[];
+             $piePendapatanNasabahData['backgroundColor']=[];
+             $piePendapatanNasabahData['data']=[];
+             foreach ($staffs as $key=>$staff){
+                 $from_date=$request['from_date'];
+                 $to_date=$request['to_date'];
+                 array_push($piePendapatanNasabahData['labels'],$labelsData[$key]);
+                 array_push($piePendapatanNasabahData['backgroundColor'],$colorsData[$key]);
+                 $nasabah=Nasabah::where('staff_id',$staff->id)->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date)->count();
+                 array_push($piePendapatanNasabahData['data'],$nasabah);
+             }
+
+
             // Generate Bar Data
             $barChartData['dataArray']=[];
             foreach ($staffs as $key=>$staff){
@@ -103,14 +120,44 @@ class BendaharaGrafikWebController extends Controller
                 );
             }
 
+            // Generate Bar Pendapatan Nasabah Data
+            $barPendapatanNasabahData['dataArray']=[];
+            foreach ($staffs as $key=>$staff){
+                $from_date=$request['from_date'];
+                $to_date=$request['to_date'];
+                $label=$staff->fullname;
+                $backgroundColor=$colorsData[$key];
+                $borderColor=$backgroundColor;
+                $dataInside=[];
+                while (strtotime($from_date) <= strtotime($to_date)) {
+                    array_push($dataInside,
+                    [
+                        "x"=>$from_date,
+                        "y"=>Nasabah::where('staff_id',$staff->id)->whereDate('created_at',$from_date)->count(),
+                    ]
+                    );
+                    $from_date = date ("Y-m-d", strtotime("+1 days", strtotime($from_date)));
+                }
+                array_push($barPendapatanNasabahData['dataArray'],
+                [
+                    "label"=>$label,
+                    "backgroundColor"=>$backgroundColor,
+                    "borderColor"=>$borderColor,
+                    "data"=> $dataInside
+                ]
+                );
+            }
+
             return response()->json([
                 'piechart' => $pieChartData,
-                'barchart'=> $barChartData
+                'barchart'=> $barChartData,
+                'barPendapatanNasabah'=>$barPendapatanNasabahData,
+                'piePendapatanNasabah'=>$piePendapatanNasabahData
             ], 200);
         }
         catch (\Throwable $th) {
-            // return response()->json(['message' => $th], 500);
-            return $th;
+            return response()->json(['message' => $th], 500);
+            // return $th;
         }
     }
 }

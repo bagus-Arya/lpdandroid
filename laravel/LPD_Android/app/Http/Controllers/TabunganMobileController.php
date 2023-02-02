@@ -23,13 +23,19 @@ class TabunganMobileController extends Controller
         $diffInYears = $earliestDate->diffInYears($latestDate);
         $currentDate=$earliestDate;
         $currentSaldo=0;
+        $currentBunga=0;
         if($diffInYears!=0){
             for ($i = 1; $i <= $diffInYears; $i++) {
+                // return response()->json(['message1' =>  $currentDate->copy()->subYear()->format('Y-m-d'),
+                // 'message2' =>   $currentDate->copy()->format('Y-m-d')], 403);
                 $totalSetoranThisYear=Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
                                     ->where('type_transaksi','Setoran')->where('status','validated-bendahara')
-                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->subYear()->addDay()->format('Y-m-d'))
-                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->addYear()->format('Y-m-d') )
+                                    // ->whereBetween('tgl_transaksi', [$from, $to])
                                     ->sum('nominal');
+               
+                
                 // $totalPenarikanThisYear=Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
                 //                     ->where('type_transaksi','Penarikan')->whereNot('status','like','rejected%')
                 //                     ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->subYear()->addDay()->format('Y-m-d'))
@@ -38,13 +44,27 @@ class TabunganMobileController extends Controller
 
                 $totalPenarikanThisYear=Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
                                     ->where('type_transaksi','Penarikan')->where('status','validated-nasabah')
-                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->subYear()->addDay()->format('Y-m-d'))
-                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->addYear()->format('Y-m-d') )
                                     ->sum('nominal');
+
                 
                 $totalSaldoThisYear=$currentSaldo+$totalSetoranThisYear-$totalPenarikanThisYear;
-                $currentSaldo=$totalSaldoThisYear+((4/100) * $totalSaldoThisYear);
+                $currentBunga=$currentBunga+((4* $totalSaldoThisYear)/100);
+                $currentSaldo=$totalSaldoThisYear+((4* $totalSaldoThisYear)/100);
+                
+                $currentDate=$currentDate->copy()->addYear();
                 if($i==$diffInYears){
+                    // if($i==1){
+                    //     return response()->json(
+                    //         [
+                    //          'message1' =>  $currentDate->copy()->format('Y-m-d'),
+                    //          'message2' =>   $currentDate->copy()->addYear()->format('Y-m-d') ,
+                    //          'message3'=> $totalSetoranThisYear,
+                    //          'message4'=> $totalPenarikanThisYear,
+                    //          'message5'=> $currentSaldo
+                    //         ], 403);
+                    // }
                     // $currentSaldo=$currentSaldo+(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
                     // ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
                     // ->where('type_transaksi','Penarikan')->whereNot('status','like','rejected%')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal')); 
@@ -53,9 +73,11 @@ class TabunganMobileController extends Controller
                     ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
                     ->where('type_transaksi','Penarikan')->where('status','validated-nasabah')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal')); 
                 }
-                $currentDate=$currentDate->copy()->addYear();
+                
             }
             $bukuTabungan['saldo']=$currentSaldo;
+            $bukuTabungan['bunga']=$currentBunga;
+            $bukuTabungan['tahun']=$diffInYears;
             return $bukuTabungan; 
         }
         // $bukuTabungan['saldo']=(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
@@ -65,6 +87,8 @@ class TabunganMobileController extends Controller
         $bukuTabungan['saldo']=(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
             ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$request->get('login_user')->id)
             ->where('type_transaksi','Penarikan')->where('status','validated-nasabah')->sum('nominal'));
+        $bukuTabungan['bunga']=$currentBunga;
+        $bukuTabungan['tahun']=$diffInYears;
         return $bukuTabungan; 
     }
     public function transaksis(Request $request,$token){
@@ -93,12 +117,13 @@ class TabunganMobileController extends Controller
         $diffInYears = $earliestDate->diffInYears($latestDate);
         $currentDate=$earliestDate;
         $currentSaldo=0;
+        $currentBunga=0;
         if($diffInYears!=0){
             for ($i = 1; $i <= $diffInYears; $i++) {
                 $totalSetoranThisYear=Transaksi::where('buku_tabungan_id',$nasabah->id)
                                     ->where('type_transaksi','Setoran')->where('status','validated-bendahara')
-                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->subYear()->addDay()->format('Y-m-d'))
-                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->addYear()->format('Y-m-d') )
                                     ->sum('nominal');
                 // $totalPenarikanThisYear=Transaksi::where('buku_tabungan_id',$nasabah->id)
                 //                     ->where('type_transaksi','Penarikan')->whereNot('status','like','rejected%')
@@ -108,12 +133,14 @@ class TabunganMobileController extends Controller
 
                 $totalPenarikanThisYear=Transaksi::where('buku_tabungan_id',$nasabah->id)
                                     ->where('type_transaksi','Penarikan')->where('status','validated-nasabah')
-                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->subYear()->addDay()->format('Y-m-d'))
-                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '>=', $currentDate->copy()->format('Y-m-d'))
+                                    ->whereDate('tgl_transaksi', '<=', $currentDate->copy()->addYear()->format('Y-m-d') )
                                     ->sum('nominal');
                 
                 $totalSaldoThisYear=$currentSaldo+$totalSetoranThisYear-$totalPenarikanThisYear;
+                $currentBunga=$currentBunga+((4* $totalSaldoThisYear)/100);
                 $currentSaldo=$totalSaldoThisYear+((4/100) * $totalSaldoThisYear);
+                $currentDate=$currentDate->copy()->addYear();
                 if($i==$diffInYears){
                     // $currentSaldo=$currentSaldo+(Transaksi::where('buku_tabungan_id',$nasabah->id)
                     // ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$nasabah->id)
@@ -123,9 +150,11 @@ class TabunganMobileController extends Controller
                     ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$nasabah->id)
                     ->where('type_transaksi','Penarikan')->where('status','validated-nasabah')->whereDate('tgl_transaksi', '>=', $currentDate->copy()->addDay()->format('Y-m-d'))->sum('nominal')); 
                 }
-                $currentDate=$currentDate->copy()->addYear();
             }
             $bukuTabungan['saldo']=$currentSaldo;
+            $bukuTabungan['bunga']=$currentBunga;
+            $bukuTabungan['tahun']=$diffInYears;
+          
             return $bukuTabungan; 
         }
         // $bukuTabungan['saldo']=(Transaksi::where('buku_tabungan_id',$nasabah->id)
@@ -135,6 +164,8 @@ class TabunganMobileController extends Controller
         $bukuTabungan['saldo']=(Transaksi::where('buku_tabungan_id',$nasabah->id)
             ->where('type_transaksi','Setoran')->where('status','validated-bendahara')->sum('nominal'))-(Transaksi::where('buku_tabungan_id',$nasabah->id)
             ->where('type_transaksi','Penarikan')->where('status','validated-nasabah')->sum('nominal'));    
+        $bukuTabungan['bunga']=$currentBunga;
+        $bukuTabungan['tahun']=$diffInYears;
         return $bukuTabungan; 
     }
 

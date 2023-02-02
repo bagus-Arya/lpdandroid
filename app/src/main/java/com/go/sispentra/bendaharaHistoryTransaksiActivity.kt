@@ -5,12 +5,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -25,6 +28,7 @@ import com.rw.keyboardlistener.com.go.sispentra.data.Transaksi
 import org.json.JSONArray
 import org.json.JSONException
 
+
 class bendaharaHistoryTransaksiActivity : AppCompatActivity() {
     var baseUrl= BaseURL()
     //    ${baseUrl.url}
@@ -33,12 +37,38 @@ class bendaharaHistoryTransaksiActivity : AppCompatActivity() {
     private lateinit var transaksis:ArrayList<Transaksi>
     private lateinit var mHistoryTransaksiAdapter: HistoryTransaksiAdapter
     private lateinit var refreshLayout:SwipeRefreshLayout
+    private var selectedSpinner:String="Semua"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bendahara_history_transaksi)
         basicStarter()
         getAndUpdateTokenLoginData()
         reqGetHistoryTransaksi(loginData, getHistoryTransaksiUrl)
+
+        val spinner=findViewById<Spinner>(R.id.spinner)
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
+            this,
+            R.array.filterHistoryTransaksi, R.layout.spinner_items
+        )
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown)
+        spinner.setAdapter(adapter)
+
+        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedSpinner=spinner.selectedItem.toString()
+                reqGetHistoryTransaksi(loginData, getHistoryTransaksiUrl)
+//                Toast.makeText(this@bendaharaHistoryTransaksiActivity, selectedSpinner, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+
+            }
+        })
     }
 
     fun createArrayTransaksis(jsonArray: JSONArray):ArrayList<Transaksi>{
@@ -92,7 +122,8 @@ class bendaharaHistoryTransaksiActivity : AppCompatActivity() {
 //        })
     }
 
-    fun reqGetHistoryTransaksi(loginData: LoginData, URL:String){
+    fun reqGetHistoryTransaksi(loginData: LoginData,  URL:String){
+        var URL=URL+"?type_transaksi="+selectedSpinner
         val queue = Volley.newRequestQueue(this)
         val jsonObjectArray: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, URL,null,

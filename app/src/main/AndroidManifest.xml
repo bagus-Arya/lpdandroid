@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -18,9 +18,13 @@
         android:theme="@style/Theme.Sispentra"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".StaffNasabahActivity"
+            android:exported="false"
+            android:parentActivityName=".ketuaDataStaffActivity"/>
+        <activity
             android:name=".nasabahValidasiPenarikan"
             android:exported="false"
-            android:parentActivityName=".nasabahHomeActivity"/>
+            android:parentActivityName=".nasabahHomeActivity" />
         <activity
             android:name=".bendaharaHistoryTransaksiActivity"
             android:exported="false"
@@ -166,8 +170,7 @@
             android:name=".LaporanPenarikanBendaharaActivity"
             android:exported="true"
             android:parentActivityName=".BendaharaHomeActivity"
-            android:screenOrientation="portrait" />
-        <!-- Ketua -->
+            android:screenOrientation="portrait" /> <!-- Ketua -->
         <activity
             android:name=".HomeActivity"
             android:exported="true"

@@ -84,8 +84,8 @@
                         android:text="Validasi Setoran"
                         android:textAllCaps="false"
                         app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_validasi_penarikan"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_grafik_kinerja"
-                        tools:layout_editor_absoluteX="16dp" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_data_staff"
+                        tools:layout_editor_absoluteX="0dp" />
 
                     <Button
                         android:id="@+id/btn_bendahara_history_transaksi"
@@ -149,8 +149,19 @@
                         android:backgroundTint="@color/secondary"
                         android:text="Grafik Kinerja"
                         android:textAllCaps="false"
-                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_validasi_setoran"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_data_staff"
                         app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_profile_saya"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                    <Button
+                        android:id="@+id/btn_bendahara_data_staff"
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:backgroundTint="@color/secondary"
+                        android:text="Data Staff"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_bendahara_validasi_setoran"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_bendahara_grafik_kinerja"
                         tools:layout_editor_absoluteX="16dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

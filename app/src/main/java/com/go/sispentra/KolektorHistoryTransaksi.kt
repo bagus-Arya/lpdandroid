@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +37,7 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
     private lateinit var transaksis:ArrayList<Transaksi>
     private lateinit var mHistoryTransaksiAdapter: HistoryTransaksiAdapter
     private lateinit var refreshLayout:SwipeRefreshLayout
+    private var selectedSpinner:String="Semua"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,31 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
         basicStarter()
         getAndUpdateTokenLoginData()
         reqGetHistoryTransaksi(loginData, getHistoryTransaksiUrl)
+
+        val spinner=findViewById<Spinner>(R.id.spinner)
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
+            this,
+            R.array.filterHistoryTransaksi, R.layout.spinner_items
+        )
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown)
+        spinner.setAdapter(adapter)
+
+        spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedSpinner=spinner.selectedItem.toString()
+                reqGetHistoryTransaksi(loginData, getHistoryTransaksiUrl)
+//                Toast.makeText(this@bendaharaHistoryTransaksiActivity, selectedSpinner, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+
+            }
+        })
     }
 
     fun createArrayTransaksis(jsonArray: JSONArray):ArrayList<Transaksi>{
@@ -95,6 +124,7 @@ class KolektorHistoryTransaksi : AppCompatActivity() {
     }
 
     fun reqGetHistoryTransaksi(loginData: LoginData, URL:String){
+        var URL=URL+"?type_transaksi="+selectedSpinner
         val queue = Volley.newRequestQueue(this)
         val jsonObjectArray: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, URL,null,

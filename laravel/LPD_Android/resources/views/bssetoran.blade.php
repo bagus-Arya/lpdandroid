@@ -112,6 +112,16 @@
                     </div>
                   </div>
             </div>
+            <div class="col-12 mt-4">
+              <div class="card">
+                <div class="card-body" >
+                  <h5 class="card-title text-center">Target dan Jumlah Setoran</h5>
+                  <div >
+                    <canvas id="barTargetDanJumlahSetoran"></canvas>
+                  </div>
+                </div>
+              </div>
+          </div>
         </div>
         
     </div>
@@ -123,8 +133,15 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.1/html2canvas.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+
     <script>
+        const ctxBar = document.getElementById('barTargetDanJumlahSetoran');
+        var barChartInstance=new Chart();
+
+
         const startDate=document.getElementById('startDate');
         const endDate=document.getElementById('endDate');
         const table_laporan_body=document.getElementById('table_laporan_body');
@@ -190,6 +207,47 @@
             .then(json => {
                 // console.log(json);
                 updateView(json);
+
+                const barchart = {
+                  type: 'bar',
+                  data: {
+                    labels: ['Jumlah', 'Target'],
+                    datasets: [{
+                      label:'test',
+                      data: [json.jumlahSetoran, json.targetSetoran],
+                      backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                      ],
+                      borderColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    plugins: {
+    legend: {
+      display: false
+    }
+  },
+                  indexAxis:'y',
+                  scales: { 
+                      x:{
+                          beginAtZero: true,
+                          min:0,
+                          max:json.targetSetoran+2,
+                          ticks: {
+                            precision: 0,
+                            
+                          }
+                      }
+                  }
+                  }       
+                  };
+                  barChartInstance.destroy();
+                  barChartInstance=new Chart(ctxBar,barchart);
             })
             .catch(error => console.log(error));
         }

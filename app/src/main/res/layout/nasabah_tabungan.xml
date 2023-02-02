@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?actionBarSize"
-    android:paddingHorizontal="15dp"
     android:background="@drawable/bg_page"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="?actionBarSize"
     tools:context=".nasabahTabunganActivity">
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
@@ -26,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/cardview_nasabah_tabungan_history" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
@@ -33,16 +35,63 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:padding="15dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/refreshLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/btn_tambah_setoran"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#095A0D"
+                android:text="Setoran"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_ubah_nasabah"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_bunga_nasabah"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/btn_ubah_nasabah"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/ubahColor"
+                android:text="Ubah"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_hapus_nasabah"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_tambah_setoran"
+                app:layout_constraintTop_toTopOf="@+id/btn_tambah_setoran" />
+
+            <Button
+                android:id="@+id/btn_hapus_nasabah"
+                android:layout_width="90dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#DE623A"
+                android:text="Hapus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_ubah_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/btn_tambah_setoran"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -93,6 +142,18 @@
                 app:layout_constraintTop_toTopOf="@+id/textView41" />
 
             <TextView
+                android:id="@+id/nasabah_bunga_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bunga"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasabah_saldo_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+            <TextView
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,13 +187,21 @@
                 android:id="@+id/textView41"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:text="Saldo"
                 android:textColor="@color/textColor"
                 android:textSize="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView38"
                 app:layout_constraintTop_toBottomOf="@+id/nasabah_nama_kolektor_nasabah" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bunga"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView41"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_saldo_nasabah" />
 
             <TextView
                 android:id="@+id/textView29"
@@ -177,6 +246,16 @@
 
             <TextView
                 android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+            <TextView
+                android:id="@+id/textView54"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"

@@ -3,6 +3,7 @@ package com.rw.keyboardlistener.com.go.sispentra.adapter
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,11 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
         val cv_tgl_validasi_nasabah: TextView =itemView.findViewById(R.id.cv_tgl_validasi_nasabah)
         val cv_nominal: TextView =itemView.findViewById(R.id.cv_nominal)
         val cv_status_penarikan: TextView =itemView.findViewById(R.id.cv_status_penarikan)
+        val tglValKolektor: TextView =itemView.findViewById(R.id.tglValKolektor)
+        val tglValKolektorKoma: TextView =itemView.findViewById(R.id.tglValKolektorKoma)
+        val tglValNasabah: TextView =itemView.findViewById(R.id.tglValNasabah)
+        val tglValNasabahKoma: TextView =itemView.findViewById(R.id.tglValNasabahKoma)
+        val textViewNominal:TextView= itemView.findViewById(R.id.textViewNominal)
     }
 
 
@@ -61,6 +67,13 @@ class HistoryTransaksiAdapter (val transaksis:ArrayList<Transaksi>): RecyclerVie
             else{
                 holder.cv_status_penarikan.setTextColor(Color.parseColor(red))
             }
+            holder.tglValKolektor.visibility= GONE
+            holder.tglValKolektorKoma.visibility= GONE
+            holder.tglValNasabah.visibility= GONE
+            holder.tglValNasabahKoma.visibility= GONE
+            holder.cv_tgl_validasi_kolektor.visibility= GONE
+            holder.cv_tgl_validasi_nasabah.visibility= GONE
+//            holder.textViewNominal
         }
         else{
             holder.cv_nominal.text="-"+formatRupiah(currentItem.nominal)

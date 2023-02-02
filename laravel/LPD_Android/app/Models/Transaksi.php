@@ -22,4 +22,18 @@ class Transaksi extends Model
     public function bukutabungan(){
         return $this->belongsTo(BukuTabungan::class,'buku_tabungan_id','id');
     }
+
+    public function scopeFilter($query,array $filters)
+    {
+        $query->when($filters['type_transaksi'] ?? false,function($query,$type_transaksi){
+            // return $query->where('fullname','like','%'.$fullname.'%');
+            if($type_transaksi=="Semua"){
+                return $query;
+            }
+            else {
+                return $query->where('type_transaksi',$type_transaksi);
+            }
+        });
+    }
+
 }

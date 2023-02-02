@@ -63,7 +63,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btn_ubah_nasabah"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nasabah_saldo_nasabah"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_bunga_nasabah"
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
@@ -142,6 +142,18 @@
                 app:layout_constraintTop_toTopOf="@+id/textView41" />
 
             <TextView
+                android:id="@+id/nasabah_bunga_nasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bunga"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nasabah_saldo_nasabah"
+                app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+            <TextView
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,6 +192,16 @@
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@+id/textView38"
                 app:layout_constraintTop_toBottomOf="@+id/nasabah_nama_kolektor_nasabah" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bunga"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView41"
+                app:layout_constraintTop_toBottomOf="@+id/nasabah_saldo_nasabah" />
 
             <TextView
                 android:id="@+id/textView29"
@@ -224,6 +246,16 @@
 
             <TextView
                 android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/textColor"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+            <TextView
+                android:id="@+id/textView54"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"

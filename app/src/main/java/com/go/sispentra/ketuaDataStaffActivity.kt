@@ -45,11 +45,14 @@ class ketuaDataStaffActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ketua_data_staff)
-        basicStarter()
         getAndUpdateTokenLoginData()
+        basicStarter()
         reqGetStaff(loginData,getDataStaffURL,null)
 
         val floatingButtonTambah=findViewById<FloatingActionButton>(R.id.floatingActionButton_Tambah_Staff)
+        if(loginData.role!="Ketua"){
+            floatingButtonTambah.visibility=View.GONE
+        }
         val search_ketua_staff=findViewById<TextInputEditText>(R.id.search_ketua_staff)
         val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
 
@@ -135,7 +138,7 @@ class ketuaDataStaffActivity : AppCompatActivity() {
 
 
     fun updateRv(staffs:ArrayList<Staff>){
-        mStaffAdapter=StaffAdapter(staffs,object:StaffAdapter.OnAdapterListener{
+        mStaffAdapter=StaffAdapter(staffs,loginData,object:StaffAdapter.OnAdapterListener{
             override fun onDelete(currentItem: Staff,position:Int) {
 
                 try {
@@ -147,6 +150,12 @@ class ketuaDataStaffActivity : AppCompatActivity() {
                 catch (e:Exception){
 
                 }
+            }
+
+            override fun onNasabah(currentItem: Staff, position: Int) {
+                val intent = Intent(this@ketuaDataStaffActivity, StaffNasabahActivity::class.java)
+                intent.putExtra("staff_id", currentItem.id)
+                startActivity(intent)
             }
         })
 

@@ -15,10 +15,14 @@ use Illuminate\Validation\Rule;
 class TransaksiMobileController extends Controller
 {
     public function index(Request $request,$token){
+        $filters=$request->validate([
+            'type_transaksi'=>'string',
+        ]);
+
         if($request->get('login_user')->role=="Bendahara" || $request->get('login_user')->role=="Ketua"){
             return Transaksi::latest('tgl_transaksi')->with('bukutabungan.nasabah.kolektor',function ($q){
                 $q->withTrashed();
-            })->get();
+            })->filter($filters)->get();
         }
         elseif($request->get('login_user')->role=="Kolektor"){
             return Transaksi::latest('tgl_transaksi')->whereHas('bukutabungan',function($q) use($request){
@@ -27,7 +31,7 @@ class TransaksiMobileController extends Controller
                 });
             })->with('bukutabungan.nasabah.kolektor',function ($q){
                 $q->withTrashed();
-            })->get();
+            })->filter($filters)->get();
         }
         else{
             return response()->json(['message' => 'No content'], 204);

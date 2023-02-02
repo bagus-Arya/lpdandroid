@@ -21,27 +21,67 @@
               <button id="submit" class="btn btn-success">Submit</button>
             </div>
         </form>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body" >
-                      <h5 class="card-title">Bar Chart</h5>
-                      <div >
-                        <canvas id="barChart"></canvas>
+        <div class="row py-4">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body" >
+                <h2 class="card-title text-center">Graph Kinerja Kolektor</h2>
+                <div class="row py-4">
+                  <div class="col-12">
+                    <div class="card">
+                        <div class="card-body" >
+                          <h5 class="card-title">Bar Chart</h5>
+                          <div >
+                            <canvas id="barChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Pie Chart</h5>
+                          <div>
+                            <canvas id="pieChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mt-4">
+            <div class="card">
+              <div class="card-body" >
+                <h2 class="card-title text-center">Graph Pendapatan Nasabah</h2>
+                <div class="row py-4">
+                  <div class="col-12">
+                    <div class="card">
+                        <div class="card-body" >
+                          <h5 class="card-title">Bar Chart</h5>
+                          <div >
+                            <canvas id="barPendapatanNasabahChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-12 mt-2">
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Pie Chart</h5>
+                        <div>
+                          <canvas id="piePendapatanNasabahChart"></canvas>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                </div>
+                </div>
+              </div>
             </div>
-            <div class="col-12 mt-2">
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Pie Chart</h5>
-                      <div>
-                        <canvas id="pieChart"></canvas>
-                      </div>
-                    </div>
-                  </div>
-            </div>
+          </div>
+          
         </div>
         
     </div>
@@ -57,8 +97,12 @@
     <script>
       const ctxBar = document.getElementById('barChart');
       const ctxPie = document.getElementById('pieChart');
+      const ctxBarPendapatanNasabah = document.getElementById('barPendapatanNasabahChart');
+      const ctxPiePendapatanNasabah = document.getElementById('piePendapatanNasabahChart');
       var pieChartInstance=new Chart();
       var barChartInstance=new Chart();
+      var piePendapatanNasabahChartInstance=new Chart();
+      var barPendapatanNasabahChartInstance=new Chart();
 
       buttonSubmit=document.getElementById('submit');
         buttonSubmit.addEventListener("click", ()=>{
@@ -66,6 +110,7 @@
             fromDate=document.getElementById('inputFromDate').value;
             toDate=document.getElementById('inputToDate').value;
             livesearchurl=basicUrl+'?from_date='+fromDate+'&to_date='+toDate
+            console.log(livesearchurl);
             fetch(livesearchurl)
             .then((response) => response.json())
             .then((data) => {
@@ -83,7 +128,10 @@
                           }
                           },
                       y:{
-                          min:0
+                          min:0,
+                          ticks: {
+                            precision: 0
+                          }
                       }
                       }
                   }       
@@ -106,6 +154,49 @@
                   };
                   pieChartInstance.destroy();
                   pieChartInstance=new Chart(ctxPie,configPie);
+                  console.log(data);
+
+                  // 
+                  const barPendapatanNasabahchart = {
+                  type: 'bar',
+                  data: {
+                    datasets:data.barPendapatanNasabah.dataArray
+                  },
+                  options: {
+                  scales: {
+                      x: {
+                          type: 'time',
+                          time: {
+                              unit:'day'
+                          }
+                          },
+                      y:{
+                          min:0,
+                          ticks: {
+                            precision: 0
+                          }
+                      }
+                      }
+                  }       
+                  };
+                  barPendapatanNasabahChartInstance.destroy();
+                  barPendapatanNasabahChartInstance=new Chart(ctxBarPendapatanNasabah,barPendapatanNasabahchart);
+
+                  const dataPiePendapatanNasabahChart = {
+                  labels:data.piePendapatanNasabah.labels,
+                  datasets: [{
+                      label: 'Data Count',
+                      data: data.piePendapatanNasabah.data,
+                      backgroundColor:data.piePendapatanNasabah.backgroundColor,
+                      hoverOffset: 4
+                  }]
+                  };
+                  const configPiePendapatanNasabahChart = {
+                  type: 'pie',
+                  data: dataPiePendapatanNasabahChart,
+                  };
+                  piePendapatanNasabahChartInstance.destroy();
+                  piePendapatanNasabahChartInstance=new Chart(ctxPiePendapatanNasabah,configPiePendapatanNasabahChart);
                   console.log(data);
                 }
             )

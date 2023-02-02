@@ -42,6 +42,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
     lateinit var nasabah_no_telepon_nasabah:TextView
     lateinit var nasabah_nama_kolektor_nasabah:TextView
     lateinit var nasabah_saldo_nasabah:TextView
+    lateinit var nasabah_bunga_nasabah:TextView
     lateinit var refreshLayout:SwipeRefreshLayout
     lateinit var rv_tabungan_transaksi:RecyclerView
 
@@ -71,6 +72,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
         nasabah_no_telepon_nasabah.setText(dataTabungan.no_telepon)
         nasabah_nama_kolektor_nasabah.setText(dataTabungan.nasabah_kolektor)
         nasabah_saldo_nasabah.setText(dataTabungan.saldo?.let { formatRupiah(it) })
+        nasabah_bunga_nasabah.setText(dataTabungan.bunga?.let { formatRupiah(it) +" ("+dataTabungan.tahun+" Tahun)" })
     }
 
     fun reqGetTabungan(loginData: LoginData, URL:String){
@@ -85,7 +87,9 @@ class nasabahTabunganActivity : AppCompatActivity() {
                     response.getJSONObject("nasabah").getString("fullname"),
                     response.getJSONObject("nasabah").getJSONObject("kolektor").getString("fullname"),
                     response.getDouble("saldo"),
-                    response.getJSONObject("nasabah").getString("no_telepon")
+                    response.getJSONObject("nasabah").getString("no_telepon"),
+                    response.getDouble("bunga"),
+                    response.getInt("tahun")
                 )
                 updateBukuTabunganComponent(dataTabungan)
                 Log.d("Req", response.toString())
@@ -259,6 +263,7 @@ class nasabahTabunganActivity : AppCompatActivity() {
         nasabah_no_telepon_nasabah=findViewById<TextView>(R.id.nasabah_no_telepon_nasabah)
         nasabah_nama_kolektor_nasabah=findViewById<TextView>(R.id.nasabah_nama_kolektor_nasabah)
         nasabah_saldo_nasabah=findViewById<TextView>(R.id.nasabah_saldo_nasabah)
+        nasabah_bunga_nasabah=findViewById<TextView>(R.id.nasabah_bunga_nasabah)
         refreshLayout=findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
         rv_tabungan_transaksi=findViewById<RecyclerView>(R.id.rv_tabungan_transaksi)
 

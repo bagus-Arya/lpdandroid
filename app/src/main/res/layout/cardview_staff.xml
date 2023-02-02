@@ -19,6 +19,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/btn_nasabah_staff"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#095A0D"
+                android:text="Nasabah"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cv_hapus_staff"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_role" />
+
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
@@ -59,13 +75,16 @@
                 android:id="@+id/cv_hapus_staff"
                 android:layout_width="90dp"
                 android:layout_height="42dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#DE623A"
                 android:text="Hapus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView38" />
+                app:layout_constraintHorizontal_bias="0.948"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_role" />
 
             <TextView
                 android:id="@+id/textView31"

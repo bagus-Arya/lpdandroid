@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Staff;
 use \App\Models\Transaksi;
+use \App\Models\Nasabah;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use PDF;
@@ -91,6 +92,7 @@ class LaporanWebController extends Controller
         $transaksiJmls=$transaksiData->sum('nominal');
         $transaksiJml= Helper::rupiah($transaksiJmls);
         $userLoginData=Staff::withTrashed()->where('id', $validate['id_kolektor'])->firstOrfail();
+
         // $userLoginData=$request->get('login_user');
         // $pdf = PDF::loadView('bspenarikandownload',compact('transaksiArray','transaksiJml','userLoginData','validate'));
         // $pdf->setPaper('A4','potrait');
@@ -115,12 +117,26 @@ class LaporanWebController extends Controller
         $transaksiArray=$transaksiData->get();
         $transaksiJmls=$transaksiData->sum('nominal');
         $transaksiJml= Helper::rupiah($transaksiJmls);
-        
+        $jumlahSetoran=$transaksiData->count();
+        $targetSetoran=0;
+
+        $from_date=$validate['start_date'];
+        $to_date=$validate['end_date'];
+
+        while (strtotime($from_date) <= strtotime($to_date)) {
+            $targetSetoran=$targetSetoran+Nasabah::where('staff_id',$validate['id_kolektor'])
+            ->whereDate('created_at','<=',$from_date)->count();
+            $from_date = date ("Y-m-d", strtotime("+1 days", strtotime($from_date)));
+        }
+
+
         return response()->json(
             [
                 'staffData' => $staffData,
                 'transaksiArray'=>$transaksiArray,
                 'transaksiJml'=>$transaksiJml,
+                'jumlahSetoran'=>$jumlahSetoran,
+                'targetSetoran'=>$targetSetoran
             ], 200);
     }
 }

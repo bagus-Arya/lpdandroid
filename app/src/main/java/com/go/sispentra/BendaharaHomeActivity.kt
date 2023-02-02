@@ -40,9 +40,15 @@ class BendaharaHomeActivity : AppCompatActivity(){
         val btn_bendahara_laporan_penarikan = findViewById<Button>(R.id.btn_bendahara_laporan_penarikan)
         val btn_bendahara_history_transaksi = findViewById<Button>(R.id.btn_bendahara_history_transaksi)
         val btn_bendahara_logout = findViewById<Button>(R.id.btn_bendahara_logout)
+        val btn_bendahara_data_staff = findViewById<Button>(R.id.btn_bendahara_data_staff)
 
         btn_bendahara_profile_saya.setOnClickListener{
             val intent = Intent(this@BendaharaHomeActivity, DataBendaharaActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_bendahara_data_staff.setOnClickListener{
+            val intent = Intent(this@BendaharaHomeActivity, ketuaDataStaffActivity::class.java)
             startActivity(intent)
         }
 

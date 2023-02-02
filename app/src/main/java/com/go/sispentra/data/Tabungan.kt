@@ -7,5 +7,7 @@ data class Tabungan(
     var nasabah_name:String?=null,
     var nasabah_kolektor:String?=null,
     var saldo:Double?=null,
-    var no_telepon:String?=null
+    var no_telepon:String?=null,
+    var bunga:Double?=null,
+    var tahun:Int?=null,
 )

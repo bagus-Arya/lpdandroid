@@ -32,10 +32,10 @@ Route::post('/login',[LoginMobileController::class,'login']);
 
 
 Route::group(['middleware'=>['CustomAuth']],function(){
-    Route::group(['middleware'=>['KetuaCustomAuth'],'prefix'=>'staff'],function(){
-        Route::get('/{token}',[StaffMobileController::class,'index']);
-        Route::post('/{token}/create',[StaffMobileController::class,'store']);
-        Route::delete('/{token}/delete/{staff}',[StaffMobileController::class,'destory']);
+    Route::group(['prefix'=>'staff'],function(){
+        Route::get('/{token}',[StaffMobileController::class,'index'])->middleware(['StaffCustomAuth']);
+        Route::post('/{token}/create',[StaffMobileController::class,'store'])->middleware(['KetuaAndBendahara']);
+        Route::delete('/{token}/delete/{staff}',[StaffMobileController::class,'destory'])->middleware(['KetuaAndBendahara']);
     });
 
     Route::group(['prefix'=>'profile'],function(){
@@ -48,12 +48,12 @@ Route::group(['middleware'=>['CustomAuth']],function(){
         Route::get('/{token}/penarikan',[LaporanWebController::class,'showPenarikan'])->name('getLaporanPenarikanData');
     });
 
-    Route::group(['middleware'=>['KolektorCustomAuth'],'prefix'=>'nasabah'],function(){
-        Route::get('/{token}',[NasabahMobileController::class,'index']);
-        Route::post('/{token}/create',[NasabahMobileController::class,'store']);
-        Route::get('/{token}/show/{nasabah}',[NasabahMobileController::class,'show']);
-        Route::put('/{token}/update/{nasabah}',[NasabahMobileController::class,'update']);
-        Route::delete('/{token}/delete/{nasabah}',[NasabahMobileController::class,'destroy']);
+    Route::group(['prefix'=>'nasabah'],function(){
+        Route::get('/{token}',[NasabahMobileController::class,'index'])->middleware(['StaffCustomAuth']);
+        Route::post('/{token}/create',[NasabahMobileController::class,'store'])->middleware(['KolektorCustomAuth']);
+        Route::get('/{token}/show/{nasabah}',[NasabahMobileController::class,'show'])->middleware(['KolektorCustomAuth']);
+        Route::put('/{token}/update/{nasabah}',[NasabahMobileController::class,'update'])->middleware(['KolektorCustomAuth']);
+        Route::delete('/{token}/delete/{nasabah}',[NasabahMobileController::class,'destroy'])->middleware(['KolektorCustomAuth']);
     });
 
     Route::group(['prefix'=>'setoran'],function(){
